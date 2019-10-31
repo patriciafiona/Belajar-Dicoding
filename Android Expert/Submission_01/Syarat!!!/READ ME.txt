@@ -1,0 +1,42 @@
+HARUS DATA LOKAL, GAK BOLEH PAKE API!!!
+
+1. Kriteria
+Fitur yang harus ada pada aplikasi:
+
+a.Daftar Film
+	Syarat:
+	- Menggunakan ListView untuk menampilkan daftar film dengan jumlah minimal 10 item.
+
+b.Detail Film
+	Syarat:
+
+	- Menampilkan poster dan informasi film pada halaman detail film.
+	- Menggunakan Parcelable sebagai interface dari obyek data yang akan dikirimkan antar Activity.
+
+-------------------------------------------------------------------------------------------------------------
+Kesempatan untuk submission Anda diterima, akan lebih besar jika:
+
+1. Menerapkan mekanisme Intent dengan baik dan benar.
+2. Menuliskan kode dengan bersih.
+
+-------------------------------------------------------------------------------------------------------------
+
+Submission Anda akan ditolak jika:
+
+1. Tidak menggunakan ListView untuk menampilkan daftar film.
+
+2. List yang ditampilkan kurang dari 10 item.
+
+3. Tidak menerapkan Parcelable sebagai interface dari obyek data yang akan dikirimkan antar Activity.
+
+4. Poster tidak berhasil ditampilkan.
+
+5. Informasi yang ditampilkan pada daftar ataupun detail film, tidak relevan.
+
+6. Proyek tidak berhasil di-build.
+
+7. Aplikasi force closed.
+
+8. Mengirimkan file selain proyek Android Studio.
+
+9. Mengirimkan proyek yang bukan karya sendiri.
