@@ -9,5 +9,6 @@
     <color name="colorIdleBlue">#AED6F1</color>
 
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorSolidGrey">#909497</color>
 
 </resources>

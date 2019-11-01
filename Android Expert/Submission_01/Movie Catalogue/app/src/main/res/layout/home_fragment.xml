@@ -1,50 +1,137 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.HomeFragment">
+    tools:context=".ui.main.HomeFragment"
+    android:orientation="vertical">
 
-    <!--Bagian Promotion-->
-    <LinearLayout
-        android:id="@+id/box_promotion"
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
+        android:fillViewport="false"
+        android:scrollbars="none">
 
-    </LinearLayout>
-
-    <!--Bagian Sedang Tayang-->
-    <LinearLayout
-        android:id="@+id/box_SedangTayang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sedang Tayang"
-            android:textSize="20dp"/>
-
-        <!--Bagian Slider Movie-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+
+            <!--Bagian Promotion image slider-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:orientation="vertical">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/Slider"
+                    android:layout_width="match_parent"
+                    android:layout_marginVertical="20dp"
+                    android:layout_height="150dp">
+
+                </androidx.viewpager.widget.ViewPager>
+
+                <LinearLayout
+                    android:id="@+id/dotsLayoutPromotion"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="-65dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Bagian Sedang Tayang-->
+            <LinearLayout
+                android:id="@+id/box_SedangTayang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sedang Tayang"
+                    android:textSize="14dp"/>
+
+                <!--Bagian Slider Movie-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <!--movie 1-->
+                        <ImageView
+                            android:id="@+id/slider_01"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_venom"/>
+
+                        <!--movie 2-->
+                        <ImageView
+                            android:id="@+id/slider_02"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_spiderman"/>
+
+                        <!--movie 3-->
+                        <ImageView
+                            android:id="@+id/slider_03"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_deadpool"/>
+
+                        <!--movie 4-->
+                        <ImageView
+                            android:id="@+id/slider_04"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_marrypopins" />
+
+                        <!--movie 5-->
+                        <ImageView
+                            android:id="@+id/slider_05"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_avengerinfinity"
+                            android:contentDescription="TODO" />
+
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Selengkapnya"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Selengkapnya">
-        </Button>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
