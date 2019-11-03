@@ -1,6 +1,8 @@
 package com.path_studio.moviecatalogue.ui.main;
 
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -12,17 +14,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
 import android.text.Html;
-import android.transition.Slide;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.path_studio.moviecatalogue.Adapters.SedangTayangAdapter;
+import com.path_studio.moviecatalogue.MainActivity;
 import com.path_studio.moviecatalogue.R;
-import com.path_studio.moviecatalogue.SliderAdapter.SliderAdapter;
+import com.path_studio.moviecatalogue.Adapters.SliderAdapter;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -37,6 +40,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     Timer timer;
     final long DELAY_MS = 500;//delay in milliseconds before task is to be executed
     final long PERIOD_MS = 3000; // time in milliseconds between successive task executions.
+
+    //untuk inisiasi button
+    Button lengkap_st;
+    Button lengkap_at;
 
     private MainViewModel mViewModel;
 
@@ -60,6 +67,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        //untuk button selengkapnya
+        lengkap_at = view.findViewById(R.id.button_selengkapnya_at);
+        lengkap_st = view.findViewById(R.id.button_selengkapnya_st);
+
+        lengkap_at.setOnClickListener(this);
+        lengkap_st.setOnClickListener(this);
+
+
+        //untuk slider
         mSlideViewPager = (ViewPager) view.findViewById(R.id.Slider);
         mDotLayout = (LinearLayout) view.findViewById(R.id.dotsLayoutPromotion);
 
@@ -131,6 +148,41 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View view) {
+        FragmentManager mFragmentManager = getFragmentManager();
 
+        switch (view.getId()){
+            case R.id.button_selengkapnya_at:
+                //ganti ke fragment akan tayang
+                AkanTayangFragment mAkanTayangFragment = new AkanTayangFragment();
+
+                if (mFragmentManager != null) {
+                    mFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frame_container, mAkanTayangFragment, AkanTayangFragment.class.getSimpleName())
+                            .addToBackStack(null)
+                            .commit();
+                }
+
+                //set active menu
+                ((MainActivity)getActivity()).active_menu("AkanTayang");
+
+                break;
+            case R.id.button_selengkapnya_st:
+                //ganti ke fragment sedang tayang
+                SedangTayangFragment mSedangTayangFragment = new SedangTayangFragment();
+
+                if (mFragmentManager != null) {
+                    mFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.frame_container, mSedangTayangFragment, SedangTayangFragment.class.getSimpleName())
+                            .addToBackStack(null)
+                            .commit();
+                }
+
+                //set active menu
+                ((MainActivity)getActivity()).active_menu("SedangTayang");
+
+                break;
+        }
     }
 }

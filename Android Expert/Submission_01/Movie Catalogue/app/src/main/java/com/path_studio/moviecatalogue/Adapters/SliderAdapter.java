@@ -1,4 +1,4 @@
-package com.path_studio.moviecatalogue.SliderAdapter;
+package com.path_studio.moviecatalogue.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

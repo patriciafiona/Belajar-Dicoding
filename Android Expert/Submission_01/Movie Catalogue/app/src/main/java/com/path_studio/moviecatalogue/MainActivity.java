@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.menu_3:
                 //ganti ke fragment akan tayang
-                //ganti ke fragment home lagi
                 AkanTayangFragment mAkanTayangFragment = new AkanTayangFragment();
 
                 transaction.replace(R.id.frame_container, mAkanTayangFragment);
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    void active_menu(String active){
+    public void active_menu(String active){
         switch(active){
             case "Home":
                 Menu1.setTextColor(ContextCompat.getColor(MainActivity.this, R.color.colorWhite));
