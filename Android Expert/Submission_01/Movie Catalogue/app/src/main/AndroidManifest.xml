@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.path_studio.moviecatalogue">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,17 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailST"></activity>
-        <activity android:name=".DetailAT" />
-        <activity android:name=".ui.main.ContactFragment" />
-        <activity android:name=".ui.main.AkanTayangFragment" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.OpeningActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.DetailST" />
+        <activity android:name=".Activities.DetailAT" />
+        <activity android:name=".ui.main.ContactFragment" />
+        <activity android:name=".ui.main.AkanTayangFragment" />
+        <activity android:name=".Activities.MainActivity"></activity>
     </application>
 
 </manifest>

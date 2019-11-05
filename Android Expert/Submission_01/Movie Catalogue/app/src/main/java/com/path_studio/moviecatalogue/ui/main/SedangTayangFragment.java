@@ -11,8 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.path_studio.moviecatalogue.Adapters.SedangTayangAdapter;
-import com.path_studio.moviecatalogue.DetailAT;
-import com.path_studio.moviecatalogue.DetailST;
+import com.path_studio.moviecatalogue.Activities.DetailST;
 import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
 

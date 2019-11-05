@@ -1,16 +1,16 @@
-package com.path_studio.moviecatalogue;
+package com.path_studio.moviecatalogue.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.path_studio.moviecatalogue.R;
 import com.path_studio.moviecatalogue.ui.main.AkanTayangFragment;
 import com.path_studio.moviecatalogue.ui.main.ContactFragment;
 import com.path_studio.moviecatalogue.ui.main.HomeFragment;

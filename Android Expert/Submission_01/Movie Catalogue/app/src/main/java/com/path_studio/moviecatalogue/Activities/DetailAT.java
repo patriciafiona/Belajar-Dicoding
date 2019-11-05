@@ -1,7 +1,8 @@
-package com.path_studio.moviecatalogue;
+package com.path_studio.moviecatalogue.Activities;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,14 +10,16 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.net.Uri;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.path_studio.moviecatalogue.Activities.MainActivity;
+import com.path_studio.moviecatalogue.R;
+import com.path_studio.moviecatalogue.YouTubeConfig;
 
-public class DetailST extends YouTubeBaseActivity implements View.OnClickListener {
+public class DetailAT extends YouTubeBaseActivity implements View.OnClickListener {
 
     private static final String TAG = "DetailSTActivity";
 
@@ -24,8 +27,8 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
     Button mPlayST;
     YouTubePlayer.OnInitializedListener mOnInitialozedListener;
 
-    private TextView mJudul, mTahun, mOverview, mRattingText_ST, mLinkST;
-    private ImageView mPoster, mBack_02;
+    private TextView mJudul, mTahun, mOverview, mRattingText_AT, mLinkAT;
+    private ImageView mPoster, mBack_01;
     private RatingBar mRating;
 
     private String[] juduls;
@@ -40,13 +43,13 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_st);
+        setContentView(R.layout.activity_detail_at);
 
         //buat youtube
         Log.d(TAG,"oncreate Starting");
 
-        mPlayST = (Button) findViewById(R.id.YT_play_01);
-        mYouTubePlayerView = (YouTubePlayerView) findViewById(R.id.view_ST_video);
+        mPlayST = (Button) findViewById(R.id.YT_play_02);
+        mYouTubePlayerView = (YouTubePlayerView) findViewById(R.id.view_AT_video);
 
         mOnInitialozedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -54,7 +57,7 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
                 Log.d(TAG,"OnCLick: Done Initializing Youtube Player");
 
                 //get link video trailer from array
-                String[] links = getResources().getStringArray(R.array.link_trailer_st);
+                String[] links = getResources().getStringArray(R.array.link_trailer_at);
                 String link = links[getIntent().getExtras().getInt("IndexMovie")];
 
                 youTubePlayer.loadVideo(link);
@@ -69,33 +72,32 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
         mPlayST.setOnClickListener(this);
 
         //end youtube
+        mLinkAT = (TextView) findViewById(R.id.link_web_at);
+        mBack_01 = (ImageView) findViewById(R.id.back_home_01);
 
-        mLinkST = (TextView) findViewById(R.id.link_web_st);
-        mBack_02 = (ImageView) findViewById(R.id.back_home_02);
+        mJudul = (TextView) findViewById(R.id.detail_judul);
+        mPoster = (ImageView) findViewById(R.id.detail_poster);
+        mTahun = (TextView) findViewById(R.id.detail_tahun);
+        mOverview = (TextView) findViewById(R.id.detail_overview);
+        mRattingText_AT = (TextView) findViewById(R.id.ratting_text_AT);
 
-        mJudul = (TextView) findViewById(R.id.detail_judul_ST);
-        mPoster = (ImageView) findViewById(R.id.detail_poster_ST);
-        mTahun = (TextView) findViewById(R.id.detail_tahun_ST);
-        mOverview = (TextView) findViewById(R.id.detail_overview_ST);
-        mRattingText_ST = (TextView) findViewById(R.id.ratting_text_ST);
-
-        mRating = (RatingBar) findViewById(R.id.ratingBar_ST);
+        mRating = (RatingBar) findViewById(R.id.ratingBar_AT);
 
         //set jadi array dulu
-        juduls = getResources().getStringArray(R.array.data_sedang_tayang);
-        descs = getResources().getStringArray(R.array.data_desc_st);
-        years = getResources().getStringArray(R.array.data_year_st);
-        ratings = getResources().getStringArray(R.array.data_ratting_st);
-        urls = getResources().getStringArray(R.array.link_web_st);
+        juduls = getResources().getStringArray(R.array.data_akan_tayang);
+        descs = getResources().getStringArray(R.array.data_desc_at);
+        years = getResources().getStringArray(R.array.data_year_at);
+        ratings = getResources().getStringArray(R.array.data_ratting_at);
+        urls = getResources().getStringArray(R.array.link_web_at);
 
-        posters = getResources().obtainTypedArray(R.array.data_photo_sedang_tayang);
+        posters = getResources().obtainTypedArray(R.array.data_photo_akan_tayang);
 
         //tampilkan datanya
         UI();
 
         //set tombol back onclick
-        mBack_02.setOnClickListener(this);
-        mLinkST.setOnClickListener(this);
+        mBack_01.setOnClickListener(this);
+        mLinkAT.setOnClickListener(this);
 
     }
 
@@ -112,26 +114,26 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
         float tampung = Integer.valueOf(ratings[index]);
         float hasil_ratting = ((float) tampung / 2) / 10;
 
-        mRattingText_ST.setText(String.valueOf(hasil_ratting));
+        mRattingText_AT.setText(String.valueOf(hasil_ratting));
 
         mRating.setRating(hasil_ratting);
         mOverview.setText(descs[index]);
-        mLinkST.setText(urls[index]);
+        mLinkAT.setText(urls[index]);
     }
 
     @Override
     public void onClick(View view) {
         //untuk tombol back ke halaman home
         switch (view.getId()) {
-            case R.id.back_home_02:
+            case R.id.back_home_01:
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 break;
-            case R.id.YT_play_01:
+            case R.id.YT_play_02:
                 Log.d(TAG,"OnCLick: Initializing Youtube Player");
                 mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(), mOnInitialozedListener);
                 break;
-            case R.id.link_web_st:
+            case R.id.link_web_at:
                 //open website
                 goToUrl(urls[index]);
                 break;
@@ -143,4 +145,5 @@ public class DetailST extends YouTubeBaseActivity implements View.OnClickListene
         Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
         startActivity(launchBrowser);
     }
+
 }

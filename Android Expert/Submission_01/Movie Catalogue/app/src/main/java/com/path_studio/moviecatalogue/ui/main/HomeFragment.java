@@ -2,7 +2,6 @@ package com.path_studio.moviecatalogue.ui.main;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
@@ -21,8 +20,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.path_studio.moviecatalogue.Adapters.SedangTayangAdapter;
-import com.path_studio.moviecatalogue.MainActivity;
+import com.path_studio.moviecatalogue.Activities.MainActivity;
 import com.path_studio.moviecatalogue.R;
 import com.path_studio.moviecatalogue.Adapters.SliderAdapter;
 

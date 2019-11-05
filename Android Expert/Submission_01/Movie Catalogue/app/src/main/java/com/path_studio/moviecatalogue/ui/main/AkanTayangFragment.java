@@ -12,7 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.path_studio.moviecatalogue.Adapters.AkanTayangAdapter;
-import com.path_studio.moviecatalogue.DetailAT;
+import com.path_studio.moviecatalogue.Activities.DetailAT;
 import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
 
