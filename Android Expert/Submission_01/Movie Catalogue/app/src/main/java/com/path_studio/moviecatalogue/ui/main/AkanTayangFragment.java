@@ -1,6 +1,7 @@
 package com.path_studio.moviecatalogue.ui.main;
 
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.path_studio.moviecatalogue.Adapters.AkanTayangAdapter;
+import com.path_studio.moviecatalogue.DetailAT;
 import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
 
@@ -30,6 +32,8 @@ public class AkanTayangFragment extends Fragment implements View.OnClickListener
     private String[] dataDescription;
     private TypedArray dataPhoto;
     private ArrayList<Movie> movies;
+
+    private int IndexMovie=0;
 
     public static AkanTayangFragment newInstance() {
         return new AkanTayangFragment();
@@ -63,6 +67,11 @@ public class AkanTayangFragment extends Fragment implements View.OnClickListener
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), movies.get(i).getName(), Toast.LENGTH_SHORT).show();
+                //menampilkan datanya
+                IndexMovie = i;
+
+                //ke activity detail
+                go_to_detail();
             }
         });
     }
@@ -83,6 +92,14 @@ public class AkanTayangFragment extends Fragment implements View.OnClickListener
             movies.add(movie);
         }
         adapter.setMovies(movies);
+    }
+
+    public void go_to_detail(){
+        //direct ke halaman detail mobil
+        Intent i = new Intent(getActivity(), DetailAT.class);
+        i.putExtra("IndexMovie", IndexMovie);
+        startActivity(i);
+
     }
 
     @Override
