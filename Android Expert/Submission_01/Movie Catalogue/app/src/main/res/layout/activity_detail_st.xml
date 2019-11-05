@@ -1,91 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="@color/colorSkyBlue"
-        android:padding="10dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/back_home_02"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_back"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:background="@color/colorSkyBlue"
+            android:padding="10dp">
 
-    </LinearLayout>
+            <ImageView
+                android:id="@+id/back_home_02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="horizontal">
+        </LinearLayout>
 
-        <!--Bagian Poster-->
-        <ImageView
-            android:id="@+id/detail_poster_ST"
-            android:layout_width="126dp"
-            android:layout_height="170dp"
-            android:src="@drawable/poster_spiderman" />
-
-        <!--Bagian detail kanan-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingHorizontal="10dp">
+            android:padding="20dp"
+            android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/detail_judul_ST"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/judul_film"
-                android:textColor="@color/colorBlack"
-                android:textSize="20dp"
-                android:textStyle="bold" />
+            <!--Bagian Poster-->
+            <ImageView
+                android:id="@+id/detail_poster_ST"
+                android:layout_width="126dp"
+                android:layout_height="170dp"
+                android:src="@drawable/poster_spiderman" />
 
-            <TextView
-                android:id="@+id/detail_tahun_ST"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/tahun"
-                android:textSize="14dp" />
-
-            <!--Bagian Rating-->
+            <!--Bagian detail kanan-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginVertical="20dp">
+                android:paddingHorizontal="10dp">
 
                 <TextView
+                    android:id="@+id/detail_judul_ST"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/rating"
-                    android:textStyle="bold"
-                    android:textSize="18dp"/>
+                    android:layout_marginTop="20dp"
+                    android:text="@string/judul_film"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/detail_tahun_ST"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tahun"
+                    android:textSize="14dp" />
+
+                <!--Bagian Rating-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RatingBar
-                        android:id="@+id/ratingBar_ST"
-                        style="?android:attr/ratingBarStyleSmall"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    android:orientation="vertical"
+                    android:layout_marginVertical="20dp">
 
                     <TextView
-                        android:id="@+id/ratting_text_ST"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="5.0"
-                        android:paddingLeft="20dp"/>
+                        android:text="@string/rating"
+                        android:textStyle="bold"
+                        android:textSize="18dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RatingBar
+                            android:id="@+id/ratingBar_ST"
+                            style="?android:attr/ratingBarStyleSmall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/ratting_text_ST"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="5.0"
+                            android:paddingLeft="20dp"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -93,28 +101,68 @@
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorBlack"
-            android:text="@string/overview"
-            android:textStyle="bold"
-            android:textSize="20dp"/>
+            android:padding="20dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/detail_overview_ST"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/lorem" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:text="@string/overview"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/detail_overview_ST"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lorem" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"
+                android:text="Trailer"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <view
+                android:id="@+id/view_ST_video"
+                class="com.google.android.youtube.player.YouTubePlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/YT_play_01"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="20dp"
+                android:text="Play" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:layout_marginTop="20dp"
+                android:text="Full Description"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:id="@+id/link_web_st"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorDonker"
+                android:text="@string/link"
+                android:textStyle="italic"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

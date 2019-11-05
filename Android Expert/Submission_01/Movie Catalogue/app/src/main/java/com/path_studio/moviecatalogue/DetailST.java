@@ -1,25 +1,38 @@
 package com.path_studio.moviecatalogue;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.net.Uri;
 
-public class DetailST extends AppCompatActivity implements View.OnClickListener {
+import com.google.android.youtube.player.YouTubeBaseActivity;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerView;
 
-    private TextView mJudul, mTahun, mOverview, mRattingText_ST;
-    private ImageView mPoster, mBack_01;
+public class DetailST extends YouTubeBaseActivity implements View.OnClickListener {
+
+    private static final String TAG = "DetailSTActivity";
+
+    YouTubePlayerView mYouTubePlayerView;
+    Button mPlayST;
+    YouTubePlayer.OnInitializedListener mOnInitialozedListener;
+
+    private TextView mJudul, mTahun, mOverview, mRattingText_ST, mLinkST;
+    private ImageView mPoster, mBack_02;
     private RatingBar mRating;
 
     private String[] juduls;
     private String[] descs;
     private String[] years;
     private String[] ratings;
+    private String[] urls;
     private TypedArray posters;
 
     private int index = 0;
@@ -29,7 +42,36 @@ public class DetailST extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_st);
 
-        mBack_01 = (ImageView) findViewById(R.id.back_home_02);
+        //buat youtube
+        Log.d(TAG,"oncreate Starting");
+
+        mPlayST = (Button) findViewById(R.id.YT_play_01);
+        mYouTubePlayerView = (YouTubePlayerView) findViewById(R.id.view_ST_video);
+
+        mOnInitialozedListener = new YouTubePlayer.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+                Log.d(TAG,"OnCLick: Done Initializing Youtube Player");
+
+                //get link video trailer from array
+                String[] links = getResources().getStringArray(R.array.link_trailer_st);
+                String link = links[getIntent().getExtras().getInt("IndexMovie")];
+
+                youTubePlayer.loadVideo(link);
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+                Log.d(TAG,"OnCLick: Failed Initializing Youtube Player");
+            }
+        };
+
+        mPlayST.setOnClickListener(this);
+
+        //end youtube
+
+        mLinkST = (TextView) findViewById(R.id.link_web_st);
+        mBack_02 = (ImageView) findViewById(R.id.back_home_02);
 
         mJudul = (TextView) findViewById(R.id.detail_judul_ST);
         mPoster = (ImageView) findViewById(R.id.detail_poster_ST);
@@ -44,6 +86,7 @@ public class DetailST extends AppCompatActivity implements View.OnClickListener 
         descs = getResources().getStringArray(R.array.data_desc_st);
         years = getResources().getStringArray(R.array.data_year_st);
         ratings = getResources().getStringArray(R.array.data_ratting_st);
+        urls = getResources().getStringArray(R.array.link_web_st);
 
         posters = getResources().obtainTypedArray(R.array.data_photo_sedang_tayang);
 
@@ -51,7 +94,8 @@ public class DetailST extends AppCompatActivity implements View.OnClickListener 
         UI();
 
         //set tombol back onclick
-        mBack_01.setOnClickListener(this);
+        mBack_02.setOnClickListener(this);
+        mLinkST.setOnClickListener(this);
 
     }
 
@@ -71,8 +115,8 @@ public class DetailST extends AppCompatActivity implements View.OnClickListener 
         mRattingText_ST.setText(String.valueOf(hasil_ratting));
 
         mRating.setRating(hasil_ratting);
-
         mOverview.setText(descs[index]);
+        mLinkST.setText(urls[index]);
     }
 
     @Override
@@ -83,6 +127,20 @@ public class DetailST extends AppCompatActivity implements View.OnClickListener 
                 Intent i = new Intent(this, MainActivity.class);
                 startActivity(i);
                 break;
+            case R.id.YT_play_01:
+                Log.d(TAG,"OnCLick: Initializing Youtube Player");
+                mYouTubePlayerView.initialize(YouTubeConfig.getApiKey(), mOnInitialozedListener);
+                break;
+            case R.id.link_web_st:
+                //open website
+                goToUrl(urls[index]);
+                break;
         }
+    }
+
+    private void goToUrl (String url) {
+        Uri uriUrl = Uri.parse(url);
+        Intent launchBrowser = new Intent(Intent.ACTION_VIEW, uriUrl);
+        startActivity(launchBrowser);
     }
 }
