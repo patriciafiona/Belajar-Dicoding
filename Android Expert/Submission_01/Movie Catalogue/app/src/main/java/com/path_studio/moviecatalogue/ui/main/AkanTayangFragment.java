@@ -23,7 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-public class AkanTayangFragment extends Fragment implements View.OnClickListener {
+public class AkanTayangFragment extends Fragment {
 
     private MainViewModel mViewModel;
 
@@ -99,11 +99,6 @@ public class AkanTayangFragment extends Fragment implements View.OnClickListener
         Intent i = new Intent(getActivity(), DetailAT.class);
         i.putExtra("IndexMovie", IndexMovie);
         startActivity(i);
-
-    }
-
-    @Override
-    public void onClick(View view) {
 
     }
 

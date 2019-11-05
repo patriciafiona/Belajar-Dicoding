@@ -1,5 +1,6 @@
 package com.path_studio.moviecatalogue.ui.main;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.path_studio.moviecatalogue.Adapters.SedangTayangAdapter;
+import com.path_studio.moviecatalogue.DetailAT;
+import com.path_studio.moviecatalogue.DetailST;
 import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
 
@@ -27,6 +30,9 @@ public class SedangTayangFragment extends Fragment implements View.OnClickListen
     private String[] dataDescription;
     private TypedArray dataPhoto;
     private ArrayList<Movie> movies;
+
+    private int IndexMovie=0;
+
 
     private MainViewModel mViewModel;
 
@@ -63,8 +69,21 @@ public class SedangTayangFragment extends Fragment implements View.OnClickListen
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getActivity(), movies.get(i).getName(), Toast.LENGTH_SHORT).show();
+                //menampilkan datanya
+                IndexMovie = i;
+
+                //ke activity detail
+                go_to_detail();
             }
         });
+    }
+
+    public void go_to_detail(){
+        //direct ke halaman detail mobil
+        Intent i = new Intent(getActivity(), DetailST.class);
+        i.putExtra("IndexMovie", IndexMovie);
+        startActivity(i);
+
     }
 
     private void prepare() {

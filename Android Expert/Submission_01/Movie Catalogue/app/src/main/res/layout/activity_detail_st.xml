@@ -11,7 +11,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/back_home_01"
+            android:id="@+id/back_home_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_arrow_back"/>
@@ -26,7 +26,7 @@
 
         <!--Bagian Poster-->
         <ImageView
-            android:id="@+id/detail_poster"
+            android:id="@+id/detail_poster_ST"
             android:layout_width="126dp"
             android:layout_height="170dp"
             android:src="@drawable/poster_spiderman" />
@@ -39,7 +39,7 @@
             android:paddingHorizontal="10dp">
 
             <TextView
-                android:id="@+id/detail_judul"
+                android:id="@+id/detail_judul_ST"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
@@ -49,7 +49,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/detail_tahun"
+                android:id="@+id/detail_tahun_ST"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tahun"
@@ -75,13 +75,13 @@
                     android:orientation="horizontal">
 
                     <RatingBar
-                        android:id="@+id/ratingBar_AT"
+                        android:id="@+id/ratingBar_ST"
                         style="?android:attr/ratingBarStyleSmall"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
-                        android:id="@+id/ratting_text_AT"
+                        android:id="@+id/ratting_text_ST"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="5.0"
@@ -110,7 +110,7 @@
             android:textSize="20dp"/>
 
         <TextView
-            android:id="@+id/detail_overview"
+            android:id="@+id/detail_overview_ST"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lorem" />
