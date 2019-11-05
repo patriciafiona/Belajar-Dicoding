@@ -10,11 +10,10 @@ import android.widget.TextView;
 
 import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
-import com.path_studio.moviecatalogue.ui.main.SedangTayangFragment;
 
 import java.util.ArrayList;
 
-public class SedangTayangAdapter extends BaseAdapter {
+public class AkanTayangAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<Movie> movies = new ArrayList<>();
@@ -25,7 +24,7 @@ public class SedangTayangAdapter extends BaseAdapter {
     }
 
     //constructor hasil generate
-    public SedangTayangAdapter(Context context) {
+    public AkanTayangAdapter(Context context) {
         this.context = context;
     }
 
@@ -47,13 +46,13 @@ public class SedangTayangAdapter extends BaseAdapter {
         if (itemView == null) {
             itemView = LayoutInflater.from(context).inflate(R.layout.item_movie, viewGroup, false);
         }
-        ViewHolder viewHolder = new ViewHolder(itemView);
+        AkanTayangAdapter.ViewHolder viewHolder = new AkanTayangAdapter.ViewHolder(itemView);
         Movie Mmovie = (Movie) getItem(i);
         viewHolder.bind(Mmovie);
         return itemView;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
         private TextView txtName;
         private TextView txtDescription;
         private ImageView imgPhoto;

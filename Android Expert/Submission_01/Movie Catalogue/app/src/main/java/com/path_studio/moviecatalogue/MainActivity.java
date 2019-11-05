@@ -6,8 +6,10 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.path_studio.moviecatalogue.ui.main.AkanTayangFragment;
 import com.path_studio.moviecatalogue.ui.main.ContactFragment;
@@ -17,6 +19,8 @@ import com.path_studio.moviecatalogue.ui.main.SedangTayangFragment;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView Menu1, Menu2, Menu3, Menu4;
+
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //set active menu is HomeFragment
         active_menu("Home");
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            finish();
+            System.exit(0);
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override
