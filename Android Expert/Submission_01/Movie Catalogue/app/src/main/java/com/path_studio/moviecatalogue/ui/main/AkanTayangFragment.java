@@ -33,6 +33,13 @@ public class AkanTayangFragment extends Fragment {
     private TypedArray dataPhoto;
     private ArrayList<Movie> movies;
 
+    private String[] juduls;
+    private String[] descs;
+    private String[] years;
+    private String[] ratings;
+    private String[] urls;
+    private String[] link_youtubes;
+
     private int IndexMovie=0;
 
     public static AkanTayangFragment newInstance() {
@@ -55,6 +62,14 @@ public class AkanTayangFragment extends Fragment {
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //set jadi array dulu
+        juduls = getResources().getStringArray(R.array.data_akan_tayang);
+        descs = getResources().getStringArray(R.array.data_desc_at);
+        years = getResources().getStringArray(R.array.data_year_at);
+        ratings = getResources().getStringArray(R.array.data_ratting_at);
+        urls = getResources().getStringArray(R.array.link_web_at);
+        link_youtubes = getResources().getStringArray(R.array.link_trailer_at);
+
         //list
         ListView listView = view.findViewById(R.id.lv_list_02);
         adapter = new AkanTayangAdapter(getActivity());
@@ -95,9 +110,20 @@ public class AkanTayangFragment extends Fragment {
     }
 
     public void go_to_detail(){
+
+        //kirim datanya dengan PARCETABLE
+        Movie movie = new Movie();
+        movie.setName(juduls[IndexMovie]);
+        movie.setYear(years[IndexMovie]);
+        movie.setRatting(Integer.parseInt(ratings[IndexMovie]));
+        movie.setDescription(descs[IndexMovie]);
+        movie.setLink_web(urls[IndexMovie]);
+        movie.setLink_trailer(link_youtubes[IndexMovie]);
+        movie.setPhoto_index(IndexMovie); //nanti baca datanya di halaman detail
+
         //direct ke halaman detail mobil
         Intent i = new Intent(getActivity(), DetailAT.class);
-        i.putExtra("IndexMovie", IndexMovie);
+        i.putExtra(DetailAT.EXTRA_MOVIE, movie);
         startActivity(i);
 
     }

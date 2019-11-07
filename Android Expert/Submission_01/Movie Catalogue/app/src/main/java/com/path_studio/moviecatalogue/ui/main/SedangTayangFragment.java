@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.path_studio.moviecatalogue.Activities.DetailAT;
 import com.path_studio.moviecatalogue.Adapters.SedangTayangAdapter;
 import com.path_studio.moviecatalogue.Activities.DetailST;
 import com.path_studio.moviecatalogue.Movie;
@@ -29,6 +30,13 @@ public class SedangTayangFragment extends Fragment implements View.OnClickListen
     private String[] dataDescription;
     private TypedArray dataPhoto;
     private ArrayList<Movie> movies;
+
+    private String[] juduls;
+    private String[] descs;
+    private String[] years;
+    private String[] ratings;
+    private String[] urls;
+    private String[] link_youtubes;
 
     private int IndexMovie=0;
 
@@ -56,6 +64,14 @@ public class SedangTayangFragment extends Fragment implements View.OnClickListen
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+        //set jadi array dulu
+        juduls = getResources().getStringArray(R.array.data_sedang_tayang);
+        descs = getResources().getStringArray(R.array.data_desc_st);
+        years = getResources().getStringArray(R.array.data_year_st);
+        ratings = getResources().getStringArray(R.array.data_ratting_st);
+        urls = getResources().getStringArray(R.array.link_web_st);
+        link_youtubes = getResources().getStringArray(R.array.link_trailer_st);
+
         //list
         ListView listView = view.findViewById(R.id.lv_list_01);
         adapter = new SedangTayangAdapter(getActivity());
@@ -78,9 +94,19 @@ public class SedangTayangFragment extends Fragment implements View.OnClickListen
     }
 
     public void go_to_detail(){
+        //kirim datanya dengan PARCETABLE
+        Movie movie = new Movie();
+        movie.setName(juduls[IndexMovie]);
+        movie.setYear(years[IndexMovie]);
+        movie.setRatting(Integer.parseInt(ratings[IndexMovie]));
+        movie.setDescription(descs[IndexMovie]);
+        movie.setLink_web(urls[IndexMovie]);
+        movie.setLink_trailer(link_youtubes[IndexMovie]);
+        movie.setPhoto_index(IndexMovie); //nanti baca datanya di halaman detail
+
         //direct ke halaman detail mobil
         Intent i = new Intent(getActivity(), DetailST.class);
-        i.putExtra("IndexMovie", IndexMovie);
+        i.putExtra(DetailAT.EXTRA_MOVIE, movie);
         startActivity(i);
 
     }

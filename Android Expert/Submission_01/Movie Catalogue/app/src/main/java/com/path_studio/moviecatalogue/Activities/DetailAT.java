@@ -15,9 +15,10 @@ import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
-import com.path_studio.moviecatalogue.Activities.MainActivity;
+import com.path_studio.moviecatalogue.Movie;
 import com.path_studio.moviecatalogue.R;
 import com.path_studio.moviecatalogue.YouTubeConfig;
+
 
 public class DetailAT extends YouTubeBaseActivity implements View.OnClickListener {
 
@@ -31,19 +32,18 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
     private ImageView mPoster, mBack_01;
     private RatingBar mRating;
 
-    private String[] juduls;
-    private String[] descs;
-    private String[] years;
-    private String[] ratings;
-    private String[] urls;
     private TypedArray posters;
 
-    private int index = 0;
+    public static final String EXTRA_MOVIE = "extra_movie";
+    private Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_at);
+
+        //inisiasi parcetable
+        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         //buat youtube
         Log.d(TAG,"oncreate Starting");
@@ -56,10 +56,8 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
             public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
                 Log.d(TAG,"OnCLick: Done Initializing Youtube Player");
 
-                //get link video trailer from array
-                String[] links = getResources().getStringArray(R.array.link_trailer_at);
-                String link = links[getIntent().getExtras().getInt("IndexMovie")];
-
+                //get link video trailer
+                String link = movie.getLink_trailer();
                 youTubePlayer.loadVideo(link);
             }
 
@@ -72,6 +70,9 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
         mPlayST.setOnClickListener(this);
 
         //end youtube
+
+        posters = getResources().obtainTypedArray(R.array.data_photo_akan_tayang);
+
         mLinkAT = (TextView) findViewById(R.id.link_web_at);
         mBack_01 = (ImageView) findViewById(R.id.back_home_01);
 
@@ -83,15 +84,6 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
 
         mRating = (RatingBar) findViewById(R.id.ratingBar_AT);
 
-        //set jadi array dulu
-        juduls = getResources().getStringArray(R.array.data_akan_tayang);
-        descs = getResources().getStringArray(R.array.data_desc_at);
-        years = getResources().getStringArray(R.array.data_year_at);
-        ratings = getResources().getStringArray(R.array.data_ratting_at);
-        urls = getResources().getStringArray(R.array.link_web_at);
-
-        posters = getResources().obtainTypedArray(R.array.data_photo_akan_tayang);
-
         //tampilkan datanya
         UI();
 
@@ -102,23 +94,20 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
     }
 
     public void UI() {
-        Bundle extras = getIntent().getExtras();
-        index = extras.getInt("IndexMovie");
+        mJudul.setText(movie.getName());
+        mTahun.setText(movie.getYear());
 
-        mJudul.setText(juduls[index]);
-        mTahun.setText(years[index]);
-
-        mPoster.setImageResource(posters.getResourceId(index, 0));
+        mPoster.setImageResource(posters.getResourceId(movie.getPhoto_index(), 0));
 
         //hitung ratting
-        float tampung = Integer.valueOf(ratings[index]);
+        float tampung = Integer.valueOf(movie.getRatting());
         float hasil_ratting = ((float) tampung / 2) / 10;
 
         mRattingText_AT.setText(String.valueOf(hasil_ratting));
 
         mRating.setRating(hasil_ratting);
-        mOverview.setText(descs[index]);
-        mLinkAT.setText(urls[index]);
+        mOverview.setText(movie.getDescription());
+        mLinkAT.setText(movie.getLink_web());
     }
 
     @Override
@@ -135,7 +124,7 @@ public class DetailAT extends YouTubeBaseActivity implements View.OnClickListene
                 break;
             case R.id.link_web_at:
                 //open website
-                goToUrl(urls[index]);
+                goToUrl(movie.getLink_web());
                 break;
         }
     }
