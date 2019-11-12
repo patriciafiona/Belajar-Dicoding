@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Movie</string>
+
+    <!--Tab Title-->
+    <string name="tab_text_1">Beranda</string>
+    <string name="tab_text_2">Film</string>
+    <string name="tab_text_3">Acara TV</string>
+    <string name="tab_text_4">Kontak Kami</string>
+
+    <string name="test">Test</string>
+
+    <!--Menu Title-->
+    <string name="menu_1">Pengaturan</string>
+
+    <string name="see_all">Selengkapnya</string>
+
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    <!--Data Movie-->
+    <array name="data_poster_movie">
+        <item>@drawable/poster_alita</item>
+        <item>@drawable/poster_a_start_is_born</item>
+        <item>@drawable/poster_aquaman</item>
+        <item>@drawable/poster_bohemian</item>
+        <item>@drawable/poster_creed</item>
+
+        <item>@drawable/poster_how_to_train</item>
+        <item>@drawable/poster_infinity_war</item>
+        <item>@drawable/poster_glass</item>
+        <item>@drawable/poster_mortal_engines</item>
+        <item>@drawable/poster_spiderman</item>
+    </array>
+
+    <string-array name="data_judul_movie">
+        <item>Alita Battle Angel</item>
+        <item>A Star Is Born</item>
+        <item>Aquaman</item>
+        <item>Bohemian Rhapsody</item>
+        <item>Creed II</item>
+
+        <item>How To Train Your Dragon-The Hidden World</item>
+        <item>Avengers: Infinity War</item>
+        <item>Glass</item>
+        <item>Mortal Engines</item>
+        <item>Spider-Man: Into the Spider-Verse</item>
+    </string-array>
+
+    <string-array name="data_desc_movie">
+        <item>Ketika Alita terbangun tanpa ingatan siapa dirinya di dunia masa depan yang tidak
+            dikenalinya, ia dibawa oleh Ido, seorang dokter yang penuh kasih yang menyadari bahwa
+            di suatu tempat di cangkang cyborg yang ditinggalkan ini adalah hati dan …</item>
+        <item>Musisi kawakan Jackson Maine menemukan - dan jatuh cinta dengan - artis yang
+            sedang berjuang Ally. Dia baru saja menyerah pada mimpinya untuk menjadi besar
+            sebagai penyanyi - sampai Jack membujuknya menjadi sorotan. Tetapi bahkan …</item>
+        <item>Dulunya merupakan rumah bagi peradaban paling maju di Bumi, Atlantis sekarang
+            merupakan kerajaan bawah laut yang diperintah oleh Raja Orm yang haus kekuasaan.
+            Dengan pasukan yang sangat besar, Orm berencana untuk menaklukkan orang-orang samudera
+            yang tersisa …</item>
+        <item>Penyanyi Freddie Mercury, gitaris Brian May, drummer Roger Taylor dan gitaris
+            bass John Deacon membawa dunia musik dengan badai ketika mereka membentuk band
+            rock and roll Queen pada tahun 1970. Lagu-lagu hit menjadi klasik instan.…</item>
+        <item>Antara kewajiban pribadi dan pelatihan untuk pertarungan besar berikutnya melawan
+            lawan yang memiliki ikatan dengan masa lalu keluarganya, Adonis Creed menghadapi
+            tantangan hidupnya.</item>
+
+        <item>Ketika Hiccup memenuhi mimpinya untuk menciptakan utopia naga yang damai,
+            penemuan Toothless dari pasangan yang tak teruji dan sukar ditangkap membuat
+            Night Fury menjauh. Ketika bahaya meningkat di rumah dan pemerintahan Hiccup
+            sebagai kepala desa diuji …</item>
+        <item>Ketika Avengers dan sekutu mereka terus melindungi dunia dari ancaman yang
+            terlalu besar untuk ditangani oleh satu pahlawan, bahaya baru telah muncul dari
+            bayang-bayang kosmik: Thanos. Seorang lalim keburukan intergalaksi …</item>
+        <item>Dalam serangkaian pertemuan yang meningkat, mantan penjaga keamanan David Dunn
+            menggunakan kemampuan supernaturalnya untuk melacak Kevin Wendell Crumb, seorang
+            lelaki terganggu yang memiliki dua puluh empat kepribadian. Sementara itu, kehadiran
+            bayangan …</item>
+        <item>Beribu-ribu tahun di masa depan, kota-kota di bumi menjelajah dunia dengan roda besar,
+            saling melahap dalam perjuangan untuk sumber daya yang semakin berkurang. Di salah satu
+            kota traksi besar ini, London tua, Tom …</item>
+        <item>Miles Morales menyulap hidupnya antara menjadi siswa sekolah menengah dan menjadi
+            manusia laba-laba. Ketika Wilson "Kingpin" Fisk menggunakan collider super, yang lain
+            dari seberang Spider-Verse diangkut ke dimensi ini.</item>
+
+    </string-array>
+
+    <string-array name="data_year_movie">
+        <item>(2019)</item>
+        <item>(2018)</item>
+        <item>(2018)</item>
+        <item>(2018)</item>
+        <item>(2018)</item>
+
+        <item>(2019)</item>
+        <item>(2018)</item>
+        <item>(2019)</item>
+        <item>(2018)</item>
+        <item>(2018)</item>
+    </string-array>
+
+    <string-array name="data_ratting_movie">
+        <item>69</item>
+        <item>75</item>
+        <item>68</item>
+        <item>80</item>
+        <item>67</item>
+
+        <item>77</item>
+        <item>83</item>
+        <item>66</item>
+        <item>60</item>
+        <item>60</item>
+        <item>84</item>
+    </string-array>
+
+    <string-array name="link_trailer_movie">
+        <item>cislZ9S0ocA</item>
+        <item>nSbzyEJ8X9E</item>
+        <item>WDkg3h8PCVU</item>
+        <item>mP0VHJYFOAU</item>
+        <item>ApQbQ0iJQO0</item>
+
+        <item>SkcucKDrbOI</item>
+        <item>6ZfuNTqbHE8</item>
+        <item>95ghQs5AmNk</item>
+        <item>IRsFc2gguEg</item>
+        <item>g4Hbz2jLxvQ</item>
+    </string-array>
+
+    <string-array name="link_web_movie">
+        <item>https://www.themoviedb.org/movie/399579-alita-battle-angel?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/332562-a-star-is-born?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/297802-aquaman?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/424694-bohemian-rhapsody?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/480530-creed-ii?language=en-US</item>
+
+        <item>https://www.themoviedb.org/movie/166428-how-to-train-your-dragon-3?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/299536-avengers-infinity-war</item>
+        <item>https://www.themoviedb.org/movie/450465-glass?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/428078-mortal-engines?language=en-US</item>
+        <item>https://www.themoviedb.org/movie/324857-spider-man-into-the-spider-verse</item>
+    </string-array>
+
+
+
+</resources>

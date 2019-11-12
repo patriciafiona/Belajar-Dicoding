@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.HomeFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--Bagian Sedang Tayang-->
+            <LinearLayout
+                android:id="@+id/box_SedangTayang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tab_text_2"
+                    android:textSize="14dp"/>
+
+                <!--Bagian Slider Movie-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <!--movie 1-->
+                        <ImageView
+                            android:id="@+id/slider_01"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_alita"/>
+
+                        <!--movie 2-->
+                        <ImageView
+                            android:id="@+id/slider_02"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_a_start_is_born"/>
+
+                        <!--movie 3-->
+                        <ImageView
+                            android:id="@+id/slider_03"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_aquaman"/>
+
+                        <!--movie 4-->
+                        <ImageView
+                            android:id="@+id/slider_04"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_bohemian" />
+
+                        <!--movie 5-->
+                        <ImageView
+                            android:id="@+id/slider_05"
+                            android:layout_width="120dp"
+                            android:layout_height="180dp"
+                            android:layout_marginHorizontal="10dp"
+                            android:layout_marginVertical="5dp"
+                            android:src="@drawable/poster_creed"
+                            android:contentDescription="TODO" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/button_selengkapnya_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="Selengkapnya"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>
