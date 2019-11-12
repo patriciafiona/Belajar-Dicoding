@@ -1,5 +1,6 @@
 package com.path_studio.mymovie.Fragments;
 
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
@@ -12,8 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.path_studio.mymovie.Adapters.ListMovieAdapter;
+import com.path_studio.mymovie.DetailMovieActivity;
 import com.path_studio.mymovie.Models.Movie;
 import com.path_studio.mymovie.R;
 
@@ -65,10 +68,30 @@ public class MovieFragment extends Fragment {
         rvMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
         ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
         rvMovies.setAdapter(listMovieAdapter);
+
+        listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(Movie data) {
+                //ke halaman detail
+                go_to_detail();
+
+                showSelectedHero(data);
+            }
+        });
     }
 
-    public TypedArray getPosterList(){
-        return posters;
+    public void go_to_detail(){
+        //kirim datanya dengan PARCETABLE
+        Movie movie = new Movie();
+
+        //direct ke halaman detail mobil
+        Intent i = new Intent(getActivity(), DetailMovieActivity.class);
+        //i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie);
+        startActivity(i);
+    }
+
+    private void showSelectedHero(Movie movie) {
+        Toast.makeText(getActivity(), "Kamu memilih " + movie.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }

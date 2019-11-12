@@ -14,6 +14,16 @@
     <string name="menu_1">Settings</string>
 
     <string name="see_all">See All</string>
+    <string name="judul_film">Title</string>
+    <string name="tahun">(Year)</string>
+    <string name="rating">Rating</string>
+    <string name="rating_default">5.0</string>
+    <string name="link">Link website</string>
+    <string name="full_description">Full Description</string>
+    <string name="lorem">lorem ipsum dolor sit amet</string>
+    <string name="overview">Overview</string>
+    <string name="trailer">Trailer</string>
+    <string name="play_youtube">Play</string>
 
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->

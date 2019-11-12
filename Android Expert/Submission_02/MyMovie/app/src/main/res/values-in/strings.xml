@@ -14,6 +14,16 @@
     <string name="menu_1">Pengaturan</string>
 
     <string name="see_all">Selengkapnya</string>
+    <string name="judul_film">Judul</string>
+    <string name="tahun">(Tahun)</string>
+    <string name="rating">Penilaian</string>
+    <string name="rating_default">5.0</string>
+    <string name="link">Link website</string>
+    <string name="full_description">Deskripsi Lengkap</string>
+    <string name="lorem">lorem ipsum dolor sit amet</string>
+    <string name="overview">Gambaran Singkat</string>
+    <string name="trailer">Cuplikan Video</string>
+    <string name="play_youtube">Putar</string>
 
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->

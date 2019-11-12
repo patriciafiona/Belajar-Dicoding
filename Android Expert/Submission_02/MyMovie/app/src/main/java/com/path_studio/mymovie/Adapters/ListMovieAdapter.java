@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.mymovie.Models.Movie;
 import com.path_studio.mymovie.R;
 
@@ -24,6 +21,12 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
 
     public ListMovieAdapter(ArrayList<Movie> list) {
         this.listMovie = list;
+    }
+
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
     }
 
     @NonNull
@@ -44,6 +47,14 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
         holder.imgPhoto.setImageResource(posters.getResourceId(movie.getPhoto_index(), 0));
         holder.listTitle.setText(movie.getName());
         holder.listDesc.setText(movie.getDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickCallback.onItemClicked(listMovie.get(holder.getAdapterPosition()));
+            }
+        });
+
     }
 
     @Override
@@ -60,6 +71,10 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
             listTitle = itemView.findViewById(R.id.list_movie_title);
             listDesc = itemView.findViewById(R.id.list_movie_desc);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onItemClicked(Movie data);
     }
 
 }
