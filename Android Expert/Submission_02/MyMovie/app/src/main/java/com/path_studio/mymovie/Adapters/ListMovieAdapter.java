@@ -2,11 +2,14 @@ package com.path_studio.mymovie.Adapters;
 
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.path_studio.mymovie.Fragments.MovieFragment;
 import com.path_studio.mymovie.Models.Movie;
 import com.path_studio.mymovie.R;
 
@@ -16,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder>{
+
+    private long Index = 0;
 
     private ArrayList<Movie> listMovie;
 
@@ -52,6 +57,10 @@ public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.List
             @Override
             public void onClick(View v) {
                 onItemClickCallback.onItemClicked(listMovie.get(holder.getAdapterPosition()));
+
+                Log.e("Item Selected",String.valueOf(holder.getAdapterPosition()));
+
+                MovieFragment.getInstance().go_to_detail(holder.getAdapterPosition());
             }
         });
 

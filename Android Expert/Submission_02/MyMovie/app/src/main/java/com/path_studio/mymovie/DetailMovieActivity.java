@@ -1,11 +1,15 @@
 package com.path_studio.mymovie;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -17,6 +21,11 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
 
     public static final String EXTRA_MOVIE = "extra_movie";
     private static final String TAG = "DetailMovieActivity";
+
+    private TextView mJudul, mTahun, mOverview, mRattingText_AT, mLinkAT;
+    private ImageView mPoster, mBack_01;
+    private RatingBar mRating;
+    private TypedArray posters;
 
     //inisiasi parcetable
     private Movie movie;
@@ -31,7 +40,7 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
 
-        //movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
+        movie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
         //buat youtube
         Log.d(TAG,"oncreate Starting");
@@ -58,6 +67,39 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
         mPlayST.setOnClickListener(this);
 
         //end youtube
+
+        //INISIASI
+        posters = getResources().obtainTypedArray(R.array.data_poster_movie);
+
+        mLinkAT = (TextView) findViewById(R.id.link_web_movie);
+
+        mJudul = (TextView) findViewById(R.id.detail_judul);
+        mPoster = (ImageView) findViewById(R.id.detail_poster);
+        mTahun = (TextView) findViewById(R.id.detail_tahun);
+        mOverview = (TextView) findViewById(R.id.detail_overview_movie);
+        mRattingText_AT = (TextView) findViewById(R.id.ratting_text_movie);
+
+        mRating = (RatingBar) findViewById(R.id.ratingBar_movie);
+
+        //SET UI-nya beserta datanya
+        UI();
+    }
+
+    private void UI() {
+        mJudul.setText(movie.getName());
+        mTahun.setText(movie.getYear());
+
+        mPoster.setImageResource(posters.getResourceId(movie.getPhoto_index(), 0));
+
+        //hitung ratting
+        float tampung = Integer.valueOf(movie.getRatting());
+        float hasil_ratting = ((float) tampung / 2) / 10;
+
+        mRattingText_AT.setText(String.valueOf(hasil_ratting));
+
+        mRating.setRating(hasil_ratting);
+        mOverview.setText(movie.getDescription());
+        mLinkAT.setText(movie.getLink_web());
     }
 
     @Override

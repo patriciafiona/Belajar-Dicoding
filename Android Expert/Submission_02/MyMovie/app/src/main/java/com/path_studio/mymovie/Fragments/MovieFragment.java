@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,14 +27,36 @@ public class MovieFragment extends Fragment {
 
     private RecyclerView rvMovies;
     private ArrayList<Movie> list = new ArrayList<>();
+    private long Index = 0;
 
-    public TypedArray posters;
+    private ListMovieAdapter listMovieAdapter;
+
+    private String[] juduls;
+    private String[] descs;
+    private String[] years;
+    private String[] ratings;
+    private String[] urls;
+    private String[] link_youtubes;
+
+    private TypedArray posters;
+
+    private static MovieFragment instance;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         posters = getResources().obtainTypedArray(R.array.data_poster_movie);
+
+        //inisiasi list
+        juduls = getResources().getStringArray(R.array.data_judul_movie);
+        descs = getResources().getStringArray(R.array.data_desc_movie);
+        years = getResources().getStringArray(R.array.data_year_movie);
+        ratings = getResources().getStringArray(R.array.data_ratting_movie);
+        urls = getResources().getStringArray(R.array.link_web_movie);
+        link_youtubes = getResources().getStringArray(R.array.link_trailer_movie);
+
+        instance = this;
 
         return inflater.inflate(R.layout.fragment_movie, container, false);
     }
@@ -48,6 +71,10 @@ public class MovieFragment extends Fragment {
         list.addAll(getListMovie());
         showRecyclerList();
 
+    }
+
+    public static MovieFragment getInstance() {
+        return instance;
     }
 
     public ArrayList<Movie> getListMovie() {
@@ -66,27 +93,36 @@ public class MovieFragment extends Fragment {
 
     private void showRecyclerList(){
         rvMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
-        ListMovieAdapter listMovieAdapter = new ListMovieAdapter(list);
+        listMovieAdapter = new ListMovieAdapter(list);
         rvMovies.setAdapter(listMovieAdapter);
 
         listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Movie data) {
-                //ke halaman detail
-                go_to_detail();
-
                 showSelectedHero(data);
             }
         });
     }
 
-    public void go_to_detail(){
+    public void go_to_detail(long tampung){
+        //get Index-nya
+        int IndexMovie = (int) tampung;
+        Log.e("Item Selected in Movie Fragment",String.valueOf(IndexMovie));
+
+
         //kirim datanya dengan PARCETABLE
         Movie movie = new Movie();
+        movie.setName(juduls[IndexMovie]);
+        movie.setYear(years[IndexMovie]);
+        movie.setRatting(Integer.parseInt(ratings[IndexMovie]));
+        movie.setDescription(descs[IndexMovie]);
+        movie.setLink_web(urls[IndexMovie]);
+        movie.setLink_trailer(link_youtubes[IndexMovie]);
+        movie.setPhoto_index((int)IndexMovie); //nanti baca datanya di halaman detail
 
         //direct ke halaman detail mobil
         Intent i = new Intent(getActivity(), DetailMovieActivity.class);
-        //i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie);
+        i.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie);
         startActivity(i);
     }
 
