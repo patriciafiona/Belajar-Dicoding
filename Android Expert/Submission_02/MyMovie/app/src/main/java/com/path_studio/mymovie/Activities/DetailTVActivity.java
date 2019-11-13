@@ -22,7 +22,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private static final String TAG = "DetailMovieActivity";
 
     private TextView mJudul, mTahun, mOverview, mRattingText_AT, mLinkAT;
-    private ImageView mPoster;
+    private ImageView mPoster, mBackMain;
     private RatingBar mRating;
     private TypedArray posters;
 
@@ -38,16 +38,16 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
 
         //INISIASI
         posters = getResources().obtainTypedArray(R.array.data_poster_tv);
-
         mLinkAT = findViewById(R.id.link_web_tv);
-
         mJudul = findViewById(R.id.detail_judul_tv);
         mPoster = findViewById(R.id.detail_poster_tv);
         mTahun = findViewById(R.id.detail_tahun_tv);
         mOverview = findViewById(R.id.detail_overview_tv);
         mRattingText_AT = findViewById(R.id.ratting_text_tv);
-
         mRating = findViewById(R.id.ratingBar_tv);
+
+        mBackMain = findViewById(R.id.btn_back_main_02);
+        mBackMain.setOnClickListener(this);
 
         //SET UI-nya beserta datanya
         UI();
@@ -77,6 +77,11 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
             case R.id.link_web_tv:
                 //open website
                 goToUrl(movie.getLink_web());
+                break;
+            case R.id.btn_back_main_02:
+                //back to main menu
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
                 break;
         }
     }

@@ -25,7 +25,7 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
     private static final String TAG = "DetailMovieActivity";
 
     private TextView mJudul, mTahun, mOverview, mRattingText_AT, mLinkAT;
-    private ImageView mPoster;
+    private ImageView mPoster, mBackMain;
     private RatingBar mRating;
     private TypedArray posters;
 
@@ -47,8 +47,8 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
         //buat youtube
         Log.d(TAG,"oncreate Starting");
 
-        mPlayST = (Button) findViewById(R.id.YT_play_01);
-        mYouTubePlayerView = (YouTubePlayerView) findViewById(R.id.view_movie_video);
+        mPlayST = findViewById(R.id.YT_play_01);
+        mYouTubePlayerView = findViewById(R.id.view_movie_video);
 
         mOnInitialozedListener = new YouTubePlayer.OnInitializedListener() {
             @Override
@@ -72,16 +72,16 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
 
         //INISIASI
         posters = getResources().obtainTypedArray(R.array.data_poster_movie);
-
         mLinkAT = findViewById(R.id.link_web_movie);
-
         mJudul = findViewById(R.id.detail_judul);
         mPoster = findViewById(R.id.detail_poster);
         mTahun = findViewById(R.id.detail_tahun);
         mOverview = findViewById(R.id.detail_overview_movie);
         mRattingText_AT = findViewById(R.id.ratting_text_movie);
-
         mRating = findViewById(R.id.ratingBar_movie);
+
+        mBackMain = findViewById(R.id.btn_back_main_01);
+        mBackMain.setOnClickListener(this);
 
         //SET UI-nya beserta datanya
         UI();
@@ -115,6 +115,11 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
             case R.id.link_web_movie:
                 //open website
                 goToUrl(movie.getLink_web());
+                break;
+            case R.id.btn_back_main_01:
+                //back to main menu
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
                 break;
         }
     }

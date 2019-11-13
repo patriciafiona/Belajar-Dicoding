@@ -20,8 +20,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ListMovieAdapter extends RecyclerView.Adapter<ListMovieAdapter.ListViewHolder>{
 
-    private long Index = 0;
-
     private ArrayList<Movie> listMovie;
 
     public ListMovieAdapter(ArrayList<Movie> list) {

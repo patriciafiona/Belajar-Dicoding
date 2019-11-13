@@ -13,12 +13,16 @@ import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private final Context mContext;
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
+    private ViewPager viewPager;
+
+    public SectionsPagerAdapter(Context context, FragmentManager fm, ViewPager viewPager) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
+        this.viewPager = viewPager;
     }
 
     @StringRes
@@ -33,7 +37,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new HomeFragment();
+                fragment = new HomeFragment(viewPager);
                 break;
             case 1:
                 fragment = new MovieFragment();

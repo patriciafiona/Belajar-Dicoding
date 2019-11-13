@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.path_studio.mymovie.Fragments.MovieFragment;
 import com.path_studio.mymovie.Fragments.TvShowFragment;
 import com.path_studio.mymovie.Models.Movie;
 import com.path_studio.mymovie.R;
@@ -20,8 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class ListTVAdapter extends RecyclerView.Adapter<ListTVAdapter.ListViewHolder> {
-
-    private long Index = 0;
 
     private ArrayList<Movie> listTV;
 

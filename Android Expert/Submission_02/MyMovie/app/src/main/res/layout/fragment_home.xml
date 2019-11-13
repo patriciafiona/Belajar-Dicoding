@@ -16,19 +16,45 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!--Bagian Sedang Tayang-->
+            <!--Bagian Promotion image slider-->
             <LinearLayout
-                android:id="@+id/box_SedangTayang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
+                android:orientation="vertical">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/Slider"
+                    android:layout_width="match_parent"
+                    android:layout_marginVertical="20dp"
+                    android:layout_height="150dp">
+
+                </androidx.viewpager.widget.ViewPager>
+
+                <LinearLayout
+                    android:id="@+id/dotsLayoutPromotion"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="-65dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Bagian Movies-->
+            <LinearLayout
+                android:id="@+id/box_Movie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tab_text_2"
-                    android:textSize="14dp"/>
+                    style="@style/homeSection"
+                    android:text="@string/tab_text_2"/>
 
                 <!--Bagian Slider Movie-->
                 <HorizontalScrollView
@@ -43,31 +69,26 @@
 
                         <!--movie 1-->
                         <ImageView
-                            android:id="@+id/slider_01"
                             style="@style/homeScrollImage"
                             android:src="@drawable/poster_alita"/>
 
                         <!--movie 2-->
                         <ImageView
-                            android:id="@+id/slider_02"
                             style="@style/homeScrollImage"
                             android:src="@drawable/poster_a_start_is_born"/>
 
                         <!--movie 3-->
                         <ImageView
-                            android:id="@+id/slider_03"
                             style="@style/homeScrollImage"
                             android:src="@drawable/poster_aquaman"/>
 
                         <!--movie 4-->
                         <ImageView
-                            android:id="@+id/slider_04"
                             style="@style/homeScrollImage"
                             android:src="@drawable/poster_bohemian" />
 
                         <!--movie 5-->
                         <ImageView
-                            android:id="@+id/slider_05"
                             style="@style/homeScrollImage"
                             android:src="@drawable/poster_creed"/>
 
@@ -77,6 +98,67 @@
 
                 <Button
                     android:id="@+id/button_selengkapnya_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/see_all"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
+
+            <!--Bagian TV Shows-->
+            <LinearLayout
+                android:id="@+id/box_tv_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/homeSection"
+                    android:text="@string/tab_text_3" />
+
+                <!--Bagian Slider TV show-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <!--TV 1-->
+                        <ImageView
+                            style="@style/homeScrollImage"
+                            android:src="@drawable/poster_dragon_ball"/>
+
+                        <!--TV 2-->
+                        <ImageView
+                            style="@style/homeScrollImage"
+                            android:src="@drawable/poster_family_guy"/>
+
+                        <!--TV 3-->
+                        <ImageView
+                            style="@style/homeScrollImage"
+                            android:src="@drawable/poster_flash"/>
+
+                        <!--TV 4-->
+                        <ImageView
+                            style="@style/homeScrollImage"
+                            android:src="@drawable/poster_got" />
+
+                        <!--TV 5-->
+                        <ImageView
+                            style="@style/homeScrollImage"
+                            android:src="@drawable/poster_hanna"/>
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/button_selengkapnya_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:text="@string/see_all"
