@@ -1,4 +1,4 @@
-package com.path_studio.mymovie;
+package com.path_studio.mymovie.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
@@ -11,6 +11,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
 import com.path_studio.mymovie.Adapters.SectionsPagerAdapter;
+import com.path_studio.mymovie.R;
 
 public class MainActivity extends AppCompatActivity {
 

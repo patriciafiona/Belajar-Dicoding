@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.path_studio.mymovie.Adapters.ListMovieAdapter;
-import com.path_studio.mymovie.DetailMovieActivity;
+import com.path_studio.mymovie.Activities.DetailMovieActivity;
 import com.path_studio.mymovie.Models.Movie;
 import com.path_studio.mymovie.R;
 
@@ -65,7 +65,7 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        rvMovies = getActivity().findViewById(R.id.rv_heroes);
+        rvMovies = getActivity().findViewById(R.id.rv_movies);
         rvMovies.setHasFixedSize(true);
 
         list.addAll(getListMovie());
@@ -80,15 +80,15 @@ public class MovieFragment extends Fragment {
     public ArrayList<Movie> getListMovie() {
         String[] dataName = getResources().getStringArray(R.array.data_judul_movie);
         String[] dataDescription = getResources().getStringArray(R.array.data_desc_movie);
-        ArrayList<Movie> listHero = new ArrayList<>();
+        ArrayList<Movie> listMovie = new ArrayList<>();
         for (int i = 0; i < dataName.length; i++) {
             Movie movie = new Movie();
             movie.setName(dataName[i]);
             movie.setDescription(dataDescription[i]);
             movie.setPhoto_index(i);
-            listHero.add(movie);
+            listMovie.add(movie);
         }
-        return listHero;
+        return listMovie;
     }
 
     private void showRecyclerList(){
@@ -99,7 +99,7 @@ public class MovieFragment extends Fragment {
         listMovieAdapter.setOnItemClickCallback(new ListMovieAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(Movie data) {
-                showSelectedHero(data);
+                showSelectedMovie(data);
             }
         });
     }
@@ -118,7 +118,7 @@ public class MovieFragment extends Fragment {
         movie.setDescription(descs[IndexMovie]);
         movie.setLink_web(urls[IndexMovie]);
         movie.setLink_trailer(link_youtubes[IndexMovie]);
-        movie.setPhoto_index((int)IndexMovie); //nanti baca datanya di halaman detail
+        movie.setPhoto_index(IndexMovie); //nanti baca datanya di halaman detail
 
         //direct ke halaman detail mobil
         Intent i = new Intent(getActivity(), DetailMovieActivity.class);
@@ -126,7 +126,7 @@ public class MovieFragment extends Fragment {
         startActivity(i);
     }
 
-    private void showSelectedHero(Movie movie) {
+    private void showSelectedMovie(Movie movie) {
         Toast.makeText(getActivity(), "Kamu memilih " + movie.getName(), Toast.LENGTH_SHORT).show();
     }
 

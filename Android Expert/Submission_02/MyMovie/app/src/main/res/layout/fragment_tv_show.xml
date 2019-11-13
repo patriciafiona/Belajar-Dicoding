@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.TvShowFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_tvs"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/test" />
+        tools:listitem="@layout/item_row_tv" />
 
 </FrameLayout>

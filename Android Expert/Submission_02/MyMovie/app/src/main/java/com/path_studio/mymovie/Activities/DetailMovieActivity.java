@@ -1,4 +1,4 @@
-package com.path_studio.mymovie;
+package com.path_studio.mymovie.Activities;
 
 import android.content.Intent;
 import android.content.res.TypedArray;
@@ -16,6 +16,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.path_studio.mymovie.Models.Movie;
+import com.path_studio.mymovie.R;
+import com.path_studio.mymovie.YouTubeConfig;
 
 public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnClickListener {
 
@@ -23,7 +25,7 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
     private static final String TAG = "DetailMovieActivity";
 
     private TextView mJudul, mTahun, mOverview, mRattingText_AT, mLinkAT;
-    private ImageView mPoster, mBack_01;
+    private ImageView mPoster;
     private RatingBar mRating;
     private TypedArray posters;
 
@@ -71,15 +73,15 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
         //INISIASI
         posters = getResources().obtainTypedArray(R.array.data_poster_movie);
 
-        mLinkAT = (TextView) findViewById(R.id.link_web_movie);
+        mLinkAT = findViewById(R.id.link_web_movie);
 
-        mJudul = (TextView) findViewById(R.id.detail_judul);
-        mPoster = (ImageView) findViewById(R.id.detail_poster);
-        mTahun = (TextView) findViewById(R.id.detail_tahun);
-        mOverview = (TextView) findViewById(R.id.detail_overview_movie);
-        mRattingText_AT = (TextView) findViewById(R.id.ratting_text_movie);
+        mJudul = findViewById(R.id.detail_judul);
+        mPoster = findViewById(R.id.detail_poster);
+        mTahun = findViewById(R.id.detail_tahun);
+        mOverview = findViewById(R.id.detail_overview_movie);
+        mRattingText_AT = findViewById(R.id.ratting_text_movie);
 
-        mRating = (RatingBar) findViewById(R.id.ratingBar_movie);
+        mRating = findViewById(R.id.ratingBar_movie);
 
         //SET UI-nya beserta datanya
         UI();
@@ -92,8 +94,8 @@ public class DetailMovieActivity extends YouTubeBaseActivity implements View.OnC
         mPoster.setImageResource(posters.getResourceId(movie.getPhoto_index(), 0));
 
         //hitung ratting
-        float tampung = Integer.valueOf(movie.getRatting());
-        float hasil_ratting = ((float) tampung / 2) / 10;
+        float tampung = movie.getRatting();
+        float hasil_ratting = (tampung / 2) / 10;
 
         mRattingText_AT.setText(String.valueOf(hasil_ratting));
 

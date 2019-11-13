@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/bg_02_400x700"
-    tools:context=".MainActivity">
+    tools:context=".Activities.MainActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"

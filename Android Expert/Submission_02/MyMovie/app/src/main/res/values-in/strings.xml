@@ -24,6 +24,8 @@
     <string name="overview">Gambaran Singkat</string>
     <string name="trailer">Cuplikan Video</string>
     <string name="play_youtube">Putar</string>
+    <string name="made_by">Dibuat Oleh Patricia Fiona</string>
+    <string name="myEmail">patriciafiona3@gmail.com</string>
 
 
     <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
@@ -152,6 +154,93 @@
         <item>https://www.themoviedb.org/movie/324857-spider-man-into-the-spider-verse</item>
     </string-array>
 
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
+    <!--Data TV-->
+    <array name="data_poster_tv">
+        <item>@drawable/poster_dragon_ball</item>
+        <item>@drawable/poster_family_guy</item>
+        <item>@drawable/poster_flash</item>
+        <item>@drawable/poster_got</item>
+        <item>@drawable/poster_hanna</item>
+
+        <item>@drawable/poster_naruto_shipudden</item>
+        <item>@drawable/poster_ncis</item>
+        <item>@drawable/poster_supergirl</item>
+        <item>@drawable/poster_supernatural</item>
+        <item>@drawable/poster_the_simpson</item>
+    </array>
+
+    <string-array name="data_judul_tv">
+        <item>Dragon Ball</item>
+        <item>Family Guy</item>
+        <item>The Flash</item>
+        <item>Game Of Thrones</item>
+        <item>Hanna</item>
+
+        <item>Naruto Shipudden</item>
+        <item>NCIS</item>
+        <item>Supergirl</item>
+        <item>Supernatural</item>
+        <item>The Simpsons</item>
+    </string-array>
+
+    <string-array name="data_desc_tv">
+        <item>Dahulu di gunung, seorang master pertempuran yang dikenal sebagai Gohan menemukan seorang anak aneh yang ia beri nama Goku. Gohan membesarkannya dan melatih Goku dalam seni bela diri sampai dia mati. Bocah muda dan sangat kuat itu sendirian, tetapi mudah dikelola. Kemudian suatu hari, Goku bertemu dengan seorang gadis remaja bernama Bulma, yang pencariannya untuk Bola Naga mistis membawanya ke rumah Goku. Bersama-sama, mereka berangkat untuk menemukan ketujuh dan mengabulkan keinginannya. </item>
+        <item>Serial animasi Freakin Sweet yang sakit, bengkok, salah secara politis, dan menampilkan petualangan keluarga Griffin yang disfungsional. Peter yang kikuk dan Lois yang sudah lama menderita memiliki tiga anak. Stewie (bayi yang brilian tetapi sadis yang bertekad membunuh ibunya dan mengambil alih dunia), Meg (yang tertua, dan merupakan gadis yang paling tidak populer di kota) dan Chris (anak tengah, dia tidak terlalu cerdas tetapi memiliki hasrat untuk film ). Anggota terakhir keluarga itu adalah Brian - anjing yang bisa bicara dan lebih dari sekadar hewan peliharaan, ia menjaga Stewie, sementara menghirup Martinis dan memilah-milah masalah hidupnya sendiri. </item>
+        <item>Setelah akselerator partikel menyebabkan badai hebat, Penyelidik CSI Barry Allen disambar petir dan jatuh koma. Beberapa bulan kemudian dia terbangun dengan kekuatan kecepatan super, memberinya kemampuan untuk bergerak melalui Central City seperti malaikat penjaga yang tak terlihat. Meskipun awalnya bersemangat dengan kekuatan barunya, Barry terkejut menemukan bahwa dia bukan satu-satunya "manusia meta" yang diciptakan setelah ledakan akselerator - dan tidak semua orang menggunakan kekuatan baru mereka untuk kebaikan. Barry bermitra dengan S.T.A.R. Lab dan mendedikasikan hidupnya untuk melindungi yang tidak bersalah. Untuk saat ini, hanya beberapa teman dekat dan rekan yang tahu bahwa Barry secara harfiah adalah manusia tercepat yang hidup, tetapi tidak lama lagi dunia akan mengetahui apa yang menjadi Barry Allen … The Flash. </item>
+        <item>Tujuh keluarga bangsawan berjuang untuk menguasai tanah mitos Westeros. Gesekan antara rumah-rumah mengarah ke perang skala penuh. Semua sementara kejahatan yang sangat kuno terbangun di utara terjauh. Di tengah-tengah perang, tatanan militer yang diabaikan, Night\'s Watch, adalah yang berdiri di antara dunia manusia dan kengerian es di luar sana. </item>
+        <item>Drama thriller dan usia dewasa ini mengikuti perjalanan seorang gadis muda yang luar biasa saat ia menghindari pengejaran tanpa henti dari seorang agen CIA yang tidak ada buku dan mencoba untuk menggali kebenaran di balik siapa dirinya. Berdasarkan film Joe Wright 2011. </item>
+
+        <item>Naruto Shippuuden adalah kelanjutan dari serial TV animasi asli Naruto. Ceritanya berkisar pada Naruto Uzumaki yang lebih tua dan sedikit lebih matang dan upayanya untuk menyelamatkan temannya Uchiha Sasuke dari cengkeraman Shinobi seperti ular, Orochimaru. Setelah 2 setengah tahun, Naruto akhirnya kembali ke desanya Konoha, dan mulai mewujudkan ambisinya, meskipun itu tidak akan mudah, karena Ia telah mengumpulkan beberapa musuh (lebih berbahaya), seperti organisasi shinobi. ; Akatsuki. </item>
+        <item>Dari pembunuhan dan spionase hingga terorisme dan kapal selam curian, tim agen khusus menyelidiki kejahatan apa pun yang memiliki sedikit pun bukti yang terhubung dengan personel Korps Angkatan Laut dan Korps Marinir, terlepas dari pangkat atau jabatannya. </item>
+        <item>Kara Zor-El yang berusia 24 tahun, yang ditangkap oleh keluarga Danvers ketika dia berusia 13 tahun setelah diusir dari Krypton, harus belajar merangkul kekuatannya setelah sebelumnya menyembunyikannya. Orang-orang Danvers mengajarinya untuk berhati-hati dengan kekuatannya, sampai dia harus mengungkapkannya selama bencana yang tak terduga, menempatkannya dalam perjalanan kepahlawanannya. </item>
+        <item>Ketika mereka masih kecil, Sam dan Dean Winchester kehilangan ibu mereka karena kekuatan gaib yang misterius dan iblis. Selanjutnya, ayah mereka membesarkan mereka menjadi tentara. Dia mengajari mereka tentang kejahatan paranormal yang hidup di sudut-sudut gelap dan di jalan belakang Amerika … dan dia mengajari mereka cara membunuhnya. Sekarang, saudara-saudara Winchester menjelajahi negara itu dengan Chevy Impala \'67 mereka, memerangi setiap jenis ancaman supernatural yang mereka temui di sepanjang jalan. </item>
+        <item>Bertempat di Springfield, kota rata-rata di Amerika, pertunjukan ini berfokus pada kejenakaan dan petualangan sehari-hari keluarga Simpson; Homer, Marge, Bart, Lisa dan Maggie, serta ribuan pemain virtual. Sejak awal, serial ini telah menjadi ikon budaya pop, menarik ratusan selebriti menjadi bintang tamu. Acara ini juga menjadi terkenal karena satirnya yang tak kenal takut terhadap kehidupan politik, media, dan Amerika secara umum. </item>
+    </string-array>
+
+    <string-array name="data_year_tv">
+        <item>(1986)</item>
+        <item>(1999)</item>
+        <item>(2014)</item>
+        <item>(2011)</item>
+        <item>(2019)</item>
+
+        <item>(2007)</item>
+        <item>(2003)</item>
+        <item>(2015)</item>
+        <item>(2005)</item>
+        <item>(1989)</item>
+    </string-array>
+
+    <string-array name="data_ratting_tv">
+        <item>71</item>
+        <item>65</item>
+        <item>67</item>
+        <item>81</item>
+        <item>67</item>
+
+        <item>76</item>
+        <item>68</item>
+        <item>59</item>
+        <item>74</item>
+        <item>72</item>
+    </string-array>
+
+    <string-array name="link_web_tv">
+        <item>https://www.themoviedb.org/tv/12609-dragon-ball?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/1434-family-guy?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/60735-the-flash?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/1399-game-of-thrones?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/54155-hanna?language=en-US</item>
+
+        <item>https://www.themoviedb.org/tv/31910-naruto-shipp-den?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/4614-ncis?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/62688-supergirl?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/1622-supernatural?language=en-US</item>
+        <item>https://www.themoviedb.org/tv/456-the-simpsons?language=en-US</item>
+    </string-array>
+
+    <!--+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
 
 </resources>
