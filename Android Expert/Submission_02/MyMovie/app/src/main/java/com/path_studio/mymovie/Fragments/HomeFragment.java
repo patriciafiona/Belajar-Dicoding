@@ -39,6 +39,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private ViewPager viewPager;
 
+    public  HomeFragment(){
+
+    }
+
     public  HomeFragment (ViewPager viewPager){
         this.viewPager=viewPager;
     }
