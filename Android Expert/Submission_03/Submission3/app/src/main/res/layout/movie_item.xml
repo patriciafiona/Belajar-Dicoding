@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/poster_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp">
+
+        <ImageView
+            android:id="@+id/img_item_photo"
+            android:layout_width="105dp"
+            android:layout_height="170dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@color/colorSolidGrey" />
+
+        <TextView
+            android:id="@+id/list_ageRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/round_corner_orange"
+            android:text="@string/age_category_17"
+            android:textColor="@color/colorWhite"
+            android:textSize="8sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@id/poster_box"
+        android:layout_toRightOf="@id/poster_box"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/list_movie_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@string/test" />
+
+        <TextView
+            android:id="@+id/list_movie_desc"
+            android:layout_width="match_parent"
+            android:layout_height="111dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            tools:text="@string/test" />
+    </LinearLayout>
+
+</RelativeLayout>

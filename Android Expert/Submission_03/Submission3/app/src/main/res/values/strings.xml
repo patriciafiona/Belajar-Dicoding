@@ -7,6 +7,8 @@
     <string name="tab_text_3">Tv Shows</string>
     <string name="tab_text_4">Contact Us</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="test">Test</string>
+    <string name="age_category_17">17+</string>
+    <string name="age_category_all">All</string>
+    <string name="language_code">en-US</string>
 </resources>
