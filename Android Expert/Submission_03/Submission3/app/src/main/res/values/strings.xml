@@ -7,8 +7,31 @@
     <string name="tab_text_3">Tv Shows</string>
     <string name="tab_text_4">Contact Us</string>
 
+    <!--Menu Title-->
+    <string name="menu_1">Settings</string>
+
     <string name="test">Test</string>
+    <string name="lorem">lorem ipsum dolor sit amet</string>
     <string name="age_category_17">17+</string>
     <string name="age_category_all">All</string>
     <string name="language_code">en-US</string>
+
+    <string name="see_all">See All</string>
+    <string name="judul_film">Title</string>
+    <string name="tahun">(Year)</string>
+    <string name="rating">Rating</string>
+    <string name="rating_default">5.0</string>
+    <string name="link">Link website</string>
+    <string name="full_description">Full Description</string>
+    <string name="overview">Overview</string>
+    <string name="trailer">Trailer</string>
+    <string name="play_youtube">Play</string>
+    <string name="made_by">Made By Patricia Fiona</string>
+    <string name="myEmail">patriciafiona3@gmail.com</string>
+    <string name="durasi">Durasi</string>
+    <string name="genre">Genre</string>
+    <string name="director">Director</string>
+    <string name="vote_count">4000 vote_count</string>
+    <string name="release">Release</string>
+    <string name="featured_crew">Featured Crew</string>
 </resources>
