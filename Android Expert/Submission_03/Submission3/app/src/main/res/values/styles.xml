@@ -22,7 +22,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">24dp</item>
-        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColor">@color/colorDonker</item>
         <item name="android:textSize">20dp</item>
         <item name="android:textStyle">bold</item>
     </style>
@@ -47,8 +47,11 @@
     <style name="detail_rating_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginStart">0dp</item>
         <item name="android:paddingLeft">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorYellow</item>
+        <item name="android:gravity">left</item>
     </style>
 
     <style name="detail_overview_tx">
@@ -88,7 +91,7 @@
         <item name="android:layout_marginTop">8dp</item>
     </style>
 
-    <style name="detail_link_web_tx">
+    <style name="detail_Movie">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">32dp</item>

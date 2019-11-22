@@ -27,7 +27,9 @@ public class MovieViewModel extends ViewModel {
     private final String linkPoster = "http://image.tmdb.org/t/p/original";
     private static final String API_KEY = "59ade0f2f439410860ac45335e2e539d";
     private MutableLiveData<ArrayList<MovieItems>> listMovies = new MutableLiveData<>();
+    private String[] genre;
 
+    //for list movie
     public void setMovie(String language, Context mContext) {
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
@@ -83,6 +85,7 @@ public class MovieViewModel extends ViewModel {
 
     }
 
+    //for detail movie page
     public void setMovie(String language, int movie_id, Context mContext) {
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
@@ -121,6 +124,50 @@ public class MovieViewModel extends ViewModel {
                             e.printStackTrace();
                         }
 
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error.Response", error.toString());
+                    }
+                });
+
+        // add it to the RequestQueue
+        queue.add(getRequest);
+    }
+
+    public void setMovieGenre(String language, int movie_id, Context mContext){
+        //get detail data movie
+        final RequestQueue queue = Volley.newRequestQueue(mContext);
+
+        final ArrayList<MovieItems> listItems = new ArrayList<>();
+        final String url = "https://api.themoviedb.org/3/movie/"+movie_id+"?api_key=" + API_KEY + "&language=" + language;
+
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray data = response.getJSONArray("genres");
+                            for (int i = 0; i < data.length(); i++) {
+                                try {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+                                    genre[i] = response.getString("genres");
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            MovieItems movieItems = new MovieItems();
+                            movieItems.setGenre(genre);
+                            listItems.add(movieItems);
+
+                            listMovies.postValue(listItems);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener()

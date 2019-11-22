@@ -47,7 +47,7 @@
             android:id="@+id/detail_judul"
             style="@style/detail_judul"
             android:layout_marginTop="32dp"
-            android:text="@string/judul_film"
+            android:text="@string/title_film"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,11 +55,12 @@
         <TextView
             android:id="@+id/detail_tahun"
             style="@style/detail_tahun"
-            android:text="@string/tahun"
+            android:text="@string/year"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
             app:layout_constraintTop_toBottomOf="@+id/detail_judul" />
 
         <TableLayout
+            android:id="@+id/detail_table01"
             android:layout_width="230dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -87,10 +88,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/durasi" />
+                    android:text="@string/status" />
 
                 <TextView
-                    android:id="@+id/detail_duration"
+                    android:id="@+id/detail_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test"
@@ -102,25 +103,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Director" />
+                    android:text="@string/age_rating" />
 
                 <TextView
-                    android:id="@+id/detail_derector"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rating" />
-
-                <TextView
-                    android:id="@+id/detail_duartion"
+                    android:id="@+id/detail_age_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/test"
@@ -142,10 +128,8 @@
             <TextView
                 android:id="@+id/ratting_text_movie"
                 style="@style/detail_rating_text"
+                android:layout_width="wrap_content"
                 android:text="@string/rating_default"
-                android:textStyle="bold"
-                android:textColor="@color/colorYellow"
-                android:textSize="20sp"
                 app:layout_constraintStart_toEndOf="@+id/ratingBar_movie" />
 
             <RatingBar
@@ -163,15 +147,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/release"
                     android:textColor="@color/colorBlack"
                     android:textStyle="bold"/>
+
                 <TextView
+                    android:id="@+id/detail_release"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/test"/>
+                    android:text="@string/test" />
 
 
             </LinearLayout>
@@ -179,7 +166,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/detail_voteCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/vote_count"
@@ -191,30 +178,93 @@
             style="@style/detail_overview_tx"
             android:text="@string/overview"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_voteCount" />
 
         <TextView
             android:id="@+id/detail_overview_movie"
             style="@style/detail_overview_text"
             android:text="@string/lorem"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            android:justificationMode="inter_word"/>
 
         <TextView
             android:id="@+id/textView4"
-            style="@style/detail_link_web_tx"
-            android:layout_marginTop="8dp"
-            android:text="@string/full_description"
+            style="@style/detail_Movie"
+            android:layout_marginTop="16dp"
+            android:text="@string/detail_movie"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_overview_movie" />
 
-        <TextView
-            android:id="@+id/link_web_movie"
-            style="@style/detail_link_web_text"
-            android:text="@string/link"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TableLayout
+            android:id="@+id/detail_table02"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/imdb_id" />
+
+                <TextView
+                    android:id="@+id/detail_imdb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/colorBlack" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/original_language" />
+
+                <TextView
+                    android:id="@+id/detail_ori_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/colorBlack" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/popularity" />
+
+                <TextView
+                    android:id="@+id/detail_popularity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/colorBlack" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="156dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/revenue" />
+
+                <TextView
+                    android:id="@+id/detail_revenue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test"
+                    android:textColor="@color/colorBlack" />
+            </TableRow>
+
+        </TableLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

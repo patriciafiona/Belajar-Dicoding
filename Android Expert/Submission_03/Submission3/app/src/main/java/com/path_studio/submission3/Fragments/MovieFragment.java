@@ -99,7 +99,8 @@ public class MovieFragment extends Fragment {
     }
 
     private void showSelectedMovie(MovieItems movie) {
-        Toast.makeText(getActivity(), "Kamu memilih " + movie.getName(), Toast.LENGTH_SHORT).show();
+        String pilih = getResources().getString(R.string.your_choose);
+        Toast.makeText(getActivity(), pilih + movie.getName(), Toast.LENGTH_SHORT).show();
     }
 
 }
