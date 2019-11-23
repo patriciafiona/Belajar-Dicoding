@@ -20,13 +20,11 @@
     <string name="title_film">Title</string>
     <string name="rating">Rating</string>
     <string name="rating_default">5.0</string>
-    <string name="link">Link website</string>
     <string name="full_description">Full Description</string>
     <string name="overview">Overview</string>
     <string name="made_by">Made By Patricia Fiona</string>
     <string name="myEmail">patriciafiona3@gmail.com</string>
     <string name="genre">Genre</string>
-    <string name="director">Director</string>
     <string name="vote_count">4000 vote_count</string>
     <string name="release">Release</string>
     <string name="your_choose">You\'re choose</string>
@@ -38,5 +36,5 @@
     <string name="revenue">Revenue</string>
     <string name="vote_count_text">Vote Count</string>
     <string name="age_rating">Age Rating</string>
-
+    <string name="no_translate">No translate for English language</string>
 </resources>

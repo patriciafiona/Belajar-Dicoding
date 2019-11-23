@@ -21,11 +21,13 @@ import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.MovieViewModel;
 
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.StringJoiner;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener{
@@ -124,6 +126,33 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         else
             mAgeRating.setText(getResources().getString(R.string.age_category_all));
 
+        //menampilkan tanggal release
+        if(movieItems.getRelease_date() != null && !movieItems.getRelease_date().isEmpty()){
+            String tanggal = movieItems.getRelease_date();
+            try {
+                Date date=new SimpleDateFormat("yyyy-MM-dd").parse(tanggal);
+
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                String strDate = formatter.format(date);
+                mRelease.setText(strDate);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+        //menampilkan overview
+        if(movieItems.getDescription()!=null  && !movieItems.getDescription().isEmpty()){
+            mOverview.setText(movieItems.getDescription());
+        }else{
+            mOverview.setText(getResources().getString(R.string.no_translate));
+        }
+
+        double rev = Double.parseDouble(movieItems.getRevenue());
+        NumberFormat US_currency = NumberFormat.getCurrencyInstance(Locale.US);
+        mRevenue.setText(US_currency.format(rev));
+
+
+
         //hitung ratting
         double tampung = movieItems.getRatting();
         float hasil_ratting = ((float)tampung / 2);
@@ -131,10 +160,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         mJudul.setText(movieItems.getName());
         mRating.setRating(hasil_ratting);
-        mOverview.setText(movieItems.getDescription());
         mStatus.setText(movieItems.getStatus());
-        mRelease.setText(movieItems.getRelease_date());
-        mRevenue.setText(movieItems.getRevenue());
         mPopularity.setText(movieItems.getPopularity());
         mIMDB.setText(movieItems.getImdb_id());
         mOriLanguage.setText(movieItems.getOriginal_language());

@@ -82,7 +82,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                     .into(movieViewHolder.imgPhoto);
 
             listTitle.setText(movieItems.getName());
-            listDesc.setText(movieItems.getDescription());
+
+            if(movieItems.getDescription()!=null && !movieItems.getDescription().isEmpty()){
+                listDesc.setText(movieItems.getDescription());
+            }else{
+                listDesc.setText(mContext.getResources().getString(R.string.no_translate));
+            }
 
             //check age ratting
             if(movieItems.isAdult()){

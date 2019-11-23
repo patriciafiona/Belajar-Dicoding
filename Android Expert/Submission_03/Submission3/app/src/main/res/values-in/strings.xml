@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Movie Catalogue</string>
+
+    <!--Tab Title-->
+    <string name="tab_text_1">Beranda</string>
+    <string name="tab_text_2">Film</string>
+    <string name="tab_text_3">Acara TV</string>
+    <string name="tab_text_4">Hubungi Kami</string>
+
+    <!--Menu Title-->
+    <string name="menu_1">Pengaturan</string>
+
+    <string name="test">Test</string>
+    <string name="lorem">lorem ipsum dolor sit amet</string>
+    <string name="age_category_17">17+</string>
+    <string name="age_category_all">SU</string>
+    <string name="language_code">id</string>
+
+    <string name="see_all">Selengkapnya</string>
+    <string name="title_film">Judul</string>
+    <string name="rating">Rating</string>
+    <string name="rating_default">5.0</string>
+    <string name="full_description">Deskripsi Selengkapnya</string>
+    <string name="overview">Gambaran Singkat</string>
+    <string name="made_by">Dibuat Oleh Patricia Fiona</string>
+    <string name="myEmail">patriciafiona3@gmail.com</string>
+    <string name="genre">Genre</string>
+    <string name="vote_count">4000 pemilih</string>
+    <string name="release">Tanggal Terbit</string>
+    <string name="your_choose">Kamu memilih</string>
+    <string name="status">Status</string>
+    <string name="detail_movie">Detail Film</string>
+    <string name="imdb_id">ID IMDB</string>
+    <string name="original_language">Bahasa Asli</string>
+    <string name="popularity">Popularitas</string>
+    <string name="revenue">Pendapatan</string>
+    <string name="vote_count_text">Jumlah Pemilih</string>
+    <string name="age_rating">Rating Usia</string>
+    <string name="no_translate">(Tidak ada terjemahan bahasa Indonesia)</string>
+
+</resources>
