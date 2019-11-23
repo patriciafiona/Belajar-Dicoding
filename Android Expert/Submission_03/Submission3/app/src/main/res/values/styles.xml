@@ -6,6 +6,17 @@
         <item name="colorPrimary">@color/colorSkyBlue</item>
         <item name="colorPrimaryDark">@color/colorSkyBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>
+        <item name="android:buttonStyle">@style/PoppinsButtonStyle</item>
+    </style>
+
+    <style name="PoppinsTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <style name="PoppinsButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
     <!--Style untuk halaman detail-->
@@ -22,8 +33,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">24dp</item>
-        <item name="android:textColor">@color/colorDonker</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorSkyBlue</item>
+        <item name="android:shadowColor">@color/colorIdleBlue</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -32,7 +47,15 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="detail_table01_fill">
+        <item name="android:layout_width">103dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/test</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorLightGrey</item>
     </style>
 
     <style name="detail_rating_tx">
@@ -40,7 +63,7 @@
         <item name="android:layout_height">25dp</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">16dp</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -48,8 +71,12 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">0dp</item>
-        <item name="android:paddingLeft">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:shadowColor">@color/colorOrange</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">5</item>
         <item name="android:textColor">@color/colorYellow</item>
         <item name="android:gravity">left</item>
     </style>
@@ -59,7 +86,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -73,7 +100,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -96,7 +123,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -106,8 +133,15 @@
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">32dp</item>
         <item name="android:textColor">@color/colorDonker</item>
-        <item name="android:textSize">12dp</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <style name="detail_table02_fill">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/test</item>
+        <item name="android:textColor">@color/colorBlack</item>
     </style>
 
     <!--Style untuk halaman home-->
@@ -115,7 +149,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/colorBlack</item>
-        <item name="android:textSize">18dp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="homeScrollImage">
@@ -126,7 +160,7 @@
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlNormal">@color/colorLightCrem</item>
+        <item name="colorControlNormal">@color/colorDarkOrange</item>
         <item name="colorControlActivated">@color/colorYellow</item>
     </style>
 

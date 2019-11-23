@@ -9,8 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/progressBar_detail_movie"
@@ -25,19 +24,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/btn_back_main_01"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_arrow_back_24dp"
-            app:layout_constraintBottom_toTopOf="@+id/detail_poster"
+            android:background="@color/colorDarkBlue"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!--Background-->
+            <ImageView
+                android:id="@+id/detail_bg_top"
+                android:layout_width="match_parent"
+                android:layout_height="205dp"
+                android:alpha="0.5"
+                android:src="@color/colorSolidGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/detail_poster"
             style="@style/detail_poster"
+            android:layout_marginStart="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,40 +59,35 @@
             android:id="@+id/detail_judul"
             style="@style/detail_judul"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/title_film"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/detail_tahun"
-            style="@style/detail_tahun"
-            android:text="@string/year"
-            app:layout_constraintStart_toEndOf="@+id/detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/detail_judul" />
-
         <TableLayout
             android:id="@+id/detail_table01"
-            android:layout_width="230dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/detail_tahun">
+            app:layout_constraintTop_toBottomOf="@+id/detail_judul">
 
-            <TableRow>
+            <TableRow android:layout_height="56dp">
 
                 <TextView
-                    android:layout_width="109dp"
+                    android:layout_width="84dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
                     android:text="@string/genre" />
 
                 <TextView
                     android:id="@+id/detail_genre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table01_fill" />
             </TableRow>
 
             <TableRow>
@@ -88,14 +95,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
                     android:text="@string/status" />
 
                 <TextView
                     android:id="@+id/detail_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table01_fill" />
             </TableRow>
 
             <TableRow>
@@ -103,14 +109,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="12sp"
                     android:text="@string/age_rating" />
 
                 <TextView
                     android:id="@+id/detail_age_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table01_fill" />
             </TableRow>
 
         </TableLayout>
@@ -119,11 +124,14 @@
             android:id="@+id/Rating_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center_vertical"
-            android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/detail_poster"
-            tools:layout_editor_absoluteX="20dp">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
 
             <TextView
                 android:id="@+id/ratting_text_movie"
@@ -137,8 +145,8 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:theme="@style/RatingBar"
-                android:layout_marginStart="16dp" />
+                android:layout_marginStart="16dp"
+                android:theme="@style/RatingBar" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -152,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/release"
                     android:textColor="@color/colorBlack"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/detail_release"
@@ -169,6 +177,7 @@
             android:id="@+id/detail_voteCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="@string/vote_count"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Rating_container" />
@@ -176,23 +185,32 @@
         <TextView
             android:id="@+id/textView2"
             style="@style/detail_overview_tx"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/overview"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_voteCount" />
 
         <TextView
             android:id="@+id/detail_overview_movie"
             style="@style/detail_overview_text"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:justificationMode="inter_word"
             android:text="@string/lorem"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            android:justificationMode="inter_word"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
             android:id="@+id/textView4"
             style="@style/detail_Movie"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="20dp"
             android:text="@string/detail_movie"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_overview_movie" />
 
@@ -200,6 +218,10 @@
             android:id="@+id/detail_table02"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView4">
@@ -209,14 +231,12 @@
                 <TextView
                     android:layout_width="156dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorDonker"
                     android:text="@string/imdb_id" />
 
                 <TextView
                     android:id="@+id/detail_imdb"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table02_fill" />
             </TableRow>
 
             <TableRow>
@@ -224,14 +244,12 @@
                 <TextView
                     android:layout_width="156dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorDonker"
                     android:text="@string/original_language" />
 
                 <TextView
                     android:id="@+id/detail_ori_language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table02_fill"/>
             </TableRow>
 
             <TableRow>
@@ -239,14 +257,12 @@
                 <TextView
                     android:layout_width="156dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorDonker"
                     android:text="@string/popularity" />
 
                 <TextView
                     android:id="@+id/detail_popularity"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table02_fill" />
             </TableRow>
 
             <TableRow>
@@ -254,14 +270,12 @@
                 <TextView
                     android:layout_width="156dp"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/colorDonker"
                     android:text="@string/revenue" />
 
                 <TextView
                     android:id="@+id/detail_revenue"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test"
-                    android:textColor="@color/colorBlack" />
+                    style="@style/detail_table02_fill"/>
             </TableRow>
 
         </TableLayout>

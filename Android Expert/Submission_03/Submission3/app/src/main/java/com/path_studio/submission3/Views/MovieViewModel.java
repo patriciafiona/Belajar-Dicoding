@@ -27,7 +27,7 @@ public class MovieViewModel extends ViewModel {
     private final String linkPoster = "http://image.tmdb.org/t/p/original";
     private static final String API_KEY = "59ade0f2f439410860ac45335e2e539d";
     private MutableLiveData<ArrayList<MovieItems>> listMovies = new MutableLiveData<>();
-    private String[] genre;
+    private ArrayList<String> genre = new ArrayList<>();
 
     //for list movie
     public void setMovie(String language, Context mContext) {
@@ -92,7 +92,7 @@ public class MovieViewModel extends ViewModel {
 
         final ArrayList<MovieItems> listItems = new ArrayList<>();
         final String url = "https://api.themoviedb.org/3/movie/"+movie_id+"?api_key=" + API_KEY + "&language=" + language;
-
+        final MovieItems movieItems = new MovieItems();
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()
@@ -101,14 +101,13 @@ public class MovieViewModel extends ViewModel {
                     public void onResponse(JSONObject response) {
                         //now get your  json array like this
                         try {
-                            MovieItems movieItems = new MovieItems();
                             movieItems.setId(response.getInt("id"));
 
                             movieItems.setName(response.getString("title"));
                             movieItems.setRatting(response.getDouble("vote_average"));
                             movieItems.setPoster(linkPoster + response.getString("poster_path"));
                             movieItems.setDescription(response.getString("overview"));
-
+                            movieItems.setBackdrop(linkPoster+response.getString("backdrop_path"));
                             movieItems.setImdb_id(response.getString("imdb_id"));
                             movieItems.setOriginal_language(response.getString("original_language"));
                             movieItems.setPopularity(response.getString("popularity"));
@@ -136,14 +135,18 @@ public class MovieViewModel extends ViewModel {
 
         // add it to the RequestQueue
         queue.add(getRequest);
+
+        setMovieGenre(language, movie_id, mContext, movieItems);
     }
 
-    public void setMovieGenre(String language, int movie_id, Context mContext){
+    public void setMovieGenre(String language, int movie_id, Context mContext, final MovieItems movieItems){
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
         final ArrayList<MovieItems> listItems = new ArrayList<>();
         final String url = "https://api.themoviedb.org/3/movie/"+movie_id+"?api_key=" + API_KEY + "&language=" + language;
+
+        genre.clear();
 
         // prepare the Request
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -155,12 +158,11 @@ public class MovieViewModel extends ViewModel {
                             for (int i = 0; i < data.length(); i++) {
                                 try {
                                     JSONObject jsonObject = data.getJSONObject(i);
-                                    genre[i] = response.getString("genres");
+                                    genre.add( jsonObject.getString("name"));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
-                            MovieItems movieItems = new MovieItems();
                             movieItems.setGenre(genre);
                             listItems.add(movieItems);
 

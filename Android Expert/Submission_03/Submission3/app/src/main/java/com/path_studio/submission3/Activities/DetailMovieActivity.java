@@ -21,12 +21,16 @@ import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.MovieViewModel;
 
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.StringJoiner;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener{
 
     private int id_movie;
-    private String hasil_genre;
 
     private ProgressBar progressBar;
     private MovieViewModel movieViewModel;
@@ -34,9 +38,9 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
     private static final String TAG = "DetailMovieActivity";
 
-    private TextView mJudul, mTahun, mOverview, mRattingText;
+    private TextView mJudul, mOverview, mRattingText;
     private TextView mGenre, mStatus, mAgeRating, mRelease, mVoteCount, mRevenue, mPopularity, mOriLanguage, mIMDB;
-    private ImageView mPoster, mBackMain;
+    private ImageView mPoster, mDetailBgTop;
     private RatingBar mRating;
 
     private TableLayout mDetail01, mDetail02;
@@ -51,9 +55,9 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         id_movie = mIntent.getIntExtra("movie_id", 0);
 
         progressBar = findViewById(R.id.progressBar_detail_movie);
+        mDetailBgTop = findViewById(R.id.detail_bg_top);
         mJudul = findViewById(R.id.detail_judul);
         mPoster = findViewById(R.id.detail_poster);
-        mTahun = findViewById(R.id.detail_tahun);
         mOverview = findViewById(R.id.detail_overview_movie);
         mRattingText = findViewById(R.id.ratting_text_movie);
         mRating = findViewById(R.id.ratingBar_movie);
@@ -74,9 +78,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mT01 = findViewById(R.id.textView3);
         mT02 = findViewById(R.id.textView2);
         mT03 = findViewById(R.id.textView4);
-
-        mBackMain = findViewById(R.id.btn_back_main_01);
-        mBackMain.setOnClickListener(this);
 
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
@@ -106,22 +107,16 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         MovieItems movieItems = mData.get(0);
 
         //menampilkan genre
-        String[] genres = movieItems.getGenre();
-        if(genres != null && genres.length>0){
-            for(int i=0; i< genres.length;i++){
-                hasil_genre = hasil_genre + genres[i];
+        ArrayList<String> genres = movieItems.getGenre();
 
-                if(i < genres.length-1){
-                    hasil_genre = hasil_genre + ", ";
-                }else{
-                    hasil_genre = hasil_genre + ".";
-                }
+        if(genres!=null && !genres.isEmpty()) {
+            StringJoiner sj = new StringJoiner(", ");
+
+            for (String s : genres) {
+                sj.add(s);
             }
-            mGenre.setText(hasil_genre);
+            mGenre.setText(sj.toString());
         }
-
-        //menamilkan tahun film
-        mTahun.setText(movieItems.getRelease_date());
 
         //menampilkan age rating
         if(movieItems.isAdult())
@@ -151,14 +146,18 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                 .load(movieItems.getPoster())
                 .apply(new RequestOptions().override(200, 300))
                 .into(mPoster);
+
+        Glide.with(this)
+                .load(movieItems.getBackdrop())
+                .apply(new RequestOptions().override(500, 300))
+                .into(mDetailBgTop);
     }
 
     private void hideAll(){
         //set visible = false when still loading
-        mBackMain.setVisibility(View.GONE);
+        mDetailBgTop.setVisibility(View.GONE);
         mJudul.setVisibility(View.GONE);
         mPoster.setVisibility(View.GONE);
-        mTahun.setVisibility(View.GONE);
         mOverview.setVisibility(View.GONE);
         mRattingText.setVisibility(View.GONE);
         mRating.setVisibility(View.GONE);
@@ -175,10 +174,9 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
     private void seeAll(){
         //set visible = true when loading finish
-        mBackMain.setVisibility(View.VISIBLE);
+        mDetailBgTop.setVisibility(View.VISIBLE);
         mJudul.setVisibility(View.VISIBLE);
         mPoster.setVisibility(View.VISIBLE);
-        mTahun.setVisibility(View.VISIBLE);
         mOverview.setVisibility(View.VISIBLE);
         mRattingText.setVisibility(View.VISIBLE);
         mRating.setVisibility(View.VISIBLE);

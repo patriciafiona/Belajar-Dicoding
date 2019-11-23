@@ -1,11 +1,14 @@
 package com.path_studio.submission3.Models;
 
+import java.util.ArrayList;
+
 public class MovieItems {
 
     public MovieItems(){
         //constructor
     }
 
+    private String backdrop;
     private String poster;
     private boolean adult;
     private int id;
@@ -21,7 +24,7 @@ public class MovieItems {
     private String status;
     private int vote_count;
 
-    private String[] genre;
+    private ArrayList<String> genre;
 
 
     //setter and getter hasil generate
@@ -62,8 +65,11 @@ public class MovieItems {
     public String getImdb_id() {
         return imdb_id;
     }
-    public String[] getGenre() {
+    public ArrayList<String> getGenre() {
         return genre;
+    }
+    public String getBackdrop() {
+        return backdrop;
     }
 
     public void setId(int id){ this.id = id;}
@@ -103,7 +109,10 @@ public class MovieItems {
     public void setStatus(String status) {
         this.status = status;
     }
-    public void setGenre(String[] genre) {
+    public void setGenre(ArrayList<String> genre) {
         this.genre = genre;
+    }
+    public void setBackdrop(String backdrop) {
+        this.backdrop = backdrop;
     }
 }

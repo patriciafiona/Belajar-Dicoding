@@ -1,9 +1,9 @@
 package com.path_studio.submission3.Activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.path_studio.submission3.Adapters.SectionsPagerAdapter;
 import com.path_studio.submission3.R;
@@ -12,8 +12,9 @@ import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
-import android.view.View;
 import android.widget.Toast;
+
+import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,22 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
     @Override
