@@ -20,12 +20,10 @@ import com.path_studio.submission3.Models.MovieItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.MovieViewModel;
 
-import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringJoiner;
@@ -147,16 +145,21 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
             mOverview.setText(getResources().getString(R.string.no_translate));
         }
 
-        double rev = Double.parseDouble(movieItems.getRevenue());
-        NumberFormat US_currency = NumberFormat.getCurrencyInstance(Locale.US);
-        mRevenue.setText(US_currency.format(rev));
+        //menampilkan revenue
+        if(movieItems.getRevenue()!=null  && !movieItems.getRevenue().isEmpty()) {
+            double rev = Double.parseDouble(movieItems.getRevenue());
+            NumberFormat US_currency = NumberFormat.getCurrencyInstance(Locale.US);
+            mRevenue.setText(US_currency.format(rev));
+        }else{
+            mRevenue.setText(" - ");
+        }
 
 
 
         //hitung ratting
         double tampung = movieItems.getRatting();
         float hasil_ratting = ((float)tampung / 2);
-        mRattingText.setText(String.valueOf(hasil_ratting));
+        mRattingText.setText(String.valueOf(tampung));
 
         mJudul.setText(movieItems.getName());
         mRating.setRating(hasil_ratting);

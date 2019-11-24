@@ -37,4 +37,15 @@
     <string name="vote_count_text">Vote Count</string>
     <string name="age_rating">Age Rating</string>
     <string name="no_translate">No translate for English language</string>
+
+    <string name="first_air_date">First Air Date</string>
+    <string name="last_air_date">Last Air Date</string>
+    <string name="created_by">Created By</string>
+    <string name="current_seasson">Current Seasson</string>
+    <string name="seasson_ep_detail">0000 | 0 Episodes</string>
+    <string name="detail_tv">Detail TV Show</string>
+    <string name="production_status">Production Status</string>
+    <string name="homepage">Homepage</string>
+    <string name="networks">Networks</string>
+    <string name="no_overview">Sorry, we don\'t have this overview.</string>
 </resources>

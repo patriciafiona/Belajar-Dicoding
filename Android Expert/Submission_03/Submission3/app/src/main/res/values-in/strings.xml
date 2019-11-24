@@ -39,4 +39,14 @@
     <string name="age_rating">Rating Usia</string>
     <string name="no_translate">(Tidak ada terjemahan bahasa Indonesia)</string>
 
+    <string name="first_air_date">Tanggal Tayang Perdana</string>
+    <string name="last_air_date">Tanggal Tayang Terakhir</string>
+    <string name="created_by">Dibuat Oleh</string>
+    <string name="current_seasson">Seasson Saat ini</string>
+    <string name="seasson_ep_detail">0000 | 0 Episodes</string>
+    <string name="detail_tv">Detail Acara TV</string>
+    <string name="production_status">Status Produksi</string>
+    <string name="homepage">Beranda</string>
+    <string name="networks">Jaringan</string>
+    <string name="no_overview">Maaf, Gambara Acara TV ini tidak tersedia.</string>
 </resources>

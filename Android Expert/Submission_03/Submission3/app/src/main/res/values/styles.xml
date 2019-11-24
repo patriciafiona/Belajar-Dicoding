@@ -51,9 +51,10 @@
     </style>
 
     <style name="detail_table01_fill">
-        <item name="android:layout_width">103dp</item>
+        <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">@string/test</item>
+        <item name="android:layout_marginRight">20dp</item>
         <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/colorLightGrey</item>
     </style>
@@ -104,18 +105,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="detail_yt_view">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">16dp</item>
-    </style>
-
-    <style name="detail_btn_yt">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginVertical">20dp</item>
-        <item name="android:layout_marginTop">8dp</item>
+    <style name="detail_btn_see_all_seasson">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">25dp</item>
+        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:background">@color/colorDarkBlue</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="detail_Movie">
@@ -130,10 +125,10 @@
     <style name="detail_link_web_text">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">8dp</item>
-        <item name="android:layout_marginBottom">32dp</item>
-        <item name="android:textColor">@color/colorDonker</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:text">@string/test</item>
+        <item name="android:textColor">@color/colorSkyBlue</item>
+        <item name="android:textSize">10sp</item>
         <item name="android:textStyle">italic</item>
     </style>
 
@@ -157,6 +152,37 @@
         <item name="android:layout_height">180dp</item>
         <item name="android:layout_marginHorizontal">10dp</item>
         <item name="android:layout_marginVertical">5dp</item>
+    </style>
+
+    <!--Style untuk gambar seasson tv show-->
+    <style name="detail_box_seasson">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginHorizontal">20dp</item>
+        <item name="android:background">@drawable/background_with_shadow</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+
+    <style name="detail_poster_seasson">
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">90dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:src">@color/colorSolidGrey</item>
+    </style>
+
+    <style name="detail_seasson_num">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="detail_seasson_detail">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">

@@ -136,10 +136,10 @@ public class MovieViewModel extends ViewModel {
         // add it to the RequestQueue
         queue.add(getRequest);
 
-        setMovieGenre(language, movie_id, mContext, movieItems);
+        setMovieArray(language, movie_id, mContext, movieItems);
     }
 
-    public void setMovieGenre(String language, int movie_id, Context mContext, final MovieItems movieItems){
+    public void setMovieArray(String language, int movie_id, Context mContext, final MovieItems movieItems){
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -154,6 +154,7 @@ public class MovieViewModel extends ViewModel {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
+                            //untuk genre
                             JSONArray data = response.getJSONArray("genres");
                             for (int i = 0; i < data.length(); i++) {
                                 try {

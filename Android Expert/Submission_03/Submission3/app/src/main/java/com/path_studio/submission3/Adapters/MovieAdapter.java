@@ -64,6 +64,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         ImageView imgPhoto;
         TextView listTitle, listDesc, listAgeRating, list_ratingText;
         RatingBar listratingBar;
+        TextView mAgeRating;
 
         MovieViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +74,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
             listAgeRating = itemView.findViewById(R.id.list_ageRating);
             listratingBar = itemView.findViewById(R.id.list_ratingBar);
             list_ratingText = itemView.findViewById(R.id.list_ratingText);
+            mAgeRating = itemView.findViewById(R.id.list_ageRating);
         }
 
         void bind(final MovieItems movieItems, final MovieViewHolder movieViewHolder) {
@@ -97,6 +99,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
                 listAgeRating.setText(mContext.getResources().getString(R.string.age_category_all));
                 listAgeRating.setBackgroundResource(R.drawable.round_corner_green);
             }
+            mAgeRating.setVisibility(View.VISIBLE);
 
             //set ratting bar
             double tampung = movieItems.getRatting();
