@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.path_studio.submission3.Activities.DetailTVActivity;
 import com.path_studio.submission3.Adapters.TVAdapter;
+import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.TVShowViewModel;
@@ -50,6 +51,13 @@ public class TvShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        //check internet connection
+        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
+        if(!internetConnectionCheck.isNetworkConnected(getActivity())){
+            //show popup
+            internetConnectionCheck.showAlertDialog(getActivity());
+        }
 
         instance = this;
 

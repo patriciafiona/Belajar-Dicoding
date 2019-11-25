@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TableLayout;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.TVShowViewModel;
@@ -48,13 +50,22 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private Button mSeeAllSeasson;
     private ImageView mCurrentSeassonPoster;
     private TextView mCurrentSeassonName, mCurrentSeassonDetail, mCurrentSeassonOverview;
+    private LinearLayout mRating_container_2, mSeassonBox;
 
     private TableLayout mDetail01, mDetail02;
+    private TextView mT01, mT02, mT03;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tv);
+
+        //check internet connection
+        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
+        if(!internetConnectionCheck.isNetworkConnected(this)){
+            //show popup
+            internetConnectionCheck.showAlertDialog(this);
+        }
 
         initiate();
 
@@ -100,6 +111,14 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mLinkHomepage = findViewById(R.id.detail_homepage);
         mOriLanguage = findViewById(R.id.detail_languages_tv);
         mNetwork = findViewById(R.id.networks_tv);
+
+        mDetail01 = findViewById(R.id.detail_table01_2);
+        mDetail02 = findViewById(R.id.detail_table02_2);
+        mRating_container_2 = findViewById(R.id.Rating_container_2);
+        mSeassonBox = findViewById(R.id.c_seasson_box);
+        mT01 = findViewById(R.id.textView2);
+        mT02 = findViewById(R.id.textView5);
+        mT03 = findViewById(R.id.textView6);
 
         //current seasson detail
         mCurrentSeassonPoster = findViewById(R.id.detail_current_seasson_poster);
@@ -270,11 +289,15 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mJudul.setVisibility(View.GONE);
         mPoster.setVisibility(View.GONE);
         mOverview.setVisibility(View.GONE);
-        mRattingText.setVisibility(View.GONE);
-        mRating.setVisibility(View.GONE);
-        mFirstAir.setVisibility(View.GONE);
-        mLastAir.setVisibility(View.GONE);
+        mRating_container_2.setVisibility(View.GONE);
         mVoteCount.setVisibility(View.GONE);
+        mSeassonBox.setVisibility(View.GONE);
+        mDetail01.setVisibility(View.GONE);
+        mDetail02.setVisibility(View.GONE);
+        mSeeAllSeasson.setVisibility(View.GONE);
+        mT01.setVisibility(View.GONE);
+        mT02.setVisibility(View.GONE);
+        mT03.setVisibility(View.GONE);
     }
 
     private void seeAll(){
@@ -282,11 +305,15 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mJudul.setVisibility(View.VISIBLE);
         mPoster.setVisibility(View.VISIBLE);
         mOverview.setVisibility(View.VISIBLE);
-        mRattingText.setVisibility(View.VISIBLE);
-        mRating.setVisibility(View.VISIBLE);
-        mFirstAir.setVisibility(View.VISIBLE);
-        mLastAir.setVisibility(View.VISIBLE);
+        mRating_container_2.setVisibility(View.VISIBLE);
         mVoteCount.setVisibility(View.VISIBLE);
+        mSeassonBox.setVisibility(View.VISIBLE);
+        mDetail01.setVisibility(View.VISIBLE);
+        mDetail02.setVisibility(View.VISIBLE);
+        mSeeAllSeasson.setVisibility(View.VISIBLE);
+        mT01.setVisibility(View.VISIBLE);
+        mT02.setVisibility(View.VISIBLE);
+        mT03.setVisibility(View.VISIBLE);
     }
 
     @Override

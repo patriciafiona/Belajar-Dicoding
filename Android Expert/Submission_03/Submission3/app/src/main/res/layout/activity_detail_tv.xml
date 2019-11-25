@@ -40,6 +40,7 @@
                 android:layout_height="205dp"
                 android:alpha="0.5"
                 android:src="@color/colorSolidGrey"
+                android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +68,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TableLayout
-            android:id="@+id/detail_table01"
+            android:id="@+id/detail_table01_2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -309,7 +310,7 @@
             app:layout_constraintTop_toBottomOf="@+id/detail_see_all_season" />
 
         <TableLayout
-            android:id="@+id/detail_table02"
+            android:id="@+id/detail_table02_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"

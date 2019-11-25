@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.MovieItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.MovieViewModel;
@@ -50,6 +51,13 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_movie);
+
+        //check internet connection
+        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
+        if(!internetConnectionCheck.isNetworkConnected(this)){
+            //show popup
+            internetConnectionCheck.showAlertDialog(this);
+        }
 
         Intent mIntent = getIntent();
         id_movie = mIntent.getIntExtra("movie_id", 0);

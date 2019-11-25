@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Submission 3</string>
+    <string name="app_name">Movie Catalogue</string>
 
     <!--Tab Title-->
     <string name="tab_text_1">Home</string>
@@ -48,4 +48,8 @@
     <string name="homepage">Homepage</string>
     <string name="networks">Networks</string>
     <string name="no_overview">Sorry, we don\'t have this overview.</string>
+    <string name="ok">Oke</string>
+    <string name="cancel">Cancle</string>
+    <string name="dialog_message">Check Your Internet Connection?</string>
+    <string name="dialog_title">No Internet Connection</string>
 </resources>

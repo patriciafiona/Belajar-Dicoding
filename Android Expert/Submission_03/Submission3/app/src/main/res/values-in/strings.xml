@@ -49,4 +49,8 @@
     <string name="homepage">Beranda</string>
     <string name="networks">Jaringan</string>
     <string name="no_overview">Maaf, Gambara Acara TV ini tidak tersedia.</string>
+    <string name="ok">Oke</string>
+    <string name="cancel">Batal</string>
+    <string name="dialog_message">Periksa Koneksi Internet?</string>
+    <string name="dialog_title">Tidak Terhubung ke Internet</string>
 </resources>

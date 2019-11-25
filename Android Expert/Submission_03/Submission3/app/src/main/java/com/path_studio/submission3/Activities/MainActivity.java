@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.path_studio.submission3.Adapters.SectionsPagerAdapter;
+import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.R;
 
 import androidx.viewpager.widget.ViewPager;
@@ -29,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //check internet connection
+        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
+        if(!internetConnectionCheck.isNetworkConnected(this)){
+            //show popup
+            internetConnectionCheck.showAlertDialog(this);
+        }
 
         //set Adapters
         viewPager = findViewById(R.id.view_pager);
