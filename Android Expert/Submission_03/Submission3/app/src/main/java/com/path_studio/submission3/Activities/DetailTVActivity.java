@@ -323,6 +323,9 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
                 goToUrl(tvItems.getLink_homepage());
                 break;
             case R.id.detail_see_all_season:
+                Intent i = new Intent(this, DetailTvSeasonActivity.class);
+                i.putExtra("tv_id", id_show);
+                startActivity(i);
                 break;
         }
     }

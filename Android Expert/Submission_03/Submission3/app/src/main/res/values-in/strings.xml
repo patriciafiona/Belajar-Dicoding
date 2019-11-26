@@ -53,4 +53,6 @@
     <string name="cancel">Batal</string>
     <string name="dialog_message">Periksa Koneksi Internet?</string>
     <string name="dialog_title">Tidak Terhubung ke Internet</string>
+    <string name="search">Pencarian</string>
+    <string name="all_season">Semua Season</string>
 </resources>

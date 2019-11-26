@@ -275,6 +275,62 @@ public class TVShowViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
+    public void setSeassonDetail(String language, int show_id, Context mContext){
+        final RequestQueue queue = Volley.newRequestQueue(mContext);
+        final ArrayList<TVItems> listItems = new ArrayList<>();
+        final String url = "https://api.themoviedb.org/3/tv/"+show_id+"?api_key=" + API_KEY + "&language=" + language;
+
+        seasson_name.clear();
+        seasson_poster.clear();
+        seasson_overview.clear();
+        seasson_number.clear();
+        seasson_airDate.clear();
+        seasson_episodeCount.clear();
+
+        // prepare the Request
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray data = response.getJSONArray("seasons");
+                            for (int i = 0; i < data.length(); i++) {
+                                try {
+                                    JSONObject jsonObject = data.getJSONObject(i);
+
+                                    TVItems tvItems = new TVItems();
+
+                                    tvItems.setsTitle( jsonObject.getString("name"));
+                                    tvItems.setsPoster( linkPoster + jsonObject.getString("poster_path"));
+                                    tvItems.setsOverview( jsonObject.getString("overview"));
+                                    tvItems.setsNumber( jsonObject.getInt("season_number"));
+                                    tvItems.setsAirDate( jsonObject.getString("air_date"));
+                                    tvItems.setsEpsCount( jsonObject.getInt("episode_count"));
+                                    listItems.add(tvItems);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            listTVShow.postValue(listItems);
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("Error.Response", error.toString());
+                    }
+                });
+
+        // add it to the RequestQueue
+        queue.add(getRequest);
+    }
+
     public LiveData<ArrayList<TVItems>> getTVShow() {
         return listTVShow;
     }

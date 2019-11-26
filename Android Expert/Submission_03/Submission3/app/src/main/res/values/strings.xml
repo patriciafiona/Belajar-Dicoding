@@ -52,4 +52,6 @@
     <string name="cancel">Cancle</string>
     <string name="dialog_message">Check Your Internet Connection?</string>
     <string name="dialog_title">No Internet Connection</string>
+    <string name="search">Search</string>
+    <string name="all_season">All Season</string>
 </resources>

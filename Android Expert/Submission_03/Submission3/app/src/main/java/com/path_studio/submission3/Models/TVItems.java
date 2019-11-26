@@ -31,6 +31,13 @@ public class TVItems {
     private ArrayList<String> seasson_airDate;
     private ArrayList<Integer> seasson_episodeCount;
 
+    private String sTitle;
+    private String sPoster;
+    private String sOverview;
+    private int sNumber;
+    private String sAirDate;
+    private int sEpsCount;
+
 
     public int getId_TV() {
         return id_TV;
@@ -214,5 +221,53 @@ public class TVItems {
 
     public void setSeasson_episodeCount(ArrayList<Integer> seasson_episodeCount) {
         this.seasson_episodeCount = seasson_episodeCount;
+    }
+
+    public String getsTitle() {
+        return sTitle;
+    }
+
+    public void setsTitle(String sTitle) {
+        this.sTitle = sTitle;
+    }
+
+    public String getsPoster() {
+        return sPoster;
+    }
+
+    public void setsPoster(String sPoster) {
+        this.sPoster = sPoster;
+    }
+
+    public String getsOverview() {
+        return sOverview;
+    }
+
+    public void setsOverview(String sOverview) {
+        this.sOverview = sOverview;
+    }
+
+    public int getsNumber() {
+        return sNumber;
+    }
+
+    public void setsNumber(int sNumber) {
+        this.sNumber = sNumber;
+    }
+
+    public String getsAirDate() {
+        return sAirDate;
+    }
+
+    public void setsAirDate(String sAirDate) {
+        this.sAirDate = sAirDate;
+    }
+
+    public int getsEpsCount() {
+        return sEpsCount;
+    }
+
+    public void setsEpsCount(int sEpsCount) {
+        this.sEpsCount = sEpsCount;
     }
 }

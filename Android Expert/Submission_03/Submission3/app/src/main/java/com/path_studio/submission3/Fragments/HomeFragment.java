@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.path_studio.submission3.Adapters.SliderAdapter;
 import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.HomeItems;
@@ -57,6 +58,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private ImageView[] listPosterMovie = new ImageView[5];
     private ImageView[] listPosterTV = new ImageView[5];
 
+    private LinearLayout mBox01, mBox02, mBox03;
+    private MaterialSearchBar mSearchBar;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -82,37 +86,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }
 
         //inisialisasi
-        progressBar = view.findViewById(R.id.progressBar_home);
-        mMoreMovie = view.findViewById(R.id.button_selengkapnya_movie);
-        mMoreTvShow = view.findViewById(R.id.button_selengkapnya_tv);
-
-        mSlideViewPager = view.findViewById(R.id.Slider);
-        mDotLayout = view.findViewById(R.id.dotsLayoutPromotion);
-
-        //inisiasi gambar
-        mDiscoverMovie01 = view.findViewById(R.id.discover_movie_01);
-        mDiscoverMovie02 = view.findViewById(R.id.discover_movie_02);
-        mDiscoverMovie03 = view.findViewById(R.id.discover_movie_03);
-        mDiscoverMovie04 = view.findViewById(R.id.discover_movie_04);
-        mDiscoverMovie05 = view.findViewById(R.id.discover_movie_05);
-
-        listPosterMovie[0] = mDiscoverMovie01;
-        listPosterMovie[1] = mDiscoverMovie02;
-        listPosterMovie[2] = mDiscoverMovie03;
-        listPosterMovie[3] = mDiscoverMovie04;
-        listPosterMovie[4] = mDiscoverMovie05;
-
-        mDiscoverTV01 = view.findViewById(R.id.discover_tv_01);
-        mDiscoverTV02 = view.findViewById(R.id.discover_tv_02);
-        mDiscoverTV03 = view.findViewById(R.id.discover_tv_03);
-        mDiscoverTV04 = view.findViewById(R.id.discover_tv_04);
-        mDiscoverTV05 = view.findViewById(R.id.discover_tv_05);
-
-        listPosterTV[0] = mDiscoverTV01;
-        listPosterTV[1] = mDiscoverTV02;
-        listPosterTV[2] = mDiscoverTV03;
-        listPosterTV[3] = mDiscoverTV04;
-        listPosterTV[4] = mDiscoverTV05;
+        initiate(view);
 
         //set Onclick
         mMoreMovie.setOnClickListener(this);
@@ -124,6 +98,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         homeViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(HomeViewModel.class);
         homeViewModel.setMovieDiscoverData(getActivity(), language);
         homeViewModel.setTVDiscoverData(getActivity(), language);
+
+        setVisibleGone();
         showLoading(true);
 
         homeViewModel.getDiscover().observe(getActivity(), new Observer<ArrayList<HomeItems>>() {
@@ -131,6 +107,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
             public void onChanged(ArrayList<HomeItems> homeItems) {
                 if (homeItems != null) {
                     setDiscoverData(homeItems);
+                    setVisibleTrue();
                     showLoading(false);
                 }
             }
@@ -166,6 +143,60 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         }, DELAY_MS, PERIOD_MS);
     }
 
+    private void initiate(View view){
+        progressBar = view.findViewById(R.id.progressBar_home);
+        mMoreMovie = view.findViewById(R.id.button_selengkapnya_movie);
+        mMoreTvShow = view.findViewById(R.id.button_selengkapnya_tv);
+
+        mSlideViewPager = view.findViewById(R.id.Slider);
+        mDotLayout = view.findViewById(R.id.dotsLayoutPromotion);
+
+        //inisiasi gambar
+        mDiscoverMovie01 = view.findViewById(R.id.discover_movie_01);
+        mDiscoverMovie02 = view.findViewById(R.id.discover_movie_02);
+        mDiscoverMovie03 = view.findViewById(R.id.discover_movie_03);
+        mDiscoverMovie04 = view.findViewById(R.id.discover_movie_04);
+        mDiscoverMovie05 = view.findViewById(R.id.discover_movie_05);
+
+        listPosterMovie[0] = mDiscoverMovie01;
+        listPosterMovie[1] = mDiscoverMovie02;
+        listPosterMovie[2] = mDiscoverMovie03;
+        listPosterMovie[3] = mDiscoverMovie04;
+        listPosterMovie[4] = mDiscoverMovie05;
+
+        mDiscoverTV01 = view.findViewById(R.id.discover_tv_01);
+        mDiscoverTV02 = view.findViewById(R.id.discover_tv_02);
+        mDiscoverTV03 = view.findViewById(R.id.discover_tv_03);
+        mDiscoverTV04 = view.findViewById(R.id.discover_tv_04);
+        mDiscoverTV05 = view.findViewById(R.id.discover_tv_05);
+
+        listPosterTV[0] = mDiscoverTV01;
+        listPosterTV[1] = mDiscoverTV02;
+        listPosterTV[2] = mDiscoverTV03;
+        listPosterTV[3] = mDiscoverTV04;
+        listPosterTV[4] = mDiscoverTV05;
+
+        mBox01 = view.findViewById(R.id.home_promotion_box);
+        mBox02 = view.findViewById(R.id.box_Movie);
+        mBox03 = view.findViewById(R.id.box_tv_show);
+
+        mSearchBar = view.findViewById(R.id.searchBar);
+    }
+
+    private void setVisibleGone(){
+        mBox01.setVisibility(View.GONE);
+        mBox02.setVisibility(View.GONE);
+        mBox03.setVisibility(View.GONE);
+        mSearchBar.setVisibility(View.GONE);
+    }
+
+    private void setVisibleTrue(){
+        mBox01.setVisibility(View.VISIBLE);
+        mBox02.setVisibility(View.VISIBLE);
+        mBox03.setVisibility(View.VISIBLE);
+        mSearchBar.setVisibility(View.VISIBLE);
+    }
+
     private void setDiscoverData(ArrayList<HomeItems> mData){
         HomeItems homeItems = mData.get(0);
 
@@ -173,8 +204,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         ArrayList<String> tampung02 = homeItems.getDiscover_tv_poster();
 
         if(tampung01!=null && tampung02!=null){
-            for(int i = 0; i<tampung01.size(); i++){
-                Log.e("Link Poster", tampung01.get(i));
+            for(int i = 0; i < 5 ; i++){
+
                 Glide.with(this)
                         .load(tampung01.get(i))
                         .apply(new RequestOptions().override(200, 300))
