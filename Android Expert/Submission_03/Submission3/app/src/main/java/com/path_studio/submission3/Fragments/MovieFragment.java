@@ -66,8 +66,8 @@ public class MovieFragment extends Fragment {
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        movieViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
-        movieViewModel.setMovie(language, getActivity());
+        movieViewModel = new MovieViewModel(getActivity().getApplication());
+        movieViewModel.setMovie(language);
         showLoading(true);
 
         movieViewModel.getMovies().observe(getActivity(), new Observer<ArrayList<MovieItems>>() {

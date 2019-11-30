@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -105,9 +106,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        homeViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(HomeViewModel.class);
-        homeViewModel.setMovieDiscoverData(getActivity(), language);
-        homeViewModel.setTVDiscoverData(getActivity(), language);
+        homeViewModel = new HomeViewModel(getActivity().getApplication());
+        homeViewModel.setMovieDiscoverData(language);
+        homeViewModel.setTVDiscoverData(language);
 
         setVisibleGone();
         showLoading(true);
@@ -229,8 +230,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                 if (!TextUtils.isEmpty(search)) {
                     //set data from JSON
                     String language = getResources().getString(R.string.language_code);
-                    searchViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SearchViewModel.class);
-                    searchViewModel.setResult(getActivity(), language, search);
+                    searchViewModel = new SearchViewModel(getActivity().getApplication());
+                    searchViewModel.setResult(language, search);
 
                     //get data from JSON
                     searchViewModel.getSearchResult().observe(getActivity(), new Observer<ArrayList<SearchItems>>() {

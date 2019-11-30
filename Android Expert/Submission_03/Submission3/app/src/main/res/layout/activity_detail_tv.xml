@@ -82,7 +82,6 @@
         <TextView
             android:id="@+id/detail_genre_2"
             style="@style/detail_table01_fill"
-            android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/textView13"
             app:layout_constraintTop_toBottomOf="@+id/detail_judul_2" />
@@ -103,7 +102,6 @@
         <TextView
             android:id="@+id/detail_created_by_2"
             style="@style/detail_table01_fill"
-            android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/textView14"
@@ -124,7 +122,6 @@
         <TextView
             android:id="@+id/detail_in_production"
             style="@style/detail_table01_fill"
-            android:layout_width="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toEndOf="@+id/textView15"

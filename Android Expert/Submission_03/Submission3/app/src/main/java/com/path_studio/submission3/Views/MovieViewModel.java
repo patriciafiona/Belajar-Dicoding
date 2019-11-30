@@ -1,5 +1,6 @@
 package com.path_studio.submission3.Views;
 
+import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
@@ -9,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.path_studio.submission3.BuildConfig;
 import com.path_studio.submission3.ErrorHandling;
 import com.path_studio.submission3.Models.MovieItems;
 
@@ -18,20 +20,27 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class MovieViewModel extends ViewModel {
+public class MovieViewModel extends AndroidViewModel {
 
     private final String linkPoster = "http://image.tmdb.org/t/p/original";
-    private static final String API_KEY = "59ade0f2f439410860ac45335e2e539d";
+    private static final String API_KEY = BuildConfig.API_KEY;
     private MutableLiveData<ArrayList<MovieItems>> listMovies = new MutableLiveData<>();
     private ArrayList<String> genre = new ArrayList<>();
-    private ErrorHandling errorHandling = new ErrorHandling();
+    private Context mContext;
+
+    public MovieViewModel(@NonNull Application application) {
+        super(application);
+        this.mContext = application;
+    }
 
     //for list movie
-    public void setMovie(String language, final Context mContext) {
+    public void setMovie(String language) {
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -62,14 +71,13 @@ public class MovieViewModel extends ViewModel {
                                     listItems.add(movieItems);
 
                                 }catch (JSONException e){
-                                    errorHandling.error_alert(mContext, "JSON Error", e.toString());
                                     Log.e("Error.GET.JSON", e.toString());
                                 }
                             }
                             listMovies.postValue(listItems);
 
                         } catch (JSONException e) {
-                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
+                            Log.e("JSON Error", e.toString());
                         }
 
                     }
@@ -78,7 +86,6 @@ public class MovieViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -89,7 +96,7 @@ public class MovieViewModel extends ViewModel {
     }
 
     //for detail movie page
-    public void setMovie(String language, int movie_id, final Context mContext) {
+    public void setMovie(String language, int movie_id) {
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -123,7 +130,7 @@ public class MovieViewModel extends ViewModel {
                             listMovies.postValue(listItems);
 
                         } catch (JSONException e) {
-                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
+                            Log.e("JSON Error", e.toString());
                         }
 
                     }
@@ -132,7 +139,6 @@ public class MovieViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -140,10 +146,10 @@ public class MovieViewModel extends ViewModel {
         // add it to the RequestQueue
         queue.add(getRequest);
 
-        setMovieArray(language, movie_id, mContext, movieItems);
+        setMovieArray(language, movie_id, movieItems);
     }
 
-    public void setMovieArray(String language, int movie_id, final Context mContext, final MovieItems movieItems){
+    public void setMovieArray(String language, int movie_id, final MovieItems movieItems){
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -173,7 +179,7 @@ public class MovieViewModel extends ViewModel {
 
                             listMovies.postValue(listItems);
                         }catch (JSONException e){
-                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
+                            Log.e("JSON Error", e.toString());
                         }
                     }
                 },
@@ -181,7 +187,6 @@ public class MovieViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });

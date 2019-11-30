@@ -57,8 +57,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         //check internet connection
         InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
         if(!internetConnectionCheck.isNetworkConnected(this)){
-            //show popup
-            internetConnectionCheck.showAlertDialog(this);
+            Intent i = new Intent(this, NoInternetConnection.class);
+            startActivity(i);
         }
 
         Intent mIntent = getIntent();
@@ -100,8 +100,8 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
 
-        movieViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MovieViewModel.class);
-        movieViewModel.setMovie(language, id_movie, this);
+        movieViewModel = new MovieViewModel(this.getApplication());
+        movieViewModel.setMovie(language, id_movie);
         showLoading(true);
         hideAll();
 

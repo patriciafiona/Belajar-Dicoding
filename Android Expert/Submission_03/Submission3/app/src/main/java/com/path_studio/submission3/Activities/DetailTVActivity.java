@@ -66,8 +66,8 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         //check internet connection
         InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
         if(!internetConnectionCheck.isNetworkConnected(this)){
-            //show popup
-            internetConnectionCheck.showAlertDialog(this);
+            Intent i = new Intent(this, NoInternetConnection.class);
+            startActivity(i);
         }
 
         initiate();
@@ -75,8 +75,8 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
 
-        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TVShowViewModel.class);
-        tvShowViewModel.setTVShow(language, id_show, this);
+        tvShowViewModel = new TVShowViewModel(this.getApplication());
+        tvShowViewModel.setTVShow(language, id_show);
         showLoading(true);
         hideAll();
 

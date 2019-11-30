@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.DetailTvSeasonActivity"></activity>
+        <activity android:name=".Activities.NoInternetConnection"></activity>
+        <activity android:name=".Activities.DetailTvSeasonActivity" />
         <activity android:name=".Activities.OpeningActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

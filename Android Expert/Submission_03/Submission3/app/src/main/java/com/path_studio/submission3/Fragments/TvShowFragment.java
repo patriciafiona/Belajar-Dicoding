@@ -72,8 +72,8 @@ public class TvShowFragment extends Fragment {
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        tvShowViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(TVShowViewModel.class);
-        tvShowViewModel.setTVShow(language, getActivity());
+        tvShowViewModel = new TVShowViewModel(getActivity().getApplication());
+        tvShowViewModel.setTVShow(language);
         showLoading(true);
 
         tvShowViewModel.getTVShow().observe(getActivity(), new Observer<ArrayList<TVItems>>() {

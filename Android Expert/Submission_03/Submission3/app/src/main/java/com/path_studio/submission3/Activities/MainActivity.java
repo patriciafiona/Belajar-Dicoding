@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         //check internet connection
         InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
         if(!internetConnectionCheck.isNetworkConnected(this)){
-            //show popup
-            internetConnectionCheck.showAlertDialog(this);
+            Intent i = new Intent(this, NoInternetConnection.class);
+            startActivity(i);
         }
 
         //set Adapters

@@ -36,8 +36,8 @@ public class DetailTvSeasonActivity extends AppCompatActivity {
         //check internet connection
         InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
         if(!internetConnectionCheck.isNetworkConnected(this)){
-            //show popup
-            internetConnectionCheck.showAlertDialog(this);
+            Intent i = new Intent(this, NoInternetConnection.class);
+            startActivity(i);
         }
 
         initiate();
@@ -59,8 +59,8 @@ public class DetailTvSeasonActivity extends AppCompatActivity {
         Intent mIntent = getIntent();
         id_show = mIntent.getIntExtra("tv_id", 0);
 
-        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(TVShowViewModel.class);
-        tvShowViewModel.setSeassonDetail(language, id_show,this);
+        tvShowViewModel = new TVShowViewModel(this.getApplication());
+        tvShowViewModel.setSeassonDetail(language, id_show);
         recyclerView.setVisibility(View.GONE);
         showLoading(true);
 
