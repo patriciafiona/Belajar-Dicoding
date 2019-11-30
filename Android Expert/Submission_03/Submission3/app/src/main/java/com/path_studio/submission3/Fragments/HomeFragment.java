@@ -75,6 +75,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private MaterialSearchBar mSearchBar;
     private ArrayList<String> lastSearches = new ArrayList<>();
 
+    private SearchItems hasilSearch;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -92,12 +94,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(getActivity())){
-            //show popup
-            internetConnectionCheck.showAlertDialog(getActivity());
-        }
 
         //inisialisasi
         initiate(view);
@@ -242,9 +238,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
                         public void onChanged(ArrayList<SearchItems> searchItems) {
                             if (searchItems != null) {
                                 //tampilkan pada 10 result
-                                SearchItems sa = searchItems.get(0);
+                                hasilSearch = searchItems.get(0);
                                 mSearchBar.clearSuggestions();
-                                mSearchBar.updateLastSuggestions(sa.getSearchTitle());
+                                mSearchBar.updateLastSuggestions(hasilSearch.getSearchTitle());
                                 if (!mSearchBar.isSuggestionsVisible()) {
                                     mSearchBar.showSuggestionsList();
                                 }
@@ -281,32 +277,26 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     }
 
     private void goToDetail(final int id_res){
-        searchViewModel.getSearchResult().observe(getActivity(), new Observer<ArrayList<SearchItems>>() {
-            @Override
-            public void onChanged(ArrayList<SearchItems> searchItems) {
-                if (searchItems != null) {
-                    SearchItems sa = searchItems.get(0);
-                    ArrayList<Integer> id_result = sa.get_result_Id();
-                    ArrayList<String> mediaType = sa.getMediaType();
+        if (hasilSearch != null) {
+            ArrayList<Integer> id_result = hasilSearch.get_result_Id();
+            ArrayList<String> mediaType = hasilSearch.getMediaType();
 
-                    if(id_result != null && mediaType!= null && !id_result.isEmpty() && !mediaType.isEmpty()){
-                        switch (mediaType.get(id_res)){
-                            case "movie":
-                                Intent i = new Intent(getActivity(), DetailMovieActivity.class);
-                                i.putExtra("movie_id", id_result.get(id_res));
-                                startActivity(i);
-                                break;
-                            case "tv":
-                                Intent ii = new Intent(getActivity(), DetailTVActivity.class);
-                                ii.putExtra("tv_id", id_result.get(id_res));
-                                startActivity(ii);
-                                break;
-                        }
-                    }
-
+            if(id_result != null && mediaType!= null && !id_result.isEmpty() && !mediaType.isEmpty()){
+                switch (mediaType.get(id_res)){
+                    case "movie":
+                        Intent i = new Intent(getActivity(), DetailMovieActivity.class);
+                        i.putExtra("movie_id", id_result.get(id_res));
+                        startActivity(i);
+                        break;
+                    case "tv":
+                        Intent ii = new Intent(getActivity(), DetailTVActivity.class);
+                        ii.putExtra("tv_id", id_result.get(id_res));
+                        startActivity(ii);
+                        break;
                 }
             }
-        });
+
+        }
     }
 
     @Override

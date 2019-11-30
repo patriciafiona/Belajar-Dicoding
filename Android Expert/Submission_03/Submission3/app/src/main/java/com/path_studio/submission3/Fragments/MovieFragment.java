@@ -46,13 +46,6 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(getActivity())){
-            //show popup
-            internetConnectionCheck.showAlertDialog(getActivity());
-        }
-
         instance = this;
 
         progressBar = getActivity().findViewById(R.id.progressBar);

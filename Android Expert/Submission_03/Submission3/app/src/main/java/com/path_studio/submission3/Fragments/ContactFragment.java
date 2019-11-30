@@ -24,12 +24,7 @@ public class ContactFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(getActivity())){
-            //show popup
-            internetConnectionCheck.showAlertDialog(getActivity());
-        }
+        //
     }
 
 }
