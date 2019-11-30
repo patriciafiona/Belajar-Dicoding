@@ -54,4 +54,6 @@
     <string name="dialog_title">No Internet Connection</string>
     <string name="search">Search</string>
     <string name="all_season">All Season</string>
+    <string name="search_by_title">Search by Title</string>
+    <string name="search_m_or_t">Search a Movie or TV Show</string>
 </resources>

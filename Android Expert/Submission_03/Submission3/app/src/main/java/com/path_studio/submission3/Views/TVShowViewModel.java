@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.path_studio.submission3.ErrorHandling;
 import com.path_studio.submission3.Models.TVItems;
 
 import org.json.JSONArray;
@@ -37,7 +38,9 @@ public class TVShowViewModel extends ViewModel {
     private ArrayList<String> seasson_airDate = new ArrayList<>();
     private ArrayList<Integer> seasson_episodeCount = new ArrayList<>();
 
-    public void setTVShow(String language, Context mContext){
+    private ErrorHandling errorHandling = new ErrorHandling();
+
+    public void setTVShow(String language, final Context mContext){
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -67,13 +70,13 @@ public class TVShowViewModel extends ViewModel {
                                     listItems.add(tvItems);
 
                                 }catch (JSONException e){
-                                    Log.e("Error.GET.JSON", e.toString());
+                                    errorHandling.error_alert(mContext, "JSON Error", e.toString());
                                 }
                             }
                             listTVShow.postValue(listItems);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
 
                     }
@@ -82,6 +85,7 @@ public class TVShowViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -90,7 +94,7 @@ public class TVShowViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
-    public void setTVShow(String language, int show_id, Context mContext){
+    public void setTVShow(String language, int show_id, final Context mContext){
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -124,7 +128,7 @@ public class TVShowViewModel extends ViewModel {
                             listTVShow.postValue(listItems);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
 
                     }
@@ -133,6 +137,7 @@ public class TVShowViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -144,7 +149,7 @@ public class TVShowViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
-    public void setArray(String language, int show_id, Context mContext, final TVItems tvItems){
+    public void setArray(String language, int show_id, final Context mContext, final TVItems tvItems){
         //get detail data movie
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -199,7 +204,7 @@ public class TVShowViewModel extends ViewModel {
                             listItems.add(tvItems);
                             listTVShow.postValue(listItems);
                         }catch (JSONException e){
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
                     }
                 },
@@ -207,6 +212,7 @@ public class TVShowViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -215,7 +221,7 @@ public class TVShowViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
-    public void setSeassonDetail(String language, int show_id, Context mContext, final TVItems tvItems){
+    public void setSeassonDetail(String language, int show_id, final Context mContext, final TVItems tvItems){
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
         final ArrayList<TVItems> listItems = new ArrayList<>();
@@ -259,7 +265,7 @@ public class TVShowViewModel extends ViewModel {
                             listItems.add(tvItems);
                             listTVShow.postValue(listItems);
                         }catch (JSONException e){
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
                     }
                 },
@@ -267,6 +273,7 @@ public class TVShowViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -275,7 +282,7 @@ public class TVShowViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
-    public void setSeassonDetail(String language, int show_id, Context mContext){
+    public void setSeassonDetail(String language, int show_id, final Context mContext){
         final RequestQueue queue = Volley.newRequestQueue(mContext);
         final ArrayList<TVItems> listItems = new ArrayList<>();
         final String url = "https://api.themoviedb.org/3/tv/"+show_id+"?api_key=" + API_KEY + "&language=" + language;
@@ -309,7 +316,7 @@ public class TVShowViewModel extends ViewModel {
                                     listItems.add(tvItems);
 
                                 } catch (JSONException e) {
-                                    e.printStackTrace();
+                                    errorHandling.error_alert(mContext, "JSON Error", e.toString());
                                 }
                             }
 
@@ -323,6 +330,7 @@ public class TVShowViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });

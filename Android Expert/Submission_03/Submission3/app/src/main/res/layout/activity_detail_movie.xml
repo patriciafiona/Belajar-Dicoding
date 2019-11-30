@@ -39,8 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="205dp"
                 android:alpha="0.5"
-                android:src="@color/colorSolidGrey"
                 android:scaleType="centerCrop"
+                android:src="@color/colorSolidGrey"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -59,120 +59,109 @@
         <TextView
             android:id="@+id/detail_judul"
             style="@style/detail_judul"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:text="@string/title_film"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TableLayout
-            android:id="@+id/detail_table01"
-            android:layout_width="0dp"
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="@string/genre"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/detail_poster"
+            app:layout_constraintTop_toBottomOf="@+id/detail_judul" />
+
+        <TextView
+            android:id="@+id/detail_genre"
+            style="@style/detail_table01_fill"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/detail_judul" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/status"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/detail_poster"
-            app:layout_constraintTop_toBottomOf="@+id/detail_judul">
+            app:layout_constraintTop_toBottomOf="@+id/detail_genre" />
 
-            <TableRow android:layout_height="56dp">
+        <TextView
+            android:id="@+id/detail_status"
+            style="@style/detail_table01_fill"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView7"
+            app:layout_constraintTop_toBottomOf="@+id/detail_genre" />
 
-                <TextView
-                    android:layout_width="84dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp"
-                    android:text="@string/genre" />
-
-                <TextView
-                    android:id="@+id/detail_genre"
-                    style="@style/detail_table01_fill" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp"
-                    android:text="@string/status" />
-
-                <TextView
-                    android:id="@+id/detail_status"
-                    style="@style/detail_table01_fill" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="12sp"
-                    android:text="@string/age_rating" />
-
-                <TextView
-                    android:id="@+id/detail_age_rating"
-                    style="@style/detail_table01_fill" />
-            </TableRow>
-
-        </TableLayout>
-
-        <LinearLayout
-            android:id="@+id/Rating_container"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/age_rating"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/detail_poster"
+            app:layout_constraintTop_toBottomOf="@+id/detail_status" />
+
+        <TextView
+            android:id="@+id/detail_age_rating"
+            style="@style/detail_table01_fill"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView8"
+            app:layout_constraintTop_toBottomOf="@+id/detail_status" />
+
+        <TextView
+            android:id="@+id/ratting_text_movie"
+            style="@style/detail_rating_text"
+            android:layout_width="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/rating_default"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-            <TextView
-                android:id="@+id/ratting_text_movie"
-                style="@style/detail_rating_text"
-                android:layout_width="wrap_content"
-                android:text="@string/rating_default"
-                app:layout_constraintStart_toEndOf="@+id/ratingBar_movie" />
+        <RatingBar
+            android:id="@+id/ratingBar_movie"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:theme="@style/RatingBar"
+            app:layout_constraintStart_toEndOf="@+id/ratting_text_movie"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-            <RatingBar
-                android:id="@+id/ratingBar_movie"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:theme="@style/RatingBar" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/release"
+            android:textColor="@color/colorBlack"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar_movie"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/release"
-                    android:textColor="@color/colorBlack"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/detail_release"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test" />
-
-
-            </LinearLayout>
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/detail_release"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@string/test"
+            app:layout_constraintStart_toEndOf="@+id/ratingBar_movie"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
         <TextView
             android:id="@+id/detail_voteCount"
@@ -181,7 +170,7 @@
             android:layout_marginStart="20dp"
             android:text="@string/vote_count"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Rating_container" />
+            app:layout_constraintTop_toBottomOf="@+id/ratting_text_movie" />
 
         <TextView
             android:id="@+id/textView2"
@@ -215,71 +204,76 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_overview_movie" />
 
-        <TableLayout
-            android:id="@+id/detail_table02"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="156dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/imdb_id"
+            android:textColor="@color/colorDonker"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4">
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-            <TableRow>
+        <TextView
+            android:id="@+id/detail_imdb"
+            style="@style/detail_table02_fill"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView9"
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-                <TextView
-                    android:layout_width="156dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorDonker"
-                    android:text="@string/imdb_id" />
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/original_language"
+            android:textColor="@color/colorDonker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-                <TextView
-                    android:id="@+id/detail_imdb"
-                    style="@style/detail_table02_fill" />
-            </TableRow>
+        <TextView
+            android:id="@+id/detail_ori_language"
+            style="@style/detail_table02_fill"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView10"
+            app:layout_constraintTop_toBottomOf="@+id/detail_imdb" />
 
-            <TableRow>
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="@string/popularity"
+            android:textColor="@color/colorDonker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
-                <TextView
-                    android:layout_width="156dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorDonker"
-                    android:text="@string/original_language" />
+        <TextView
+            android:id="@+id/detail_popularity"
+            style="@style/detail_table02_fill"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/detail_ori_language" />
 
-                <TextView
-                    android:id="@+id/detail_ori_language"
-                    style="@style/detail_table02_fill"/>
-            </TableRow>
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="156dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/revenue"
+            android:textColor="@color/colorDonker"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="156dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorDonker"
-                    android:text="@string/popularity" />
-
-                <TextView
-                    android:id="@+id/detail_popularity"
-                    style="@style/detail_table02_fill" />
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_width="156dp"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/colorDonker"
-                    android:text="@string/revenue" />
-
-                <TextView
-                    android:id="@+id/detail_revenue"
-                    style="@style/detail_table02_fill"/>
-            </TableRow>
-
-        </TableLayout>
+        <TextView
+            android:id="@+id/detail_revenue"
+            style="@style/detail_table02_fill"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintTop_toBottomOf="@+id/detail_popularity" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,8 @@
 package com.path_studio.submission3.Fragments;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,18 +26,25 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.mancj.materialsearchbar.MaterialSearchBar;
+import com.mancj.materialsearchbar.adapter.SuggestionsAdapter;
+import com.path_studio.submission3.Activities.DetailMovieActivity;
+import com.path_studio.submission3.Activities.DetailTVActivity;
 import com.path_studio.submission3.Adapters.SliderAdapter;
 import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.HomeItems;
+import com.path_studio.submission3.Models.SearchItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.Views.HomeViewModel;
+import com.path_studio.submission3.Views.SearchViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,6 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
     private ViewPager viewPager;
     private ProgressBar progressBar;
     private HomeViewModel homeViewModel;
+    private SearchViewModel searchViewModel;
 
     private ImageView mDiscoverMovie01, mDiscoverMovie02, mDiscoverMovie03, mDiscoverMovie04, mDiscoverMovie05;
     private ImageView mDiscoverTV01, mDiscoverTV02, mDiscoverTV03, mDiscoverTV04, mDiscoverTV05;
@@ -60,6 +73,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
     private LinearLayout mBox01, mBox02, mBox03;
     private MaterialSearchBar mSearchBar;
+    private ArrayList<String> lastSearches = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -181,6 +195,126 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mBox03 = view.findViewById(R.id.box_tv_show);
 
         mSearchBar = view.findViewById(R.id.searchBar);
+        setting_search();
+
+    }
+
+    private void setting_search(){
+        mSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+            @Override
+            public void onSearchStateChanged(boolean enabled) {
+                //
+            }
+
+            @Override
+            public void onSearchConfirmed(CharSequence text) {
+                //
+            }
+
+            @Override
+            public void onButtonClicked(int buttonCode) {
+                if (buttonCode == mSearchBar.BUTTON_NAVIGATION) {
+                    //opening or closing a navigation drawer
+                } else if (buttonCode == mSearchBar.BUTTON_BACK) {
+                    mSearchBar.disableSearch();
+                }
+            }
+        });
+
+        mSearchBar.addTextChangeListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //proses check di list-nya
+                String search = mSearchBar.getText();
+
+                if (!TextUtils.isEmpty(search)) {
+                    //set data from JSON
+                    String language = getResources().getString(R.string.language_code);
+                    searchViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.NewInstanceFactory()).get(SearchViewModel.class);
+                    searchViewModel.setResult(getActivity(), language, search);
+
+                    //get data from JSON
+                    searchViewModel.getSearchResult().observe(getActivity(), new Observer<ArrayList<SearchItems>>() {
+                        @Override
+                        public void onChanged(ArrayList<SearchItems> searchItems) {
+                            if (searchItems != null) {
+                                //tampilkan pada 10 result
+                                SearchItems sa = searchItems.get(0);
+                                mSearchBar.clearSuggestions();
+                                mSearchBar.updateLastSuggestions(sa.getSearchTitle());
+                                if (!mSearchBar.isSuggestionsVisible()) {
+                                    mSearchBar.showSuggestionsList();
+                                }
+                            }
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                String search = mSearchBar.getText();
+                lastSearches.add(search);
+            }
+        });
+
+        mSearchBar.setSuggestionsClickListener(new SuggestionsAdapter.OnItemViewClickListener() {
+
+            @Override
+            public void OnItemClickListener(int position, View v) {
+                //go to detail movie/tv show
+                Log.e("int position", String.valueOf(position));
+                goToDetail(position);
+
+            }
+
+            @Override
+            public void OnItemDeleteListener(int position, View v) {
+                //
+            }
+
+        });
+    }
+
+    private void goToDetail(final int id_res){
+        searchViewModel.getSearchResult().observe(getActivity(), new Observer<ArrayList<SearchItems>>() {
+            @Override
+            public void onChanged(ArrayList<SearchItems> searchItems) {
+                if (searchItems != null) {
+                    SearchItems sa = searchItems.get(0);
+                    ArrayList<Integer> id_result = sa.get_result_Id();
+                    ArrayList<String> mediaType = sa.getMediaType();
+
+                    if(id_result != null && mediaType!= null && !id_result.isEmpty() && !mediaType.isEmpty()){
+                        switch (mediaType.get(id_res)){
+                            case "movie":
+                                Intent i = new Intent(getActivity(), DetailMovieActivity.class);
+                                i.putExtra("movie_id", id_result.get(id_res));
+                                startActivity(i);
+                                break;
+                            case "tv":
+                                Intent ii = new Intent(getActivity(), DetailTVActivity.class);
+                                ii.putExtra("tv_id", id_result.get(id_res));
+                                startActivity(ii);
+                                break;
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mSearchBar.setText("");
+        mSearchBar.clearSuggestions();
+        mSearchBar.hideSuggestionsList();
     }
 
     private void setVisibleGone(){

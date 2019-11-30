@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.path_studio.submission3.ErrorHandling;
 import com.path_studio.submission3.Models.HomeItems;
 
 import org.json.JSONArray;
@@ -28,9 +29,10 @@ public class HomeViewModel extends ViewModel {
     private ArrayList<String> discover_movie_poster = new ArrayList<>();
     private ArrayList<String> discover_tv_poster = new ArrayList<>();
     private HomeItems homeItems = new HomeItems();
+    private ErrorHandling errorHandling = new ErrorHandling();
 
 
-    public void setMovieDiscoverData(Context mContext, String language){
+    public void setMovieDiscoverData(final Context mContext, String language){
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -53,6 +55,7 @@ public class HomeViewModel extends ViewModel {
                                     String tampung = linkPoster + jsonObject.getString("poster_path");
                                     discover_movie_poster.add(tampung);
                                 }catch (JSONException e){
+                                    errorHandling.error_alert(mContext, "JSON Error", e.toString());
                                     Log.e("Error.GET.JSON", e.toString());
                                 }
                             }
@@ -61,7 +64,7 @@ public class HomeViewModel extends ViewModel {
                             listDiscover.postValue(listItems);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
 
                     }
@@ -70,6 +73,7 @@ public class HomeViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });
@@ -78,7 +82,7 @@ public class HomeViewModel extends ViewModel {
         queue.add(getRequest);
     }
 
-    public void setTVDiscoverData(Context mContext, String language){
+    public void setTVDiscoverData(final Context mContext, String language){
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
@@ -101,6 +105,7 @@ public class HomeViewModel extends ViewModel {
                                     String tampung = linkPoster + jsonObject.getString("poster_path");
                                     discover_tv_poster.add(tampung);
                                 }catch (JSONException e){
+                                    errorHandling.error_alert(mContext, "JSON Error", e.toString());
                                     Log.e("Error.GET.JSON", e.toString());
                                 }
                             }
@@ -109,7 +114,7 @@ public class HomeViewModel extends ViewModel {
                             listDiscover.postValue(listItems);
 
                         } catch (JSONException e) {
-                            e.printStackTrace();
+                            errorHandling.error_alert(mContext, "JSON Error", e.toString());
                         }
 
                     }
@@ -118,6 +123,7 @@ public class HomeViewModel extends ViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        errorHandling.error_alert(mContext, "Error Response JSON", error.toString());
                         Log.e("Error.Response", error.toString());
                     }
                 });

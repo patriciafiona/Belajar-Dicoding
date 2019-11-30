@@ -44,8 +44,10 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     private ImageView mPoster, mDetailBgTop;
     private RatingBar mRating;
 
-    private TableLayout mDetail01, mDetail02;
     private TextView mT01, mT02, mT03;
+
+    private TextView mDetail01, mDetail02, mDetail03;
+    private TextView mDetail04, mDetail05, mDetail06, mDetail07;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +82,16 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mOriLanguage = findViewById(R.id.detail_ori_language);
         mIMDB = findViewById(R.id.detail_imdb);
 
-        mDetail01 = findViewById(R.id.detail_table01);
-        mDetail02 = findViewById(R.id.detail_table02);
+        //table detail 01
+        mDetail01 = findViewById(R.id.textView);
+        mDetail02 = findViewById(R.id.textView7);
+        mDetail03 = findViewById(R.id.textView8);
+
+        //ratting detail 02
+        mDetail04 = findViewById(R.id.textView9);
+        mDetail05 = findViewById(R.id.textView10);
+        mDetail06 = findViewById(R.id.textView11);
+        mDetail07 = findViewById(R.id.textView12);
 
         mT01 = findViewById(R.id.textView3);
         mT02 = findViewById(R.id.textView2);
@@ -203,6 +213,17 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         mDetail01.setVisibility(View.GONE);
         mDetail02.setVisibility(View.GONE);
+        mDetail03.setVisibility(View.GONE);
+
+        mDetail04.setVisibility(View.GONE);
+        mDetail05.setVisibility(View.GONE);
+        mDetail06.setVisibility(View.GONE);
+        mDetail07.setVisibility(View.GONE);
+
+        mRevenue.setVisibility(View.GONE);
+        mPopularity.setVisibility(View.GONE);
+        mOriLanguage.setVisibility(View.GONE);
+        mIMDB.setVisibility(View.GONE);
 
         mT01.setVisibility(View.GONE);
         mT02.setVisibility(View.GONE);
@@ -222,6 +243,17 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         mDetail01.setVisibility(View.VISIBLE);
         mDetail02.setVisibility(View.VISIBLE);
+        mDetail03.setVisibility(View.VISIBLE);
+
+        mDetail04.setVisibility(View.VISIBLE);
+        mDetail05.setVisibility(View.VISIBLE);
+        mDetail06.setVisibility(View.VISIBLE);
+        mDetail07.setVisibility(View.VISIBLE);
+
+        mRevenue.setVisibility(View.VISIBLE);
+        mPopularity.setVisibility(View.VISIBLE);
+        mOriLanguage.setVisibility(View.VISIBLE);
+        mIMDB.setVisibility(View.VISIBLE);
 
         mT01.setVisibility(View.VISIBLE);
         mT02.setVisibility(View.VISIBLE);

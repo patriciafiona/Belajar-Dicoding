@@ -58,13 +58,15 @@
             <com.mancj.materialsearchbar.MaterialSearchBar
                 style="@style/MaterialSearchBarLight"
                 app:mt_speechMode="false"
-                app:mt_hint="Search by Title"
+                app:mt_hint="@string/search_by_title"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginBottom="10dp"
-                app:mt_maxSuggestionsCount="10"
+                app:mt_maxSuggestionsCount="5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/searchBar" />
+                android:id="@+id/searchBar"
+                android:outlineProvider="bounds"
+                app:mt_placeholder="@string/search_m_or_t"/>
 
             <!--Bagian Movies-->
             <LinearLayout

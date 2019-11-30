@@ -50,10 +50,13 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private Button mSeeAllSeasson;
     private ImageView mCurrentSeassonPoster;
     private TextView mCurrentSeassonName, mCurrentSeassonDetail, mCurrentSeassonOverview;
-    private LinearLayout mRating_container_2, mSeassonBox;
+    private LinearLayout mSeassonBox;
 
-    private TableLayout mDetail01, mDetail02;
     private TextView mT01, mT02, mT03;
+
+    private TextView mDetail11, mDetail12, mDetail13;
+    private TextView mDetail21, mDetail22, mDetail23, mDetail24;
+    private TextView mFADText, mLADText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,13 +115,22 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mOriLanguage = findViewById(R.id.detail_languages_tv);
         mNetwork = findViewById(R.id.networks_tv);
 
-        mDetail01 = findViewById(R.id.detail_table01_2);
-        mDetail02 = findViewById(R.id.detail_table02_2);
-        mRating_container_2 = findViewById(R.id.Rating_container_2);
         mSeassonBox = findViewById(R.id.c_seasson_box);
         mT01 = findViewById(R.id.textView2);
         mT02 = findViewById(R.id.textView5);
         mT03 = findViewById(R.id.textView6);
+
+        mDetail11 = findViewById(R.id.textView13);
+        mDetail12 = findViewById(R.id.textView14);
+        mDetail13 = findViewById(R.id.textView15);
+
+        mDetail21 = findViewById(R.id.textView16);
+        mDetail22 = findViewById(R.id.textView17);
+        mDetail23 = findViewById(R.id.textView18);
+        mDetail24 = findViewById(R.id.textView19);
+
+        mFADText = findViewById(R.id.textView3);
+        mLADText = findViewById(R.id.textView4);
 
         //current seasson detail
         mCurrentSeassonPoster = findViewById(R.id.detail_current_seasson_poster);
@@ -289,15 +301,33 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mJudul.setVisibility(View.GONE);
         mPoster.setVisibility(View.GONE);
         mOverview.setVisibility(View.GONE);
-        mRating_container_2.setVisibility(View.GONE);
         mVoteCount.setVisibility(View.GONE);
         mSeassonBox.setVisibility(View.GONE);
-        mDetail01.setVisibility(View.GONE);
-        mDetail02.setVisibility(View.GONE);
         mSeeAllSeasson.setVisibility(View.GONE);
         mT01.setVisibility(View.GONE);
         mT02.setVisibility(View.GONE);
         mT03.setVisibility(View.GONE);
+
+        mDetail11.setVisibility(View.GONE);
+        mDetail12.setVisibility(View.GONE);
+        mDetail13.setVisibility(View.GONE);
+
+        mDetail21.setVisibility(View.GONE);
+        mDetail22.setVisibility(View.GONE);
+        mDetail23.setVisibility(View.GONE);
+        mDetail24.setVisibility(View.GONE);
+
+        mPopularity.setVisibility(View.GONE);
+        mLinkHomepage.setVisibility(View.GONE);
+        mOriLanguage.setVisibility(View.GONE);
+        mNetwork.setVisibility(View.GONE);
+
+        mRattingText.setVisibility(View.GONE);
+        mRating.setVisibility(View.GONE);
+        mFirstAir.setVisibility(View.GONE);
+        mLastAir.setVisibility(View.GONE);
+        mFADText.setVisibility(View.GONE);
+        mLADText.setVisibility(View.GONE);
     }
 
     private void seeAll(){
@@ -305,15 +335,33 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mJudul.setVisibility(View.VISIBLE);
         mPoster.setVisibility(View.VISIBLE);
         mOverview.setVisibility(View.VISIBLE);
-        mRating_container_2.setVisibility(View.VISIBLE);
         mVoteCount.setVisibility(View.VISIBLE);
         mSeassonBox.setVisibility(View.VISIBLE);
-        mDetail01.setVisibility(View.VISIBLE);
-        mDetail02.setVisibility(View.VISIBLE);
         mSeeAllSeasson.setVisibility(View.VISIBLE);
         mT01.setVisibility(View.VISIBLE);
         mT02.setVisibility(View.VISIBLE);
         mT03.setVisibility(View.VISIBLE);
+
+        mDetail11.setVisibility(View.VISIBLE);
+        mDetail12.setVisibility(View.VISIBLE);
+        mDetail13.setVisibility(View.VISIBLE);
+
+        mDetail21.setVisibility(View.VISIBLE);
+        mDetail22.setVisibility(View.VISIBLE);
+        mDetail23.setVisibility(View.VISIBLE);
+        mDetail24.setVisibility(View.VISIBLE);
+
+        mPopularity.setVisibility(View.VISIBLE);
+        mLinkHomepage.setVisibility(View.VISIBLE);
+        mOriLanguage.setVisibility(View.VISIBLE);
+        mNetwork.setVisibility(View.VISIBLE);
+
+        mRattingText.setVisibility(View.VISIBLE);
+        mRating.setVisibility(View.VISIBLE);
+        mFirstAir.setVisibility(View.VISIBLE);
+        mLastAir.setVisibility(View.VISIBLE);
+        mFADText.setVisibility(View.VISIBLE);
+        mLADText.setVisibility(View.VISIBLE);
     }
 
     @Override
