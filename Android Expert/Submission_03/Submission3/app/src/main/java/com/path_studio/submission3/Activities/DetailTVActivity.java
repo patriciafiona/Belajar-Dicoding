@@ -7,14 +7,12 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -22,7 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.TVShowViewModel;
+import com.path_studio.submission3.ViewModels.TVShowViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -75,8 +73,13 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
 
-        tvShowViewModel = new TVShowViewModel(this.getApplication());
-        tvShowViewModel.setTVShow(language, id_show);
+        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(TVShowViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            tvShowViewModel.setTVShow(language, id_show);
+        }
+
         showLoading(true);
         hideAll();
 

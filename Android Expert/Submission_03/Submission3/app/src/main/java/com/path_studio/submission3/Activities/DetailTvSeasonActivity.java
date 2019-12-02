@@ -11,13 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 
-import com.path_studio.submission3.Adapters.MovieAdapter;
 import com.path_studio.submission3.Adapters.SeasonAdapter;
 import com.path_studio.submission3.InternetConnectionCheck;
-import com.path_studio.submission3.Models.MovieItems;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.TVShowViewModel;
+import com.path_studio.submission3.ViewModels.TVShowViewModel;
 
 import java.util.ArrayList;
 
@@ -40,10 +38,10 @@ public class DetailTvSeasonActivity extends AppCompatActivity {
             startActivity(i);
         }
 
-        initiate();
+        initiate(savedInstanceState);
     }
 
-    private void initiate(){
+    private void initiate(Bundle savedInstanceState){
         //inisiasi
         progressBar = findViewById(R.id.progressBar_season_detail);
 
@@ -59,8 +57,13 @@ public class DetailTvSeasonActivity extends AppCompatActivity {
         Intent mIntent = getIntent();
         id_show = mIntent.getIntExtra("tv_id", 0);
 
-        tvShowViewModel = new TVShowViewModel(this.getApplication());
-        tvShowViewModel.setSeassonDetail(language, id_show);
+        tvShowViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(TVShowViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            tvShowViewModel.setSeassonDetail(language, id_show);
+        }
+
         recyclerView.setVisibility(View.GONE);
         showLoading(true);
 

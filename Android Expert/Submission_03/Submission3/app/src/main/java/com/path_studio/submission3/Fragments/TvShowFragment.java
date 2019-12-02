@@ -16,15 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.path_studio.submission3.Activities.DetailTVActivity;
 import com.path_studio.submission3.Adapters.TVAdapter;
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.TVShowViewModel;
+import com.path_studio.submission3.ViewModels.TVShowViewModel;
 
 import java.util.ArrayList;
 
@@ -72,8 +70,13 @@ public class TvShowFragment extends Fragment {
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        tvShowViewModel = new TVShowViewModel(getActivity().getApplication());
-        tvShowViewModel.setTVShow(language);
+        tvShowViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(TVShowViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            tvShowViewModel.setTVShow(language);
+        }
+
         showLoading(true);
 
         tvShowViewModel.getTVShow().observe(getActivity(), new Observer<ArrayList<TVItems>>() {

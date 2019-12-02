@@ -1,4 +1,4 @@
-package com.path_studio.submission3.Views;
+package com.path_studio.submission3.ViewModels;
 
 import android.app.Application;
 import android.content.Context;
@@ -11,8 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.path_studio.submission3.BuildConfig;
-import com.path_studio.submission3.ErrorHandling;
-import com.path_studio.submission3.Models.HomeItems;
+import com.path_studio.submission3.Models.HomeMovieItems;
+import com.path_studio.submission3.Models.HomeTVItems;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,15 +24,19 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 public class HomeViewModel extends AndroidViewModel {
     private final String linkPoster = "http://image.tmdb.org/t/p/original";
     private static final String API_KEY = BuildConfig.API_KEY;
-    private MutableLiveData<ArrayList<HomeItems>> listDiscover = new MutableLiveData<>();
+
+    private MutableLiveData<ArrayList<HomeTVItems>> listTVDiscover = new MutableLiveData<>();
+    private MutableLiveData<ArrayList<HomeMovieItems>> listMovieDiscover = new MutableLiveData<>();
+
     private ArrayList<String> discover_movie_poster = new ArrayList<>();
     private ArrayList<String> discover_tv_poster = new ArrayList<>();
-    private HomeItems homeItems = new HomeItems();
+
+    private HomeTVItems homeTVItems = new HomeTVItems();
+    private HomeMovieItems homeMovieItems = new HomeMovieItems();
 
     private Context mContext;
 
@@ -42,11 +46,11 @@ public class HomeViewModel extends AndroidViewModel {
     }
 
 
-    public void setMovieDiscoverData(String language){
+    public void setMovieDiscover(String language){
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
-        final ArrayList<HomeItems> listItems = new ArrayList<>();
+        final ArrayList<HomeMovieItems> listItems = new ArrayList<>();
         final String url = "https://api.themoviedb.org/3/discover/movie?api_key=" + API_KEY + "&language=" + language;
 
         // prepare the Request
@@ -68,9 +72,9 @@ public class HomeViewModel extends AndroidViewModel {
                                     Log.e("Error.GET.JSON", e.toString());
                                 }
                             }
-                            homeItems.setDiscover_movie_poster(discover_movie_poster);
-                            listItems.add(homeItems);
-                            listDiscover.postValue(listItems);
+                            homeMovieItems.setDiscover_movie_poster(discover_movie_poster);
+                            listItems.add(homeMovieItems);
+                            listMovieDiscover.postValue(listItems);
 
                         } catch (JSONException e) {
                             Log.e("JSON Error", e.toString());
@@ -90,11 +94,11 @@ public class HomeViewModel extends AndroidViewModel {
         queue.add(getRequest);
     }
 
-    public void setTVDiscoverData(String language){
+    public void setTVDiscover(String language){
         //Mengambil data dari API dengan volley
         final RequestQueue queue = Volley.newRequestQueue(mContext);
 
-        final ArrayList<HomeItems> listItems = new ArrayList<>();
+        final ArrayList<HomeTVItems> listItems = new ArrayList<>();
         final String url = "https://api.themoviedb.org/3/discover/tv?api_key=" + API_KEY + "&language=" + language;
 
         // prepare the Request
@@ -116,9 +120,9 @@ public class HomeViewModel extends AndroidViewModel {
                                     Log.e("Error.GET.JSON", e.toString());
                                 }
                             }
-                            homeItems.setDiscover_tv_poster(discover_tv_poster);
-                            listItems.add(homeItems);
-                            listDiscover.postValue(listItems);
+                            homeTVItems.setDiscover_tv_poster(discover_tv_poster);
+                            listItems.add(homeTVItems);
+                            listTVDiscover.postValue(listItems);
 
                         } catch (JSONException e) {
                             Log.e("JSON Error", e.toString());
@@ -138,8 +142,11 @@ public class HomeViewModel extends AndroidViewModel {
         queue.add(getRequest);
     }
 
-    public LiveData<ArrayList<HomeItems>> getDiscover() {
-        return listDiscover;
+    public LiveData<ArrayList<HomeTVItems>> getTVDiscover() {
+        return listTVDiscover;
+    }
+    public LiveData<ArrayList<HomeMovieItems>> getMovieDiscover() {
+        return listMovieDiscover;
     }
 
 }

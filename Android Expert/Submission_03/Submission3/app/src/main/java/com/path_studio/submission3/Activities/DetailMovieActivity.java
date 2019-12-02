@@ -5,13 +5,11 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +17,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.MovieItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.MovieViewModel;
+import com.path_studio.submission3.ViewModels.MovieViewModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -100,8 +98,13 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
 
-        movieViewModel = new MovieViewModel(this.getApplication());
-        movieViewModel.setMovie(language, id_movie);
+        movieViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(MovieViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            movieViewModel.setMovie(language, id_movie);
+        }
+
         showLoading(true);
         hideAll();
 

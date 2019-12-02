@@ -15,15 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.path_studio.submission3.Activities.DetailMovieActivity;
 import com.path_studio.submission3.Adapters.MovieAdapter;
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.MovieItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.MovieViewModel;
+import com.path_studio.submission3.ViewModels.MovieViewModel;
 
 import java.util.ArrayList;
 
@@ -66,8 +64,13 @@ public class MovieFragment extends Fragment {
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        movieViewModel = new MovieViewModel(getActivity().getApplication());
-        movieViewModel.setMovie(language);
+        movieViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(MovieViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            movieViewModel.setMovie(language);
+        }
+
         showLoading(true);
 
         movieViewModel.getMovies().observe(getActivity(), new Observer<ArrayList<MovieItems>>() {

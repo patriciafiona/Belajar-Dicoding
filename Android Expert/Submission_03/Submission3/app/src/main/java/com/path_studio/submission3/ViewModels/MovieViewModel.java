@@ -1,4 +1,4 @@
-package com.path_studio.submission3.Views;
+package com.path_studio.submission3.ViewModels;
 
 import android.app.Application;
 import android.content.Context;
@@ -11,7 +11,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.path_studio.submission3.BuildConfig;
-import com.path_studio.submission3.ErrorHandling;
 import com.path_studio.submission3.Models.MovieItems;
 
 import org.json.JSONArray;
@@ -24,7 +23,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 public class MovieViewModel extends AndroidViewModel {
 

@@ -1,7 +1,6 @@
 package com.path_studio.submission3.Fragments;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -27,7 +25,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -37,15 +34,14 @@ import com.mancj.materialsearchbar.adapter.SuggestionsAdapter;
 import com.path_studio.submission3.Activities.DetailMovieActivity;
 import com.path_studio.submission3.Activities.DetailTVActivity;
 import com.path_studio.submission3.Adapters.SliderAdapter;
-import com.path_studio.submission3.InternetConnectionCheck;
-import com.path_studio.submission3.Models.HomeItems;
+import com.path_studio.submission3.Models.HomeMovieItems;
+import com.path_studio.submission3.Models.HomeTVItems;
 import com.path_studio.submission3.Models.SearchItems;
 import com.path_studio.submission3.R;
-import com.path_studio.submission3.Views.HomeViewModel;
-import com.path_studio.submission3.Views.SearchViewModel;
+import com.path_studio.submission3.ViewModels.HomeViewModel;
+import com.path_studio.submission3.ViewModels.SearchViewModel;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -106,18 +102,33 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         //Mendapatkan bahasa sesuai pengaturan
         String language = getResources().getString(R.string.language_code);
 
-        homeViewModel = new HomeViewModel(getActivity().getApplication());
-        homeViewModel.setMovieDiscoverData(language);
-        homeViewModel.setTVDiscoverData(language);
+        homeViewModel = new ViewModelProvider(getActivity(), new ViewModelProvider.AndroidViewModelFactory(getActivity().getApplication())).get(HomeViewModel.class);
+
+        // recovering the instance state
+        if (savedInstanceState == null) {
+            homeViewModel.setMovieDiscover(language);
+            homeViewModel.setTVDiscover(language);
+        }
 
         setVisibleGone();
         showLoading(true);
 
-        homeViewModel.getDiscover().observe(getActivity(), new Observer<ArrayList<HomeItems>>() {
+        homeViewModel.getMovieDiscover().observe(getActivity(), new Observer<ArrayList<HomeMovieItems>>() {
             @Override
-            public void onChanged(ArrayList<HomeItems> homeItems) {
+            public void onChanged(ArrayList<HomeMovieItems> homeItems) {
                 if (homeItems != null) {
-                    setDiscoverData(homeItems);
+                    setMovieDiscoverData(homeItems);
+                    setVisibleTrue();
+                    showLoading(false);
+                }
+            }
+        });
+
+        homeViewModel.getTVDiscover().observe(getActivity(), new Observer<ArrayList<HomeTVItems>>() {
+            @Override
+            public void onChanged(ArrayList<HomeTVItems> homeItems) {
+                if (homeItems != null) {
+                    setTVDiscoverData(homeItems);
                     setVisibleTrue();
                     showLoading(false);
                 }
@@ -322,27 +333,35 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         mSearchBar.setVisibility(View.VISIBLE);
     }
 
-    private void setDiscoverData(ArrayList<HomeItems> mData){
-        HomeItems homeItems = mData.get(0);
+    private void setMovieDiscoverData(ArrayList<HomeMovieItems> mData){
+        HomeMovieItems homeItems = mData.get(0);
 
         ArrayList<String> tampung01 = homeItems.getDiscover_movie_poster();
-        ArrayList<String> tampung02 = homeItems.getDiscover_tv_poster();
 
-        if(tampung01!=null && tampung02!=null){
+        if(tampung01!=null){
             for(int i = 0; i < 5 ; i++){
 
                 Glide.with(this)
                         .load(tampung01.get(i))
                         .apply(new RequestOptions().override(200, 300))
                         .into(this.listPosterMovie[i]);
+            }
+        }
 
+    }
+
+    private void setTVDiscoverData(ArrayList<HomeTVItems> mData){
+        HomeTVItems homeItems = mData.get(0);
+
+        ArrayList<String> tampung02 = homeItems.getDiscover_tv_poster();
+
+        if(tampung02!=null){
+            for(int i = 0; i < 5 ; i++){
                 Glide.with(this)
                         .load(tampung02.get(i))
                         .apply(new RequestOptions().override(200, 300))
                         .into(this.listPosterTV[i]);
             }
-        }else{
-            Log.e("Discover photo", "Array kosong");
         }
 
     }
