@@ -231,7 +231,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_overview_tv" />
 
-        <LinearLayout
+        <!--Constrain layout digunakan untuk wadah kotak putih-->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/c_seasson_box"
             style="@style/detail_box_seasson"
             app:layout_constraintEnd_toEndOf="parent"
@@ -241,41 +242,44 @@
             <ImageView
                 android:id="@+id/detail_current_seasson_poster"
                 style="@style/detail_poster_seasson"
-                android:layout_marginStart="0dp" />
+                android:layout_marginTop="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/c_seasson_name"
+                style="@style/detail_seasson_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:orientation="vertical">
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/test"
+                app:layout_constraintStart_toEndOf="@+id/detail_current_seasson_poster"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/c_seasson_name"
-                    style="@style/detail_seasson_num"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/test" />
+            <TextView
+                android:id="@+id/c_seasson_detail"
+                style="@style/detail_seasson_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:text="@string/seasson_ep_detail"
+                app:layout_constraintStart_toEndOf="@+id/detail_current_seasson_poster"
+                app:layout_constraintTop_toBottomOf="@+id/c_seasson_name" />
 
-                <TextView
-                    android:id="@+id/c_seasson_detail"
-                    style="@style/detail_seasson_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/seasson_ep_detail" />
+            <TextView
+                android:id="@+id/detail_current_seasson_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:justificationMode="inter_word"
+                android:text="@string/lorem"
+                android:textSize="10sp"
+                app:layout_constraintStart_toEndOf="@+id/detail_current_seasson_poster"
+                app:layout_constraintTop_toBottomOf="@+id/c_seasson_detail" />
 
-                <TextView
-                    android:id="@+id/detail_current_seasson_overview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:justificationMode="inter_word"
-                    android:text="@string/lorem"
-                    android:textSize="10sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/detail_see_all_season"

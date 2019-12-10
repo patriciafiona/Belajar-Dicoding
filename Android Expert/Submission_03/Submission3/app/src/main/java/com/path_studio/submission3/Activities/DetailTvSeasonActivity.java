@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.path_studio.submission3.Adapters.SeasonAdapter;
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.ViewModels.TVShowViewModel;
@@ -30,13 +29,6 @@ public class DetailTvSeasonActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tv_season);
-
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(this)){
-            Intent i = new Intent(this, NoInternetConnection.class);
-            startActivity(i);
-        }
 
         initiate(savedInstanceState);
     }

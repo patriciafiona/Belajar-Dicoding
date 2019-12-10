@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.R;
 
 public class ContactFragment extends Fragment {

@@ -1,13 +1,10 @@
 package com.path_studio.submission3.Activities;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.path_studio.submission3.Adapters.SectionsPagerAdapter;
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.R;
 
 import androidx.viewpager.widget.ViewPager;
@@ -19,8 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.net.InetAddress;
-
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -30,13 +25,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(this)){
-            Intent i = new Intent(this, NoInternetConnection.class);
-            startActivity(i);
-        }
 
         //set Adapters
         viewPager = findViewById(R.id.view_pager);

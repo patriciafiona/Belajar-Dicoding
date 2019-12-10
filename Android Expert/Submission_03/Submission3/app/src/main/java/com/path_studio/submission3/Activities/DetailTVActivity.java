@@ -1,6 +1,7 @@
 package com.path_studio.submission3.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -17,7 +18,6 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.path_studio.submission3.InternetConnectionCheck;
 import com.path_studio.submission3.Models.TVItems;
 import com.path_studio.submission3.R;
 import com.path_studio.submission3.ViewModels.TVShowViewModel;
@@ -48,7 +48,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private Button mSeeAllSeasson;
     private ImageView mCurrentSeassonPoster;
     private TextView mCurrentSeassonName, mCurrentSeassonDetail, mCurrentSeassonOverview;
-    private LinearLayout mSeassonBox;
+    private ConstraintLayout mSeassonBox;
 
     private TextView mT01, mT02, mT03;
 
@@ -60,13 +60,6 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_tv);
-
-        //check internet connection
-        InternetConnectionCheck internetConnectionCheck = new InternetConnectionCheck();
-        if(!internetConnectionCheck.isNetworkConnected(this)){
-            Intent i = new Intent(this, NoInternetConnection.class);
-            startActivity(i);
-        }
 
         initiate();
 
