@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
-import static com.path_studio.mynotesapp.DatabaseContract.TABLE_NAME;
+import static com.path_studio.mynotesapp.DatabaseContract.NoteColumns.TABLE_NAME;
 
 public class NoteHelper {
     private static final String DATABASE_TABLE = TABLE_NAME;

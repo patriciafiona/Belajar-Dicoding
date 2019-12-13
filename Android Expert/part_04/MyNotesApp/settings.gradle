@@ -1,2 +1,2 @@
-include ':app', ':consumerapp'
+include ':app', ':consumerapp', ':consumerapp2'
 rootProject.name='MyNotesApp'

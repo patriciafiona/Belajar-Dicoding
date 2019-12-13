@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeFragment">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="false"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/progressBar_home"
+                style="?android:attr/progressBarStyle"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <!--Bagian Promotion image slider-->
+            <LinearLayout
+                android:id="@+id/home_promotion_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-30dp"
+                android:orientation="vertical">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/Slider"
+                    android:layout_width="match_parent"
+                    android:layout_marginVertical="20dp"
+                    android:layout_height="160dp">
+
+                </androidx.viewpager.widget.ViewPager>
+
+                <LinearLayout
+                    android:id="@+id/dotsLayoutPromotion"
+                    android:layout_width="80dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="-65dp"
+                    android:orientation="horizontal">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!--Bagian Serach bar-->
+            <com.mancj.materialsearchbar.MaterialSearchBar
+                style="@style/MaterialSearchBarLight"
+                app:mt_speechMode="false"
+                app:mt_hint="@string/search_by_title"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginBottom="10dp"
+                app:mt_maxSuggestionsCount="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchBar"
+                android:outlineProvider="bounds"
+                app:mt_placeholder="@string/search_m_or_t"/>
+
+            <!--Bagian Movies-->
+            <LinearLayout
+                android:id="@+id/box_Movie"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/homeSection"
+                    android:text="@string/tab_text_2"/>
+
+                <!--Bagian Slider Movie-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <!--movie 1-->
+                        <ImageView
+                            android:id="@+id/discover_movie_01"
+                            style="@style/homeScrollImage" />
+
+                        <!--movie 2-->
+                        <ImageView
+                            android:id="@+id/discover_movie_02"
+                            style="@style/homeScrollImage" />
+
+                        <!--movie 3-->
+                        <ImageView
+                            android:id="@+id/discover_movie_03"
+                            style="@style/homeScrollImage" />
+
+                        <!--movie 4-->
+                        <ImageView
+                            android:id="@+id/discover_movie_04"
+                            style="@style/homeScrollImage" />
+
+                        <!--movie 5-->
+                        <ImageView
+                            android:id="@+id/discover_movie_05"
+                            style="@style/homeScrollImage" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/button_selengkapnya_movie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/see_all"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
+
+            <!--Bagian TV Shows-->
+            <LinearLayout
+                android:id="@+id/box_tv_show"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/homeSection"
+                    android:text="@string/tab_text_3" />
+
+                <!--Bagian Slider TV show-->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <!--TV 1-->
+                        <ImageView
+                            android:id="@+id/discover_tv_01"
+                            style="@style/homeScrollImage" />
+
+                        <!--TV 2-->
+                        <ImageView
+                            android:id="@+id/discover_tv_02"
+                            style="@style/homeScrollImage" />
+
+                        <!--TV 3-->
+                        <ImageView
+                            android:id="@+id/discover_tv_03"
+                            style="@style/homeScrollImage" />
+
+                        <!--TV 4-->
+                        <ImageView
+                            android:id="@+id/discover_tv_04"
+                            style="@style/homeScrollImage" />
+
+                        <!--TV 5-->
+                        <ImageView
+                            android:id="@+id/discover_tv_05"
+                            style="@style/homeScrollImage" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/button_selengkapnya_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:text="@string/see_all"
+                    android:textSize="8dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

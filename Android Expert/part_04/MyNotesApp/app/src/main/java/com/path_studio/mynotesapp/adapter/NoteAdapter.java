@@ -1,4 +1,4 @@
-package com.path_studio.mynotesapp;
+package com.path_studio.mynotesapp.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,6 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.path_studio.mynotesapp.CustomOnItemClickListener;
+import com.path_studio.mynotesapp.Note;
+import com.path_studio.mynotesapp.Activities.NoteAddUpdateActivity;
+import com.path_studio.mynotesapp.R;
 
 import java.util.ArrayList;
 
