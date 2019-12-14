@@ -200,6 +200,37 @@
             app:layout_constraintTop_toBottomOf="@+id/ratting_text_tv" />
 
         <TextView
+            android:id="@+id/textView21"
+            style="@style/detail_overview_tx"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/favourite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_voteCount_2" />
+
+        <TextView
+            android:id="@+id/detail_fav_tv"
+            style="@style/detail_fav_text"
+            android:layout_height="17dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="16dp"
+            android:justificationMode="inter_word"
+            android:text="@string/save_to_my_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <com.like.LikeButton
+            android:id="@+id/fav_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            app:icon_size="20dp"
+            app:icon_type="heart"
+            app:layout_constraintStart_toEndOf="@+id/detail_fav_tv"
+            app:layout_constraintTop_toBottomOf="@+id/textView21" />
+
+        <TextView
             android:id="@+id/textView2"
             style="@style/detail_overview_tx"
             android:layout_marginStart="20dp"
@@ -207,7 +238,7 @@
             android:text="@string/overview"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detail_voteCount_2" />
+            app:layout_constraintTop_toBottomOf="@+id/detail_fav_tv" />
 
         <TextView
             android:id="@+id/detail_overview_tv"

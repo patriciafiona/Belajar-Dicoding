@@ -56,7 +56,8 @@
     <string name="all_season">All Season</string>
     <string name="search_by_title">Search by Title</string>
     <string name="search_m_or_t">Search a Movie or TV Show</string>
-    <string name="no_internet_connection">No Internet Connection</string>
     <string name="exit">Exit</string>
     <string name="check_connection">Check Connection</string>
+    <string name="favourite">Favourite</string>
+    <string name="save_to_my_list">Save To My List</string>
 </resources>

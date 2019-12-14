@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.like.LikeButton;
 import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.R;
 import com.path_studio.submission4.ViewModels.MovieViewModel;
@@ -45,6 +46,9 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
     private TextView mDetail01, mDetail02, mDetail03;
     private TextView mDetail04, mDetail05, mDetail06, mDetail07;
+
+    private TextView mFavourite, mSaveTxt;
+    private LikeButton mLikeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +90,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mT01 = findViewById(R.id.textView3);
         mT02 = findViewById(R.id.textView2);
         mT03 = findViewById(R.id.textView4);
+
+        //bagian Favourite
+        mFavourite = findViewById(R.id.textView13) ;
+        mSaveTxt = findViewById(R.id.detail_fav_movie) ;
+        mLikeButton = findViewById(R.id.fav_movie) ;
 
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
@@ -223,6 +232,10 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mT01.setVisibility(View.GONE);
         mT02.setVisibility(View.GONE);
         mT03.setVisibility(View.GONE);
+
+        mFavourite.setVisibility(View.GONE);
+        mSaveTxt.setVisibility(View.GONE);
+        mLikeButton.setVisibility(View.GONE);
     }
 
     private void seeAll(){
@@ -253,6 +266,10 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mT01.setVisibility(View.VISIBLE);
         mT02.setVisibility(View.VISIBLE);
         mT03.setVisibility(View.VISIBLE);
+
+        mFavourite.setVisibility(View.VISIBLE);
+        mSaveTxt.setVisibility(View.VISIBLE);
+        mLikeButton.setVisibility(View.VISIBLE);
     }
 
     private void showLoading(Boolean state) {

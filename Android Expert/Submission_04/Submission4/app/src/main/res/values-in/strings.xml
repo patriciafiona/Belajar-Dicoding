@@ -35,7 +35,7 @@
     <string name="original_language">Bahasa Asli</string>
     <string name="popularity">Popularitas</string>
     <string name="revenue">Pendapatan</string>
-    <string name="vote_count_text">Jumlah Pemilih</string>
+    <string name="vote_count_text">Pemilih</string>
     <string name="age_rating">Rating Usia</string>
     <string name="no_translate">(Tidak ada terjemahan bahasa Indonesia)</string>
 
@@ -57,5 +57,8 @@
     <string name="all_season">Semua Season</string>
     <string name="search_by_title">Pencarian Berdasarkan Judul</string>
     <string name="search_m_or_t">Pencarian Film Atau Acara TV</string>
-    <string name="no_internet_connection">Tidak Ada Akses Internet</string>
+    <string name="exit">Exit</string>
+    <string name="check_connection">Check Connection</string>
+    <string name="favourite">Favorit</string>
+    <string name="save_to_my_list">Simpan Ke Daftar</string>
 </resources>

@@ -96,6 +96,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="detail_fav_text">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
     <style name="detail_trailer_tx">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>

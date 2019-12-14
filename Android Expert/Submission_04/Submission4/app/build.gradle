@@ -29,12 +29,13 @@ dependencies {
 
     //tambahan
     implementation 'com.github.mancj:MaterialSearchBar:0.8.2'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc02'
-    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0-rc02'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0-rc03'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.2.0-rc03'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'de.hdodenhof:circleimageview:3.0.1'
     implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
     testImplementation 'junit:junit:4.12'
     //end
 

@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.like.LikeButton;
 import com.path_studio.submission4.Models.TVItems;
 import com.path_studio.submission4.R;
 import com.path_studio.submission4.ViewModels.TVShowViewModel;
@@ -54,6 +55,9 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private TextView mDetail11, mDetail12, mDetail13;
     private TextView mDetail21, mDetail22, mDetail23, mDetail24;
     private TextView mFADText, mLADText;
+
+    private TextView mFavourite, mSaveTxt;
+    private LikeButton mLikeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +130,11 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
 
         mFADText = findViewById(R.id.textView3);
         mLADText = findViewById(R.id.textView4);
+
+        //bagian fav tv show
+        mFavourite = findViewById(R.id.textView21) ;
+        mSaveTxt = findViewById(R.id.detail_fav_tv) ;
+        mLikeButton = findViewById(R.id.fav_tv) ;
 
         //current seasson detail
         mCurrentSeassonPoster = findViewById(R.id.detail_current_seasson_poster);
@@ -323,6 +332,10 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mLastAir.setVisibility(View.GONE);
         mFADText.setVisibility(View.GONE);
         mLADText.setVisibility(View.GONE);
+
+        mFavourite.setVisibility(View.GONE);
+        mSaveTxt.setVisibility(View.GONE);
+        mLikeButton.setVisibility(View.GONE);
     }
 
     private void seeAll(){
@@ -357,6 +370,10 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         mLastAir.setVisibility(View.VISIBLE);
         mFADText.setVisibility(View.VISIBLE);
         mLADText.setVisibility(View.VISIBLE);
+
+        mFavourite.setVisibility(View.VISIBLE);
+        mSaveTxt.setVisibility(View.VISIBLE);
+        mLikeButton.setVisibility(View.VISIBLE);
     }
 
     @Override
