@@ -74,7 +74,15 @@ public class Favourite implements Parcelable {
         dest.writeString(this.poster);
         dest.writeString(this.backdrop);
     }
-    public Favourite() {}
+
+    //constructor
+    public Favourite(int id, String title, String description, String poster, double ratting) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.poster = poster;
+        this.ratting = ratting;
+    }
 
     private Favourite(Parcel in) {
         this.id = in.readInt();

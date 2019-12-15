@@ -8,13 +8,12 @@ public class DatabaseContract {
 
     static String TABLE_NAME = "fav_movie";
 
-    static final class FavouriteColumns implements BaseColumns {
-        static String TITLE = "title";
-        static String DESCRIPTION = "description";
-        static String RATTING = "ratting";
-        static String POSTER = "poster";
-        static String TYPE = "type";
-        static String BACKDROP = "backdrop";
+    public static final class FavouriteColumns implements BaseColumns {
+        public static String TITLE = "title";
+        public static String DESCRIPTION = "description";
+        public static String RATTING = "ratting";
+        public static String POSTER = "poster";
+        public static String TYPE = "type";
     }
 
 }
