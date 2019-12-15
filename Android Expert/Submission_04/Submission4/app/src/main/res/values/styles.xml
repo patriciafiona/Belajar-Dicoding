@@ -196,6 +196,10 @@
         <item name="colorControlActivated">@color/colorYellow</item>
     </style>
 
+    <style name="MineCustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">8sp</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">true</item>
         <item name="windowNoTitle">false</item>

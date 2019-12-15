@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.path_studio.submission4.Fragments.FavouriteFragment;
 import com.path_studio.submission4.Fragments.ContactFragment;
 import com.path_studio.submission4.Fragments.HomeFragment;
 import com.path_studio.submission4.Fragments.MovieFragment;
@@ -30,7 +31,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
             R.string.tab_text_1,
             R.string.tab_text_2,
             R.string.tab_text_3,
-            R.string.tab_text_4
+            R.string.tab_text_4,
+            R.string.tab_text_5
+
     };
     @Override
     public Fragment getItem(int position) {
@@ -46,6 +49,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new TvShowFragment();
                 break;
             case 3:
+                fragment = new FavouriteFragment();
+                break;
+            case 4:
                 fragment = new ContactFragment();
                 break;
         }
@@ -59,7 +65,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public int getCount() {
-        return 4;
+        return 5;
     }
 
 }

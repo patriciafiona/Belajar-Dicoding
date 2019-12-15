@@ -6,7 +6,8 @@
     <string name="tab_text_1">Beranda</string>
     <string name="tab_text_2">Film</string>
     <string name="tab_text_3">Acara TV</string>
-    <string name="tab_text_4">Hubungi Kami</string>
+    <string name="tab_text_4">Favorit</string>
+    <string name="tab_text_5">Kontak</string>
 
     <!--Menu Title-->
     <string name="menu_1">Pengaturan</string>

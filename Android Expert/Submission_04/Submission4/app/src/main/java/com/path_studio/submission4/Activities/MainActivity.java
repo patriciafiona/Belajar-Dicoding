@@ -15,8 +15,19 @@ import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 public class MainActivity extends AppCompatActivity {
+
+    private TabLayout tabLayout;
+    private int[] tabIcons = {
+            R.drawable.ic_home_16dp,
+            R.drawable.ic_movie_16dp,
+            R.drawable.ic_tv__16dp,
+            R.drawable.ic_favorite_16dp,
+            R.drawable.ic_contacts_16dp
+    };
+
 
     private ViewPager viewPager;
     private boolean doubleBackToExitPressedOnce = false;
@@ -33,7 +44,19 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
+
         getSupportActionBar().setElevation(0);
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
+        tabLayout.getTabAt(4).setIcon(tabIcons[4]);
     }
 
     @Override
