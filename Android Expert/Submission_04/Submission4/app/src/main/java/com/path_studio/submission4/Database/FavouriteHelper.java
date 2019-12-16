@@ -17,6 +17,9 @@ public class FavouriteHelper {
     private static FavouriteHelper INSTANCE;
     private static SQLiteDatabase database;
 
+    private static final String DATA_ID_COl = "data_id";
+    private boolean status_data = false;
+
     private FavouriteHelper(Context context) {
         dataBaseHelper = new DatabaseHelper(context);
     }
@@ -69,7 +72,21 @@ public class FavouriteHelper {
     }
 
     public int deleteById(String id) {
-        return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
+        return database.delete(DATABASE_TABLE, " data_id = ?", new String[]{id});
+    }
+
+    public boolean selectById(int dataId){
+        Cursor c = database.rawQuery("select * from " + DATABASE_TABLE + " where " + DATA_ID_COl + "='" + dataId + "'" , null);
+
+        if (!(c.moveToFirst())) {
+            status_data = false;
+        }else{
+            status_data = true;
+        }
+
+        c.close();
+
+        return status_data;
     }
 
 }

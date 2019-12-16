@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_fav_movie, container, false);
     }
@@ -66,18 +68,25 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
         favouriteHelper.open();
 
-        if (savedInstanceState == null) {
-            // proses ambil data
-            new LoadMovieAsync(favouriteHelper, this).execute();
-        } else {
+        if (savedInstanceState != null) {
+            Log.e("Savestateinstance","ada");
             ArrayList<Favourite> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
             if (list != null) {
                 adapter.setListNotes(list);
-                EmptyAlert.setVisibility(View.INVISIBLE);
-            }else{
-                EmptyAlert.setVisibility(View.VISIBLE);
             }
+        } else {
+            // proses ambil data
+            Log.e("Savestateinstance","null");
+            new LoadMovieAsync(favouriteHelper, this).execute();
+
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.e("Savestateinstance","Data disimpan");
+        outState.putParcelableArrayList(EXTRA_STATE, adapter.getListNotes());
     }
 
     @Override
@@ -111,10 +120,11 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
     }
 
     private static class LoadMovieAsync extends AsyncTask<Void, Void, ArrayList<Favourite>> {
-        private final WeakReference<FavouriteHelper> weakNoteHelper;
+        private final WeakReference<FavouriteHelper> weakfavouriteHelper;
         private final WeakReference<LoadMoviesCallback> weakCallback;
-        private LoadMovieAsync(FavouriteHelper noteHelper, LoadMoviesCallback callback) {
-            weakNoteHelper = new WeakReference<>(noteHelper);
+        
+        private LoadMovieAsync(FavouriteHelper favouriteHelper, LoadMoviesCallback callback) {
+            weakfavouriteHelper = new WeakReference<>(favouriteHelper);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -126,7 +136,7 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
 
         @Override
         protected ArrayList<Favourite> doInBackground(Void... voids) {
-            Cursor dataCursor = weakNoteHelper.get().queryAll();
+            Cursor dataCursor = weakfavouriteHelper.get().queryAll();
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 

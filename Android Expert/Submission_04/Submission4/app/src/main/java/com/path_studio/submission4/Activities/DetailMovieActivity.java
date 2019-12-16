@@ -18,7 +18,6 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.path_studio.submission4.Database.DatabaseCheck;
 import com.path_studio.submission4.Database.FavouriteHelper;
 import com.path_studio.submission4.Entity.Favourite;
 import com.path_studio.submission4.Models.MovieItems;
@@ -129,7 +128,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         movieViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(this.getApplication())).get(MovieViewModel.class);
 
-        // recovering the instance state
         if (savedInstanceState == null) {
             movieViewModel.setMovie(language, id_movie);
         }
@@ -155,6 +153,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                     showLoading(false);
                     seeAll();
 
+                    favouriteHelper.open();
                     database(movieItems);
 
                 }
@@ -164,8 +163,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void database(ArrayList<MovieItems> movieItems){
-        //Inisiasi Database Check, ADD, Delete
-        DatabaseCheck databaseCheckAddDelete = new DatabaseCheck(DetailMovieActivity.this);
 
         //get movie id
         ArrayList<MovieItems> data = movieItems;
@@ -173,7 +170,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         int movie_id = items.getId();
 
         //check apakah movie sudah favorit atau belum
-        status_movie_fav = databaseCheckAddDelete.movieIsFavourite(movie_id);
+        status_movie_fav = favouriteHelper.selectById(movie_id);
         if(status_movie_fav){
             //sudah favorit, hati merah
             fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
@@ -190,20 +187,26 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                 if(status_movie_fav){
                     //sudah favorit, ubah ke unfavorit
                     status_movie_fav = false;
-                    showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
-                    fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+
+                    //delete datanya
+                    deleteFavourite(items, view);
+
                 }else{
                     //belum favorit, ubah ke favorit
                     status_movie_fav = true;
 
                     //insert datanya
-                    favouriteHelper.open();
                     insertFavourite(items, view);
-                    favouriteHelper.close();
 
                 }
             }
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        favouriteHelper.close();
     }
 
     private void insertFavourite(MovieItems items, View view){
@@ -230,7 +233,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         if (result > 0) {
             favourite.setId((int) result);
             setResult(RESULT_ADD, intent);
-            finish();
 
             //berhasil, maka ganti warna hatinya
             showSnackbarMessage(getResources().getString(R.string.add_favourite), view);
@@ -238,6 +240,24 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         } else {
             Toast.makeText(DetailMovieActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void deleteFavourite(MovieItems items, View view){
+
+        long result = favouriteHelper.deleteById(String.valueOf(items.getId()));
+
+        if (result > 0) {
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_POSITION, position);
+            setResult(RESULT_DELETE, intent);
+
+            showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+
+        } else {
+            Toast.makeText(DetailMovieActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
         }
 
     }

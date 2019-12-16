@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.submission4.CustomOnItemClickListener;
 import com.path_studio.submission4.Entity.Favourite;
+import com.path_studio.submission4.Fragments.MovieFragment;
 import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.R;
 
@@ -113,12 +114,11 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
             holder.cvNote.setOnClickListener(new CustomOnItemClickListener(position, new CustomOnItemClickListener.OnItemClickCallback() {
                 @Override
                 public void onItemClicked(View view, int position) {
-                    /*
-                    Intent intent = new Intent(activity, FavAddUpdateActivity.class);
-                    intent.putExtra(FavAddUpdateActivity.EXTRA_POSITION, position);
-                    intent.putExtra(FavAddUpdateActivity.EXTRA_NOTE, listNotes.get(position));
-                    activity.startActivityForResult(intent, FavAddUpdateActivity.REQUEST_UPDATE);
-                     */
+
+                    int data_id = listNotes.get(position).getData_id();
+
+                    //ke halaman detail movie
+                    MovieFragment.getInstance().go_to_detail(data_id);
                 }
             }));
         }
