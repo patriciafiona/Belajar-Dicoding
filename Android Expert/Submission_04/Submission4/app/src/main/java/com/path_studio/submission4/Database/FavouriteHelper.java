@@ -68,10 +68,6 @@ public class FavouriteHelper {
         return database.insert(DATABASE_TABLE, null, values);
     }
 
-    public int update(String id, ContentValues values) {
-        return database.update(DATABASE_TABLE, values, _ID + " = ?", new String[]{id});
-    }
-
     public int deleteById(String id) {
         return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
     }

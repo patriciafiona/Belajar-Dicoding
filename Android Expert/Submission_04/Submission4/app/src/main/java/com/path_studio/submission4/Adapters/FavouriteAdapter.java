@@ -99,6 +99,12 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
             holder.tvTitle.setText(listNotes.get(position).getTitle());
             holder.tvDescription.setText(listNotes.get(position).getDescription());
 
+            //set ratting bar
+            double tampung = listNotes.get(position).getRatting();
+            float hasil_ratting = ((float)tampung / 2);
+
+            tvRatting.setRating(hasil_ratting);
+
             Glide.with(itemView.getContext())
                     .load(listNotes.get(position).getPoster())
                     .apply(new RequestOptions().override(200, 300))

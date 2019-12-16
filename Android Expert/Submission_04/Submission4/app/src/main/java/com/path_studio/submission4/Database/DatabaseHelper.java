@@ -20,13 +20,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
+                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_NAME,
             DatabaseContract.FavouriteColumns._ID,
+            DatabaseContract.FavouriteColumns.DATA_ID,
             DatabaseContract.FavouriteColumns.TYPE,
             DatabaseContract.FavouriteColumns.TITLE,
             DatabaseContract.FavouriteColumns.DESCRIPTION,
-            DatabaseContract.FavouriteColumns.RATTING
+            DatabaseContract.FavouriteColumns.RATTING,
+            DatabaseContract.FavouriteColumns.POSTER
     );
 
     public DatabaseHelper(Context context) {

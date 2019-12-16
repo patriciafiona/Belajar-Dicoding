@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +12,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.path_studio.submission4.Database.DatabaseCheck;
+import com.path_studio.submission4.Database.FavouriteHelper;
+import com.path_studio.submission4.Entity.Favourite;
 import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.R;
 import com.path_studio.submission4.ViewModels.MovieViewModel;
@@ -26,6 +32,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.StringJoiner;
+
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DATA_ID;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DESCRIPTION;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.POSTER;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TYPE;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -47,7 +60,26 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     private TextView mDetail01, mDetail02, mDetail03;
     private TextView mDetail04, mDetail05, mDetail06, mDetail07;
 
+    private boolean status_movie_fav = false;
+
+    private MovieItems items = new MovieItems();
+
     private FloatingActionButton fabAddMovie;
+
+    private Favourite favourite;
+    private FavouriteHelper favouriteHelper;
+    public static final String EXTRA_FAVOURITE = "extra_favourite";
+    public static final String EXTRA_POSITION = "extra_position";
+    public static final int REQUEST_ADD = 100;
+    public static final int RESULT_ADD = 101;
+    public static final int REQUEST_UPDATE = 200;
+    public static final int RESULT_UPDATE = 201;
+    public static final int RESULT_DELETE = 301;
+    private final int ALERT_DIALOG_CLOSE = 10;
+    private final int ALERT_DIALOG_DELETE = 20;
+
+    private int position;
+    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,12 +123,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         mT03 = findViewById(R.id.textView4);
 
         fabAddMovie = findViewById(R.id.fab_add_movie);
-        fabAddMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //check apakah sudah favorit atau belum
-            }
-        });
 
         //get data detail from API
         String language = getResources().getString(R.string.language_code);
@@ -111,6 +137,16 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         showLoading(true);
         hideAll();
 
+        favouriteHelper = FavouriteHelper.getInstance(getApplicationContext());
+        favourite = getIntent().getParcelableExtra(EXTRA_FAVOURITE);
+
+        if (favourite != null) {
+            position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+            isEdit = true;
+        } else {
+            favourite = new Favourite();
+        }
+
         movieViewModel.getMovies().observe(this, new Observer<ArrayList<MovieItems>>() {
             @Override
             public void onChanged(ArrayList<MovieItems> movieItems) {
@@ -118,10 +154,96 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                     setDataUI(movieItems);
                     showLoading(false);
                     seeAll();
+
+                    database(movieItems);
+
                 }
             }
         });
 
+    }
+
+    private void database(ArrayList<MovieItems> movieItems){
+        //Inisiasi Database Check, ADD, Delete
+        DatabaseCheck databaseCheckAddDelete = new DatabaseCheck(DetailMovieActivity.this);
+
+        //get movie id
+        ArrayList<MovieItems> data = movieItems;
+        items = mData.get(0);
+        int movie_id = items.getId();
+
+        //check apakah movie sudah favorit atau belum
+        status_movie_fav = databaseCheckAddDelete.movieIsFavourite(movie_id);
+        if(status_movie_fav){
+            //sudah favorit, hati merah
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
+        }else{
+            //belum favorit, hati grey
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+        }
+
+        //set onclicknya
+        fabAddMovie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check apakah sudah favorit atau belum
+                if(status_movie_fav){
+                    //sudah favorit, ubah ke unfavorit
+                    status_movie_fav = false;
+                    showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
+                    fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+                }else{
+                    //belum favorit, ubah ke favorit
+                    status_movie_fav = true;
+
+                    //insert datanya
+                    favouriteHelper.open();
+                    insertFavourite(items, view);
+                    favouriteHelper.close();
+
+                }
+            }
+        });
+    }
+
+    private void insertFavourite(MovieItems items, View view){
+        favourite.setData_id(items.getId());
+        favourite.setTitle(items.getName());
+        favourite.setDescription(items.getDescription());
+        favourite.setPoster(items.getPoster());
+        favourite.setRatting(items.getRatting());
+        favourite.setType(1); //1 = Movie
+
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_FAVOURITE, favourite);
+        intent.putExtra(EXTRA_POSITION, position);
+
+        ContentValues values = new ContentValues();
+        values.put(TITLE, items.getName());
+        values.put(DESCRIPTION, items.getDescription());
+        values.put(TYPE, 1);
+        values.put(DATA_ID, items.getId());
+        values.put(RATTING, items.getRatting());
+        values.put(POSTER, items.getPoster());
+        long result = favouriteHelper.insert(values);
+
+        if (result > 0) {
+            favourite.setId((int) result);
+            setResult(RESULT_ADD, intent);
+            finish();
+
+            //berhasil, maka ganti warna hatinya
+            showSnackbarMessage(getResources().getString(R.string.add_favourite), view);
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
+
+        } else {
+            Toast.makeText(DetailMovieActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void showSnackbarMessage(String message, View view) {
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
     }
 
     private void setDataUI(ArrayList<MovieItems> items){

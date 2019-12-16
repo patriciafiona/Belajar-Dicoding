@@ -67,4 +67,7 @@
     <string name="you_don_t_have_favourite_tv">Kamu tidak punya Acara TV Favorit</string>
     <string name="add">Tambah</string>
 
+    <string name="add_favourite">Favorit Ditambahkan</string>
+    <string name="unfavourite">Favorit Dibatalkan</string>
+
 </resources>

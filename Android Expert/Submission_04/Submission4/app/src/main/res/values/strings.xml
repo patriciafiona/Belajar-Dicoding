@@ -65,4 +65,8 @@
     <string name="you_don_t_have_favourite_movie">You don\'t have favourite Movie</string>
     <string name="you_don_t_have_favourite_tv">You don\'t have favourite TV Show</string>
     <string name="add">Add</string>
+
+    <string name="add_favourite">Favourite Added</string>
+    <string name="unfavourite">Unfavourite</string>
+
 </resources>

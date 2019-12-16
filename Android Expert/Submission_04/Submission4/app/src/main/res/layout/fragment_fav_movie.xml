@@ -48,8 +48,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fav_movie"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:listitem="@layout/item_favourite" />
+        tools:listitem="@layout/item_favourite"
+        android:layout_marginBottom="60dp"/>
 
 </FrameLayout>

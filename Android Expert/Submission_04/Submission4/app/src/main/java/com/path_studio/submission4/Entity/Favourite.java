@@ -4,21 +4,13 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Favourite implements Parcelable {
-    private String backdrop;
     private String poster;
     private int id;
+    private int data_id;
     private int type;  /* 1 = Movie; 2 = TV Show*/
     private String title;
     private String description;
     private double ratting;
-
-    public String getBackdrop() {
-        return backdrop;
-    }
-
-    public void setBackdrop(String backdrop) {
-        this.backdrop = backdrop;
-    }
 
     public String getPoster() {
         return poster;
@@ -60,6 +52,22 @@ public class Favourite implements Parcelable {
         this.ratting = ratting;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getData_id() {
+        return data_id;
+    }
+
+    public void setData_id(int data_id) {
+        this.data_id = data_id;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -68,30 +76,33 @@ public class Favourite implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
+        dest.writeInt(this.data_id);
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeDouble(this.ratting);
         dest.writeString(this.poster);
-        dest.writeString(this.backdrop);
     }
 
     //constructor
-    public Favourite(int id, String title, String description, String poster, double ratting) {
+    public Favourite(int id, int data_id, String title, String description, String poster, double ratting) {
         this.id = id;
+        this.data_id = data_id;
         this.title = title;
         this.description = description;
         this.poster = poster;
         this.ratting = ratting;
     }
 
+    public Favourite() {}
+
     private Favourite(Parcel in) {
         this.id = in.readInt();
+        this.data_id = in.readInt();
         this.title = in.readString();
         this.description = in.readString();
         this.ratting = in.readDouble();
 
         this.poster = in.readString();
-        this.backdrop = in.readString();
     }
     public static final Parcelable.Creator<Favourite> CREATOR = new Parcelable.Creator<Favourite>() {
         @Override
@@ -104,11 +115,4 @@ public class Favourite implements Parcelable {
         }
     };
 
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 }
