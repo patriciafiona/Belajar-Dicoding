@@ -71,14 +71,9 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     public static final String EXTRA_POSITION = "extra_position";
     public static final int REQUEST_ADD = 100;
     public static final int RESULT_ADD = 101;
-    public static final int REQUEST_UPDATE = 200;
-    public static final int RESULT_UPDATE = 201;
     public static final int RESULT_DELETE = 301;
-    private final int ALERT_DIALOG_CLOSE = 10;
-    private final int ALERT_DIALOG_DELETE = 20;
 
     private int position;
-    private boolean isEdit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +135,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
         if (favourite != null) {
             position = getIntent().getIntExtra(EXTRA_POSITION, 0);
-            isEdit = true;
         } else {
             favourite = new Favourite();
         }

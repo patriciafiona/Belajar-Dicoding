@@ -1,10 +1,6 @@
 package com.path_studio.submission4.Activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,9 +10,15 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.path_studio.submission4.Database.FavouriteHelper;
+import com.path_studio.submission4.Entity.Favourite;
+import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.Models.TVItems;
 import com.path_studio.submission4.R;
 import com.path_studio.submission4.ViewModels.TVShowViewModel;
@@ -27,6 +29,18 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.StringJoiner;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DATA_ID;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DESCRIPTION;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.POSTER;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TYPE;
 
 public class DetailTVActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -55,6 +69,20 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private TextView mDetail21, mDetail22, mDetail23, mDetail24;
     private TextView mFADText, mLADText;
 
+    private FloatingActionButton fabAddTVShow;
+
+    private Favourite favourite;
+    private FavouriteHelper favouriteHelper;
+    public static final String EXTRA_FAVOURITE = "extra_favourite";
+    public static final String EXTRA_POSITION = "extra_position";
+    public static final int REQUEST_ADD = 100;
+    public static final int RESULT_ADD = 101;
+    public static final int RESULT_DELETE = 301;
+    private TVItems items = new TVItems();
+    private boolean status_tv_fav = false;
+
+    private int position;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +103,15 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         showLoading(true);
         hideAll();
 
+        favouriteHelper = FavouriteHelper.getInstance(getApplicationContext());
+        favourite = getIntent().getParcelableExtra(EXTRA_FAVOURITE);
+
+        if (favourite != null) {
+            position = getIntent().getIntExtra(EXTRA_POSITION, 0);
+        } else {
+            favourite = new Favourite();
+        }
+
         tvShowViewModel.getTVShow().observe(this, new Observer<ArrayList<TVItems>>() {
             @Override
             public void onChanged(ArrayList<TVItems> tvItems) {
@@ -82,10 +119,117 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
                     setDataUI(tvItems);
                     showLoading(false);
                     seeAll();
+
+                    favouriteHelper.open();
+                    database(tvItems);
                 }
             }
         });
 
+    }
+
+    private void database(ArrayList<TVItems> movieItems){
+
+        //get movie id
+        ArrayList<TVItems> data = movieItems;
+        items = mData.get(0);
+        int tv_id = items.getId_TV();
+
+        //check apakah movie sudah favorit atau belum
+        status_tv_fav = favouriteHelper.selectById(tv_id);
+        if(status_tv_fav){
+            //sudah favorit, hati merah
+            fabAddTVShow.setImageResource(R.drawable.ic_favorite_red_24dp);
+        }else{
+            //belum favorit, hati grey
+            fabAddTVShow.setImageResource(R.drawable.ic_favorite_gray_24dp);
+        }
+
+        //set onclicknya
+        fabAddTVShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //check apakah sudah favorit atau belum
+                if(status_tv_fav){
+                    //sudah favorit, ubah ke unfavorit
+                    status_tv_fav = false;
+
+                    //delete datanya
+                    deleteFavourite(items, view);
+
+                }else{
+                    //belum favorit, ubah ke favorit
+                    status_tv_fav = true;
+
+                    //insert datanya
+                    insertFavourite(items, view);
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        favouriteHelper.close();
+    }
+
+    private void insertFavourite(TVItems items, View view){
+        favourite.setData_id(items.getId_TV());
+        favourite.setTitle(items.getTitle());
+        favourite.setDescription(items.getDescription());
+        favourite.setPoster(items.getPoster());
+        favourite.setRatting(items.getRatting());
+        favourite.setType(2); //2 = TV Show
+
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_FAVOURITE, favourite);
+        intent.putExtra(EXTRA_POSITION, position);
+
+        ContentValues values = new ContentValues();
+        values.put(TITLE, items.getTitle());
+        values.put(DESCRIPTION, items.getDescription());
+        values.put(TYPE, 2);
+        values.put(DATA_ID, items.getId_TV());
+        values.put(RATTING, items.getRatting());
+        values.put(POSTER, items.getPoster());
+        long result = favouriteHelper.insert(values);
+
+        if (result > 0) {
+            favourite.setId((int) result);
+            setResult(RESULT_ADD, intent);
+
+            //berhasil, maka ganti warna hatinya
+            showSnackbarMessage(getResources().getString(R.string.add_favourite), view);
+            fabAddTVShow.setImageResource(R.drawable.ic_favorite_red_24dp);
+
+        } else {
+            Toast.makeText(DetailTVActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void deleteFavourite(TVItems items, View view){
+
+        long result = favouriteHelper.deleteById(String.valueOf(items.getId_TV()));
+
+        if (result > 0) {
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_POSITION, position);
+            setResult(RESULT_DELETE, intent);
+
+            showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
+            fabAddTVShow.setImageResource(R.drawable.ic_favorite_gray_24dp);
+
+        } else {
+            Toast.makeText(DetailTVActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void showSnackbarMessage(String message, View view) {
+        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
     }
 
     private void initiate(){
@@ -136,6 +280,8 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
 
         mSeeAllSeasson.setOnClickListener(this);
         mLinkHomepage.setOnClickListener(this);
+
+        fabAddTVShow = findViewById(R.id.fab_add_tv);
     }
 
     private void setDataUI(ArrayList<TVItems> items){

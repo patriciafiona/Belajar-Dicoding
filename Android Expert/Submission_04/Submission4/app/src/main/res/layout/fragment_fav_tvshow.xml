@@ -36,7 +36,7 @@
             android:text="@string/you_don_t_have_favourite_tv"/>
 
         <Button
-            android:id="@+id/add_fav_movie"
+            android:id="@+id/add_fav_tv"
             android:layout_gravity="center"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
