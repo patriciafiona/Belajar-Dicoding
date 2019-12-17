@@ -99,7 +99,8 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
         void bind(int position, final FavouriteViewHolder holder) {
             holder.tvTitle.setText(listNotes.get(position).getTitle());
-            holder.tvDescription.setText(listNotes.get(position).getDescription());
+
+            holder.tvDescription.setText(activity.getResources().getString(R.string.see_detail));
 
             //set ratting bar
             double tampung = listNotes.get(position).getRatting();

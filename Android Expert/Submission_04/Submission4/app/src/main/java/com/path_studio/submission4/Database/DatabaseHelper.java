@@ -21,14 +21,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_NAME_01,
             DatabaseContract.FavouriteColumns._ID,
             DatabaseContract.FavouriteColumns.DATA_ID,
             DatabaseContract.FavouriteColumns.TYPE,
             DatabaseContract.FavouriteColumns.TITLE,
-            DatabaseContract.FavouriteColumns.DESCRIPTION,
             DatabaseContract.FavouriteColumns.RATTING,
             DatabaseContract.FavouriteColumns.POSTER
     );
@@ -39,14 +37,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL," +
-                    " %s TEXT NOT NULL," +
                     " %s TEXT NOT NULL)",
             DatabaseContract.TABLE_NAME_02,
             DatabaseContract.FavouriteColumns._ID,
             DatabaseContract.FavouriteColumns.DATA_ID,
             DatabaseContract.FavouriteColumns.TYPE,
             DatabaseContract.FavouriteColumns.TITLE,
-            DatabaseContract.FavouriteColumns.DESCRIPTION,
             DatabaseContract.FavouriteColumns.RATTING,
             DatabaseContract.FavouriteColumns.POSTER
     );

@@ -35,7 +35,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DATA_ID;
-import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DESCRIPTION;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.POSTER;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
@@ -178,7 +177,6 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
     private void insertFavourite(TVItems items, View view){
         favourite.setData_id(items.getId_TV());
         favourite.setTitle(items.getTitle());
-        favourite.setDescription(items.getDescription());
         favourite.setPoster(items.getPoster());
         favourite.setRatting(items.getRatting());
         favourite.setType("tv_show");
@@ -189,7 +187,6 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
 
         ContentValues values = new ContentValues();
         values.put(TITLE, items.getTitle());
-        values.put(DESCRIPTION, items.getDescription());
         values.put(TYPE, "tv_show");
         values.put(DATA_ID, items.getId_TV());
         values.put(RATTING, items.getRatting());
@@ -205,7 +202,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
             fabAddTVShow.setImageResource(R.drawable.ic_favorite_red_24dp);
 
         } else {
-            Toast.makeText(DetailTVActivity.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DetailTVActivity.this, getResources().getString(R.string.failed_add_data), Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -223,7 +220,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
             fabAddTVShow.setImageResource(R.drawable.ic_favorite_gray_24dp);
 
         } else {
-            Toast.makeText(DetailTVActivity.this, "Gagal menghapus data", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DetailTVActivity.this, getResources().getString(R.string.failed_remove_data), Toast.LENGTH_SHORT).show();
         }
 
     }

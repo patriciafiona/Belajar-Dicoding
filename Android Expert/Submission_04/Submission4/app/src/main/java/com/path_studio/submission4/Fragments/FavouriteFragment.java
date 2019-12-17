@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.path_studio.submission4.Database.FavouriteHelper;
 import com.path_studio.submission4.R;
 
 
@@ -25,6 +26,7 @@ import com.path_studio.submission4.R;
  */
 public class FavouriteFragment extends Fragment {
 
+    private FavouriteHelper favouriteHelper;
 
     public FavouriteFragment() {
         // Required empty public constructor
@@ -49,6 +51,15 @@ public class FavouriteFragment extends Fragment {
         NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController((AppCompatActivity) getActivity(), navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
+        favouriteHelper.open();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        favouriteHelper.close();
     }
 
 }

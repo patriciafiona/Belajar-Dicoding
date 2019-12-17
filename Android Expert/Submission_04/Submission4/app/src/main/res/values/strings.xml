@@ -69,4 +69,8 @@
     <string name="add_favourite">Favourite Added</string>
     <string name="unfavourite">Unfavourite</string>
 
+    <string name="see_detail">See Detail…</string>
+    <string name="failed_add_data">Failed add data</string>
+    <string name="failed_remove_data">Failed remove data</string>
+
 </resources>

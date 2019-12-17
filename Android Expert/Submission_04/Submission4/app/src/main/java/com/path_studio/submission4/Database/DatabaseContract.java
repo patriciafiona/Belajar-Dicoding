@@ -12,7 +12,6 @@ public class DatabaseContract {
     public static final class FavouriteColumns implements BaseColumns {
         public static String TITLE = "title";
         public static String DATA_ID = "data_id";
-        public static String DESCRIPTION = "description";
         public static String RATTING = "ratting";
         public static String POSTER = "poster";
         public static String TYPE = "type";

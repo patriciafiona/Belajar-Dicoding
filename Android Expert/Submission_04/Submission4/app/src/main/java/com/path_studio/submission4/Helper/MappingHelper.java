@@ -18,11 +18,10 @@ public class MappingHelper {
 
             String type = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TYPE));
             String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TITLE));
-            String description = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DESCRIPTION));
             String poster = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.POSTER));
             double ratting = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.RATTING));
 
-            favouritesList.add(new Favourite(id, data_id, type, title, description, poster, ratting));
+            favouritesList.add(new Favourite(id, data_id, type, title, poster, ratting));
         }
         return favouritesList;
     }

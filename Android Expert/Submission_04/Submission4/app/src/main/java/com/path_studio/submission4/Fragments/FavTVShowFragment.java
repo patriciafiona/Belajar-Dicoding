@@ -67,27 +67,9 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
         AddFavTV.setOnClickListener(this);
 
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
-        favouriteHelper.open();
 
-        if (savedInstanceState != null) {
-            Log.e("Savestateinstance","ada");
-            ArrayList<Favourite> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
-            if (list != null) {
-                adapter.setListNotes(list);
-            }
-        } else {
-            // proses ambil data
-            Log.e("Savestateinstance","null");
-            new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
+        new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
 
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.e("Savestateinstance","Data disimpan");
-        outState.putParcelableArrayList(EXTRA_STATE, adapter.getListNotes());
     }
 
     @Override
@@ -156,7 +138,6 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        favouriteHelper.close();
     }
 
 }

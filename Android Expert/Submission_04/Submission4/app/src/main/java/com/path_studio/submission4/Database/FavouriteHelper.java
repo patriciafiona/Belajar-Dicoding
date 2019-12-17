@@ -17,7 +17,7 @@ public class FavouriteHelper {
     private static final String DATABASE_TABLE_TV = TABLE_NAME_02;
     private static DatabaseHelper dataBaseHelper;
     private static FavouriteHelper INSTANCE;
-    private static SQLiteDatabase database;
+    public static SQLiteDatabase database;
 
     private static final String DATA_ID_COl = "data_id";
     private boolean status_data = false;

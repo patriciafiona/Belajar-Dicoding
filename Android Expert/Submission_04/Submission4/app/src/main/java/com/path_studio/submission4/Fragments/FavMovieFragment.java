@@ -48,12 +48,8 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav_movie, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_fav_movie, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EmptyAlert = view.findViewById(R.id.alert_empty_fav_movie);
         AddFavMovie = view.findViewById(R.id.add_fav_movie);
         progressBar = view.findViewById(R.id.progressbar);
@@ -66,27 +62,11 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
         AddFavMovie.setOnClickListener(this);
 
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
-        favouriteHelper.open();
 
-        if (savedInstanceState != null) {
-            Log.e("Savestateinstance","ada");
-            ArrayList<Favourite> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
-            if (list != null) {
-                adapter.setListNotes(list);
-            }
-        } else {
-            // proses ambil data
-            Log.e("Savestateinstance","null");
-            new LoadMovieAsync(favouriteHelper, this).execute();
+        new LoadMovieAsync(favouriteHelper, this).execute();
 
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Log.e("Savestateinstance","Data disimpan");
-        outState.putParcelableArrayList(EXTRA_STATE, adapter.getListNotes());
+        // Inflate the layout for this fragment
+        return view;
     }
 
     @Override
@@ -155,7 +135,6 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
     @Override
     public void onDestroy() {
         super.onDestroy();
-        favouriteHelper.close();
     }
 
 }

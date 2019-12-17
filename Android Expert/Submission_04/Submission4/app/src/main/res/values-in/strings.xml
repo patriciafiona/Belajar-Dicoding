@@ -70,4 +70,8 @@
     <string name="add_favourite">Favorit Ditambahkan</string>
     <string name="unfavourite">Favorit Dibatalkan</string>
 
+    <string name="see_detail">Lihat Detail…</string>
+    <string name="failed_add_data">Gagal menambah data</string>
+    <string name="failed_remove_data">Gagal menghapus data</string>
+
 </resources>

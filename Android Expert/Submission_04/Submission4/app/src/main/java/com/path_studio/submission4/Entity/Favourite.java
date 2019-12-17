@@ -9,7 +9,6 @@ public class Favourite implements Parcelable {
     private int data_id;
     private String type;
     private String title;
-    private String description;
     private double ratting;
 
     public String getPoster() {
@@ -34,14 +33,6 @@ public class Favourite implements Parcelable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public double getRatting() {
@@ -79,18 +70,16 @@ public class Favourite implements Parcelable {
         dest.writeInt(this.data_id);
         dest.writeString(this.type);
         dest.writeString(this.title);
-        dest.writeString(this.description);
         dest.writeDouble(this.ratting);
         dest.writeString(this.poster);
     }
 
     //constructor
-    public Favourite(int id, int data_id, String type, String title, String description, String poster, double ratting) {
+    public Favourite(int id, int data_id, String type, String title, String poster, double ratting) {
         this.id = id;
         this.type = type;
         this.data_id = data_id;
         this.title = title;
-        this.description = description;
         this.poster = poster;
         this.ratting = ratting;
     }
@@ -102,7 +91,6 @@ public class Favourite implements Parcelable {
         this.data_id = in.readInt();
         this.type = in.readString();
         this.title = in.readString();
-        this.description = in.readString();
         this.ratting = in.readDouble();
 
         this.poster = in.readString();
