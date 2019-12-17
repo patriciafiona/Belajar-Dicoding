@@ -38,6 +38,7 @@ import static com.path_studio.submission4.Database.DatabaseContract.FavouriteCol
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TYPE;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_01;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -164,7 +165,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         int movie_id = items.getId();
 
         //check apakah movie sudah favorit atau belum
-        status_movie_fav = favouriteHelper.selectById(movie_id);
+        status_movie_fav = favouriteHelper.selectById(movie_id, TABLE_NAME_01);
         if(status_movie_fav){
             //sudah favorit, hati merah
             fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
@@ -206,10 +207,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     private void insertFavourite(MovieItems items, View view){
         favourite.setData_id(items.getId());
         favourite.setTitle(items.getName());
+        favourite.setType("movie");
         favourite.setDescription(items.getDescription());
         favourite.setPoster(items.getPoster());
         favourite.setRatting(items.getRatting());
-        favourite.setType(1); //1 = Movie
+        favourite.setType("Movie");
 
         Intent intent = new Intent();
         intent.putExtra(EXTRA_FAVOURITE, favourite);
@@ -218,11 +220,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         ContentValues values = new ContentValues();
         values.put(TITLE, items.getName());
         values.put(DESCRIPTION, items.getDescription());
-        values.put(TYPE, 1);
         values.put(DATA_ID, items.getId());
+        values.put(TYPE, "movie");
         values.put(RATTING, items.getRatting());
         values.put(POSTER, items.getPoster());
-        long result = favouriteHelper.insert(values);
+        long result = favouriteHelper.insert(values, TABLE_NAME_01);
 
         if (result > 0) {
             favourite.setId((int) result);
@@ -240,7 +242,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
 
     private void deleteFavourite(MovieItems items, View view){
 
-        long result = favouriteHelper.deleteById(String.valueOf(items.getId()));
+        long result = favouriteHelper.deleteById(String.valueOf(items.getId()), TABLE_NAME_01);
 
         if (result > 0) {
             Intent intent = new Intent();

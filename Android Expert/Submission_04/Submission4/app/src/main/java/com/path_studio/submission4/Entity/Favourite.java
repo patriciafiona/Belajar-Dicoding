@@ -7,7 +7,7 @@ public class Favourite implements Parcelable {
     private String poster;
     private int id;
     private int data_id;
-    private int type;  /* 1 = Movie; 2 = TV Show*/
+    private String type;
     private String title;
     private String description;
     private double ratting;
@@ -52,11 +52,11 @@ public class Favourite implements Parcelable {
         this.ratting = ratting;
     }
 
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -77,6 +77,7 @@ public class Favourite implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.id);
         dest.writeInt(this.data_id);
+        dest.writeString(this.type);
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeDouble(this.ratting);
@@ -84,8 +85,9 @@ public class Favourite implements Parcelable {
     }
 
     //constructor
-    public Favourite(int id, int data_id, String title, String description, String poster, double ratting) {
+    public Favourite(int id, int data_id, String type, String title, String description, String poster, double ratting) {
         this.id = id;
+        this.type = type;
         this.data_id = data_id;
         this.title = title;
         this.description = description;
@@ -98,6 +100,7 @@ public class Favourite implements Parcelable {
     private Favourite(Parcel in) {
         this.id = in.readInt();
         this.data_id = in.readInt();
+        this.type = in.readString();
         this.title = in.readString();
         this.description = in.readString();
         this.ratting = in.readDouble();

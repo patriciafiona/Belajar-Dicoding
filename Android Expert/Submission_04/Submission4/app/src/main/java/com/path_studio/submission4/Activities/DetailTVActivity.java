@@ -18,7 +18,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.path_studio.submission4.Database.FavouriteHelper;
 import com.path_studio.submission4.Entity.Favourite;
-import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.Models.TVItems;
 import com.path_studio.submission4.R;
 import com.path_studio.submission4.ViewModels.TVShowViewModel;
@@ -41,6 +40,7 @@ import static com.path_studio.submission4.Database.DatabaseContract.FavouriteCol
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
 import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TYPE;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_02;
 
 public class DetailTVActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -136,7 +136,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         int tv_id = items.getId_TV();
 
         //check apakah movie sudah favorit atau belum
-        status_tv_fav = favouriteHelper.selectById(tv_id);
+        status_tv_fav = favouriteHelper.selectById(tv_id, TABLE_NAME_02);
         if(status_tv_fav){
             //sudah favorit, hati merah
             fabAddTVShow.setImageResource(R.drawable.ic_favorite_red_24dp);
@@ -181,7 +181,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         favourite.setDescription(items.getDescription());
         favourite.setPoster(items.getPoster());
         favourite.setRatting(items.getRatting());
-        favourite.setType(2); //2 = TV Show
+        favourite.setType("tv_show");
 
         Intent intent = new Intent();
         intent.putExtra(EXTRA_FAVOURITE, favourite);
@@ -190,11 +190,11 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         ContentValues values = new ContentValues();
         values.put(TITLE, items.getTitle());
         values.put(DESCRIPTION, items.getDescription());
-        values.put(TYPE, 2);
+        values.put(TYPE, "tv_show");
         values.put(DATA_ID, items.getId_TV());
         values.put(RATTING, items.getRatting());
         values.put(POSTER, items.getPoster());
-        long result = favouriteHelper.insert(values);
+        long result = favouriteHelper.insert(values, TABLE_NAME_02);
 
         if (result > 0) {
             favourite.setId((int) result);
@@ -212,7 +212,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
 
     private void deleteFavourite(TVItems items, View view){
 
-        long result = favouriteHelper.deleteById(String.valueOf(items.getId_TV()));
+        long result = favouriteHelper.deleteById(String.valueOf(items.getId_TV()), TABLE_NAME_02);
 
         if (result > 0) {
             Intent intent = new Intent();

@@ -116,7 +116,7 @@ public class TVShowViewModel extends AndroidViewModel {
                         //now get your  json array like this
                         try {
                             tvItems.setId_TV(response.getInt("id"));
-                            tvItems.setTitle(response.getString("name"));
+                            tvItems.setTitle(response.getString("original_name"));
                             tvItems.setRatting(response.getDouble("vote_average"));
                             tvItems.setPoster(linkPoster + response.getString("poster_path"));
                             tvItems.setDescription(response.getString("overview"));

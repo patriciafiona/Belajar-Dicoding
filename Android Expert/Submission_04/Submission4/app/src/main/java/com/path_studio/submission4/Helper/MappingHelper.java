@@ -10,20 +10,21 @@ import java.util.ArrayList;
 public class MappingHelper {
 
     public static ArrayList<Favourite> mapCursorToArrayList(Cursor notesCursor) {
-        ArrayList<Favourite> notesList = new ArrayList<>();
+        ArrayList<Favourite> favouritesList = new ArrayList<>();
 
         while (notesCursor.moveToNext()) {
             int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns._ID));
             int data_id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DATA_ID));
 
+            String type = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TYPE));
             String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TITLE));
             String description = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DESCRIPTION));
             String poster = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.POSTER));
             double ratting = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.RATTING));
 
-            notesList.add(new Favourite(id, data_id, title, description, poster, ratting));
+            favouritesList.add(new Favourite(id, data_id, type, title, description, poster, ratting));
         }
-        return notesList;
+        return favouritesList;
     }
 
 }

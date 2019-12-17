@@ -6,7 +6,8 @@ public class DatabaseContract {
 
     /* Mempermudah akses nama tabel dan nama kolom di dalam database kita. */
 
-    static String TABLE_NAME = "fav_movie";
+    public static String TABLE_NAME_01 = "fav_movie";
+    public static String TABLE_NAME_02 = "fav_tv";
 
     public static final class FavouriteColumns implements BaseColumns {
         public static String TITLE = "title";

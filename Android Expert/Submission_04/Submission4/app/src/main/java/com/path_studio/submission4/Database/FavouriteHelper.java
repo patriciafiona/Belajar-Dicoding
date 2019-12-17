@@ -8,11 +8,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
-import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_01;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_02;
 
 public class FavouriteHelper {
 
-    private static final String DATABASE_TABLE = TABLE_NAME;
+    private static final String DATABASE_TABLE_MOVIE = TABLE_NAME_01;
+    private static final String DATABASE_TABLE_TV = TABLE_NAME_02;
     private static DatabaseHelper dataBaseHelper;
     private static FavouriteHelper INSTANCE;
     private static SQLiteDatabase database;
@@ -44,9 +46,9 @@ public class FavouriteHelper {
             database.close();
     }
 
-    public Cursor queryAll() {
+    public Cursor queryAllMovie() {
         return database.query(
-                DATABASE_TABLE,
+                DATABASE_TABLE_MOVIE,
                 null,
                 null,
                 null,
@@ -55,27 +57,26 @@ public class FavouriteHelper {
                 _ID + " ASC");
     }
 
-    public Cursor queryById(String id) {
+    public Cursor queryAllTV() {
         return database.query(
-                DATABASE_TABLE,
-                null,
-                _ID + " = ?",
-                new String[]{id},
+                DATABASE_TABLE_TV,
                 null,
                 null,
                 null,
-                null);
+                null,
+                null,
+                _ID + " ASC");
     }
 
-    public long insert(ContentValues values) {
+    public long insert(ContentValues values, String DATABASE_TABLE) {
         return database.insert(DATABASE_TABLE, null, values);
     }
 
-    public int deleteById(String id) {
+    public int deleteById(String id, String DATABASE_TABLE) {
         return database.delete(DATABASE_TABLE, " data_id = ?", new String[]{id});
     }
 
-    public boolean selectById(int dataId){
+    public boolean selectById(int dataId, String DATABASE_TABLE){
         Cursor c = database.rawQuery("select * from " + DATABASE_TABLE + " where " + DATA_ID_COl + "='" + dataId + "'" , null);
 
         if (!(c.moveToFirst())) {

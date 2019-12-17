@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.submission4.CustomOnItemClickListener;
 import com.path_studio.submission4.Entity.Favourite;
 import com.path_studio.submission4.Fragments.MovieFragment;
+import com.path_studio.submission4.Fragments.TvShowFragment;
 import com.path_studio.submission4.Models.MovieItems;
 import com.path_studio.submission4.R;
 
@@ -117,8 +118,17 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
 
                     int data_id = listNotes.get(position).getData_id();
 
-                    //ke halaman detail movie
-                    MovieFragment.getInstance().go_to_detail(data_id);
+                    switch (listNotes.get(position).getType()){
+                        case "movie":
+                            //ke halaman detail movie
+                            MovieFragment.getInstance().go_to_detail(data_id);
+                            break;
+                        case "tv_show":
+                            //START DETAIL TV SHOW ACTIVITY
+                            TvShowFragment.getInstance().go_to_detail(data_id);
+                            break;
+                    }
+
                 }
             }));
         }

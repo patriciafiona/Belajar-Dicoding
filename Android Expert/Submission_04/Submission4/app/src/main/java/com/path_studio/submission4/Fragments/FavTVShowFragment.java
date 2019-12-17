@@ -137,7 +137,7 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
 
         @Override
         protected ArrayList<Favourite> doInBackground(Void... voids) {
-            Cursor dataCursor = weakfavouriteHelper.get().queryAll();
+            Cursor dataCursor = weakfavouriteHelper.get().queryAllTV();
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 
