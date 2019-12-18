@@ -28,15 +28,13 @@ import com.path_studio.submission4.R;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class FavMovieFragment extends Fragment implements LoadMoviesCallback, View.OnClickListener{
+public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
 
     private ProgressBar progressBar;
     private RecyclerView rvFavMovie;
     private FavouriteAdapter adapter;
 
     private LinearLayout EmptyAlert;
-    private Button AddFavMovie;
-
     private FavouriteHelper favouriteHelper;
     private static final String EXTRA_STATE = "EXTRA_STATE";
 
@@ -51,15 +49,12 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
         View view = inflater.inflate(R.layout.fragment_fav_movie, container, false);
 
         EmptyAlert = view.findViewById(R.id.alert_empty_fav_movie);
-        AddFavMovie = view.findViewById(R.id.add_fav_movie);
         progressBar = view.findViewById(R.id.progressbar);
         rvFavMovie = view.findViewById(R.id.rv_fav_movie);
         rvFavMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvFavMovie.setHasFixedSize(true);
         adapter = new FavouriteAdapter(getActivity());
         rvFavMovie.setAdapter(adapter);
-
-        AddFavMovie.setOnClickListener(this);
 
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
 
@@ -87,15 +82,6 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback, Vi
         } else {
             adapter.setListNotes(new ArrayList<Favourite>());
             EmptyAlert.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.add_fav_movie:
-                //ke halaman daftar movie
-                break;
         }
     }
 

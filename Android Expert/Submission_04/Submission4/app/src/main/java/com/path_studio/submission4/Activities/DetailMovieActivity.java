@@ -203,6 +203,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         favouriteHelper.close();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void insertFavourite(MovieItems items, View view){
         favourite.setData_id(items.getId());
         favourite.setTitle(items.getName());

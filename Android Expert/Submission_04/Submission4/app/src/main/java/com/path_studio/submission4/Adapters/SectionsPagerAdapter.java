@@ -49,7 +49,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new TvShowFragment();
                 break;
             case 3:
-                fragment = new FavouriteFragment();
+                fragment = new FavouriteFragment(viewPager);
                 break;
             case 4:
                 fragment = new ContactFragment();

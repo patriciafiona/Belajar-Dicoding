@@ -23,8 +23,8 @@
         android:layout_gravity="center">
 
         <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:src="@drawable/empty"/>
 
@@ -34,14 +34,6 @@
             android:textSize="14sp"
             android:textAlignment="center"
             android:text="@string/you_don_t_have_favourite_movie"/>
-
-        <Button
-            android:id="@+id/add_fav_movie"
-            android:layout_gravity="center"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/add" />
 
     </LinearLayout>
 

@@ -174,6 +174,11 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         favouriteHelper.close();
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
     private void insertFavourite(TVItems items, View view){
         favourite.setData_id(items.getId_TV());
         favourite.setTitle(items.getTitle());

@@ -11,6 +11,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,9 +28,15 @@ import com.path_studio.submission4.R;
 public class FavouriteFragment extends Fragment {
 
     private FavouriteHelper favouriteHelper;
+    public ViewPager viewPager;
+    private static FavouriteFragment instance;
 
     public FavouriteFragment() {
         // Required empty public constructor
+    }
+
+    public  FavouriteFragment (ViewPager viewPager){
+        this.viewPager=viewPager;
     }
 
 
@@ -37,6 +44,10 @@ public class FavouriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
+        favouriteHelper.open();
+
         return inflater.inflate(R.layout.fragment_favourite, container, false);
     }
 
@@ -52,8 +63,11 @@ public class FavouriteFragment extends Fragment {
         NavigationUI.setupActionBarWithNavController((AppCompatActivity) getActivity(), navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
-        favouriteHelper.open();
+        instance = this;
+    }
+
+    public static FavouriteFragment getInstance() {
+        return instance;
     }
 
     @Override

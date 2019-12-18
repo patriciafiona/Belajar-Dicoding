@@ -47,25 +47,50 @@ public class FavouriteHelper {
     }
 
     public Cursor queryAllMovie() {
-        return database.query(
-                DATABASE_TABLE_MOVIE,
-                null,
-                null,
-                null,
-                null,
-                null,
-                _ID + " ASC");
+        if(database.isOpen()){
+            return database.query(
+                    DATABASE_TABLE_MOVIE,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    _ID + " ASC");
+        }else{
+            open();
+            return database.query(
+                    DATABASE_TABLE_MOVIE,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    _ID + " ASC");
+        }
+
     }
 
     public Cursor queryAllTV() {
-        return database.query(
-                DATABASE_TABLE_TV,
-                null,
-                null,
-                null,
-                null,
-                null,
-                _ID + " ASC");
+        if(database.isOpen()){
+            return database.query(
+                    DATABASE_TABLE_TV,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    _ID + " ASC");
+        }else{
+            open();
+            return database.query(
+                    DATABASE_TABLE_TV,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    _ID + " ASC");
+        }
     }
 
     public long insert(ContentValues values, String DATABASE_TABLE) {

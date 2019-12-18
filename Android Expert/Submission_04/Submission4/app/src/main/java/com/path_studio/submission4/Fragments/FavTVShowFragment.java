@@ -29,14 +29,13 @@ import com.path_studio.submission4.R;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.OnClickListener{
+public class FavTVShowFragment extends Fragment implements LoadTVCallback{
 
     private ProgressBar progressBar;
     private RecyclerView rvFavTVShow;
     private FavouriteAdapter adapter;
 
     private LinearLayout EmptyAlert;
-    private Button AddFavTV;
 
     private FavouriteHelper favouriteHelper;
     private static final String EXTRA_STATE = "EXTRA_STATE";
@@ -50,13 +49,9 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fav_tvshow, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_fav_tvshow, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         EmptyAlert = view.findViewById(R.id.alert_empty_fav_tv);
-        AddFavTV = view.findViewById(R.id.add_fav_tv);
         progressBar = view.findViewById(R.id.progressbar);
         rvFavTVShow = view.findViewById(R.id.rv_fav_tvshow);
         rvFavTVShow.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -64,12 +59,11 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
         adapter = new FavouriteAdapter(getActivity());
         rvFavTVShow.setAdapter(adapter);
 
-        AddFavTV.setOnClickListener(this);
-
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
 
         new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
 
+        return view;
     }
 
     @Override
@@ -90,15 +84,6 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback, View.
         } else {
             adapter.setListNotes(new ArrayList<Favourite>());
             EmptyAlert.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.add_fav_movie:
-                //ke halaman daftar movie
-                break;
         }
     }
 
