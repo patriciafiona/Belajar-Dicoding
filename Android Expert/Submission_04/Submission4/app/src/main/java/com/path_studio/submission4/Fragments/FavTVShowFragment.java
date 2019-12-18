@@ -60,10 +60,19 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
         rvFavTVShow.setAdapter(adapter);
 
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
-
         new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        //refresh page
+        adapter = new FavouriteAdapter(getActivity());
+        rvFavTVShow.setAdapter(adapter);
+        new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
     }
 
     @Override

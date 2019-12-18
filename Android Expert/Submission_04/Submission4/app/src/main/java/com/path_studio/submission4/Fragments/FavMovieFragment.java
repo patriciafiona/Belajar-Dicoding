@@ -65,6 +65,16 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        //refresh page
+        adapter = new FavouriteAdapter(getActivity());
+        rvFavMovie.setAdapter(adapter);
+        new LoadMovieAsync(favouriteHelper, this).execute();
+    }
+
+    @Override
     public void preExecute() {
         getActivity().runOnUiThread(new Runnable() {
             @Override

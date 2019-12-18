@@ -100,6 +100,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
         }
 
         showLoading(true);
+        fabAddTVShow.setEnabled(false);
         hideAll();
 
         favouriteHelper = FavouriteHelper.getInstance(getApplicationContext());
@@ -117,6 +118,7 @@ public class DetailTVActivity extends AppCompatActivity implements View.OnClickL
                 if (tvItems != null) {
                     setDataUI(tvItems);
                     showLoading(false);
+                    fabAddTVShow.setEnabled(true);
                     seeAll();
 
                     favouriteHelper.open();

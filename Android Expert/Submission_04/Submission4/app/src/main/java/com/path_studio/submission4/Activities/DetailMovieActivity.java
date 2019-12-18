@@ -128,6 +128,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         }
 
         showLoading(true);
+        fabAddMovie.setEnabled(false);
         hideAll();
 
         favouriteHelper = FavouriteHelper.getInstance(getApplicationContext());
@@ -145,6 +146,7 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
                 if (movieItems != null) {
                     setDataUI(movieItems);
                     showLoading(false);
+                    fabAddMovie.setEnabled(true);
                     seeAll();
 
                     favouriteHelper.open();

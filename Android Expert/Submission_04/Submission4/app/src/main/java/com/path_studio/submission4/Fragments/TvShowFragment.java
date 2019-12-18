@@ -42,6 +42,9 @@ public class TvShowFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        instance = this;
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_tv_show, container, false);
     }
@@ -49,8 +52,6 @@ public class TvShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        instance = this;
 
         progressBar = getActivity().findViewById(R.id.progressBar_2);
         RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerView_2);
