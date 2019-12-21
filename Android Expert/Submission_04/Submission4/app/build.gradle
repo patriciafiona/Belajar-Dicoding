@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.path_studio.submission4"
+        applicationId "com.path_studio.Submission_05"
         minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
