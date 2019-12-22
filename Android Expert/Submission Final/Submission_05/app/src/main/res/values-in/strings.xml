@@ -10,7 +10,8 @@
     <string name="tab_text_5">Kontak</string>
 
     <!--Menu Title-->
-    <string name="menu_1">Pengaturan</string>
+    <string name="menu_1">Bahasa</string>
+    <string name="menu_2">Pengingat</string>
 
     <string name="test">Test</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
@@ -73,5 +74,16 @@
     <string name="see_detail">Lihat Detail…</string>
     <string name="failed_add_data">Gagal menambah data</string>
     <string name="failed_remove_data">Gagal menghapus data</string>
+
+    <string name="daily_reminder">Pengingat Harian</string>
+    <string name="reminder_for_return_to_app">Mengingatkan untuk kembali ke Apps</string>
+    <string name="release_reminder">Pengingat Film Baru</string>
+    <string name="reminder_showing_the_movie_that_release_today">Menampilkan notifikasi film baru</string>
+
+    <string name="alarm_cancle">Alarm Dibatalkan</string>
+    <string name="alarm_set_up">Alarm telah Dipasang</string>
+
+    <string name="daily_alarm_text">Catalogue Movie Merindukan Kamu…</string>
+    <string name="has_been_release">sudah keluar hari ini!</string>
 
 </resources>

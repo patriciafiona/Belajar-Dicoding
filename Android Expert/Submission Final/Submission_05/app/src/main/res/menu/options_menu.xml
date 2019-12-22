@@ -5,4 +5,9 @@
         android:id="@+id/action_change_settings"
         android:title="@string/menu_1"
         app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/action_change_reminder"
+        android:title="@string/menu_2"
+        app:showAsAction="never"/>
 </menu>

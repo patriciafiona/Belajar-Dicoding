@@ -3,6 +3,7 @@ package com.path_studio.myalarmmanager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 timePickerFragmentRepeat.show(getSupportFragmentManager(), TIME_PICKER_REPEAT_TAG);
                 break;
             case R.id.btn_set_repeating_alarm:
+                Log.e("Waktu",tvRepeatingTime.getText().toString());
                 String repeatTime = tvRepeatingTime.getText().toString();
                 String repeatMessage = edtRepeatingMessage.getText().toString();
                 alarmReceiver.setRepeatingAlarm(this, AlarmReceiver.TYPE_REPEATING,

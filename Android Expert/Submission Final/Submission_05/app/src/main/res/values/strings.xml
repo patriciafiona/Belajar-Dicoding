@@ -9,7 +9,8 @@
     <string name="tab_text_5">Contact</string>
 
     <!--Menu Title-->
-    <string name="menu_1">Settings</string>
+    <string name="menu_1">Language</string>
+    <string name="menu_2">Reminder</string>
 
     <string name="test">Test</string>
     <string name="lorem">lorem ipsum dolor sit amet</string>
@@ -73,4 +74,14 @@
     <string name="failed_add_data">Failed add data</string>
     <string name="failed_remove_data">Failed remove data</string>
 
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="reminder_for_return_to_app">Remind for Return to App</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="reminder_showing_the_movie_that_release_today">Reminder showing the Movie that release Today</string>
+
+    <string name="alarm_cancle">Alarm Cancel</string>
+    <string name="alarm_set_up">Repeating alarm set up</string>
+
+    <string name="daily_alarm_text">Catalogue Movie Missing You…</string>
+    <string name="has_been_release">has been release today!</string>
 </resources>
