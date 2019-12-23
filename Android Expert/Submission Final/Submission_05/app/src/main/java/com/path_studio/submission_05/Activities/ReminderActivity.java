@@ -12,6 +12,10 @@ import android.widget.Switch;
 import com.path_studio.submission_05.Alarm_Reminder.AlarmReceiver;
 import com.path_studio.submission_05.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
 public class ReminderActivity extends AppCompatActivity {
 
     private Switch mDaily, mRelease;
@@ -28,13 +32,7 @@ public class ReminderActivity extends AppCompatActivity {
         init();
 
         //check status alarm
-        if(alarmReceiver.checkStatusDailyAlarm(this)){
-            //true
-            mDaily.setChecked(true);
-        }else{
-            //false
-            mDaily.setChecked(false);
-        }
+        checkAlarm();
 
         //set alarm onclick and listener
         setAlarm();
@@ -48,6 +46,24 @@ public class ReminderActivity extends AppCompatActivity {
 
     }
 
+    private void checkAlarm(){
+        if(alarmReceiver.checkStatusDailyAlarm(this)){
+            //true
+            mDaily.setChecked(true);
+        }else{
+            //false
+            mDaily.setChecked(false);
+        }
+
+        if(alarmReceiver.checkStatusReleaseAlarm(this)){
+            //true
+            mRelease.setChecked(true);
+        }else{
+            //false
+            mRelease.setChecked(false);
+        }
+    }
+
     private void setAlarm(){
         mDaily.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -58,11 +74,11 @@ public class ReminderActivity extends AppCompatActivity {
                     //kalau false, alarm di set
                     String repeatTime = "07:00";
                     String repeatMessage = getResources().getString(R.string.daily_alarm_text);
-                    alarmReceiver.setRepeatingAlarm(ReminderActivity.this, AlarmReceiver.TYPE_REPEATING,
+                    alarmReceiver.setRepeatingAlarmDaily(ReminderActivity.this, AlarmReceiver.TYPE_DAILY,
                             repeatTime, repeatMessage);
                 }else{
                     //batalkan alarm (jika sudah di set)
-                    alarmReceiver.cancelAlarm(ReminderActivity.this, AlarmReceiver.TYPE_REPEATING);
+                    alarmReceiver.cancelAlarm(ReminderActivity.this, AlarmReceiver.TYPE_DAILY);
                 }
             }
         });
@@ -72,8 +88,13 @@ public class ReminderActivity extends AppCompatActivity {
                 switch_daily = mDaily.isChecked();
                 switch_release = mRelease.isChecked();
 
-                if(switch_release){
-                    //kalau true, alarm di set
+                if(switch_daily){
+                    //kalau false, alarm di set
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+                    Log.e("tanggal saat ini",dateFormat.toString());
+                    String repeatTime = "08:00";
                 }else{
                     //batalkan alarm (jika sudah di set)
                 }

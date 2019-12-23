@@ -27,25 +27,25 @@ import androidx.core.content.ContextCompat;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
-    public static final String TYPE_ONE_TIME = "OneTimeAlarm";
-    public static final String TYPE_REPEATING = "RepeatingAlarm";
+    public static final String TYPE_DAILY = "Daily Reminder";
+    public static final String TYPE_RELEASE = "RELEASE Reminder";
     public static final String EXTRA_MESSAGE = "message";
     public static final String EXTRA_TYPE = "type";
-    // Siapkan 2 id untuk 2 macam alarm, onetime dna repeating
-    private final int ID_ONETIME = 100;
-    private final int ID_REPEATING = 101;
 
-    private final static String DATE_FORMAT = "yyyy-MM-dd";
+    // Siapkan 2 id untuk 2 macam alarm, daily dan release
+    private final int ID_DAILY = 100;
+    private final int ID_RELEASE = 101;
+
     private final static String TIME_FORMAT = "HH:mm";
-
-    private boolean status_daily = false;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         String type = intent.getStringExtra(EXTRA_TYPE);
         String message = intent.getStringExtra(EXTRA_MESSAGE);
-        String title = type.equalsIgnoreCase(TYPE_ONE_TIME) ? TYPE_ONE_TIME : TYPE_REPEATING;
-        int notifId = type.equalsIgnoreCase(TYPE_ONE_TIME) ? ID_ONETIME : ID_REPEATING;
+
+        String title = type.equalsIgnoreCase(TYPE_DAILY) ? TYPE_DAILY : TYPE_RELEASE;
+        int notifId = type.equalsIgnoreCase(TYPE_DAILY) ? ID_DAILY : ID_RELEASE;
+
         showToast(context, title, message);
 
         //memunculkan notifikasi
@@ -56,36 +56,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         Toast.makeText(context, title + " : " + message, Toast.LENGTH_LONG).show();
     }
 
-    public void setOneTimeAlarm(Context context, String type, String date, String time, String message) {
-
-        if (isDateInvalid(date, DATE_FORMAT) || isDateInvalid(time, TIME_FORMAT)) return;
-
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
-        Intent intent = new Intent(context, AlarmReceiver.class);
-
-        intent.putExtra(EXTRA_MESSAGE, message);
-        intent.putExtra(EXTRA_TYPE, type);
-
-        Log.e("ONE TIME", date + " " + time);
-
-        String dateArray[] = date.split("-");
-        String timeArray[] = time.split(":");
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, Integer.parseInt(dateArray[0]));
-        calendar.set(Calendar.MONTH, Integer.parseInt(dateArray[1]) - 1);
-        calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dateArray[2]));
-        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-        calendar.set(Calendar.SECOND, 0);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_ONETIME, intent, 0);
-        if (alarmManager != null) {
-            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-        }
-        Toast.makeText(context, "One time alarm set up", Toast.LENGTH_SHORT).show();
-    }
     public boolean isDateInvalid(String date, String format) {
         try {
             DateFormat df = new SimpleDateFormat(format, Locale.getDefault());
@@ -131,7 +101,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
     }
 
-    public void setRepeatingAlarm(Context context, String type, String time, String message) {
+    public void setRepeatingAlarmDaily(Context context, String type, String time, String message) {
         if (isDateInvalid(time, TIME_FORMAT)) return;
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
@@ -146,10 +116,11 @@ public class AlarmReceiver extends BroadcastReceiver {
         calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
         calendar.set(Calendar.SECOND, 0);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, intent, 0);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_DAILY, intent, 0);
         if (alarmManager != null) {
             alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         }
+
         Toast.makeText(context, context.getResources().getString(R.string.alarm_set_up), Toast.LENGTH_SHORT).show();
     }
 
@@ -157,7 +128,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
 
-        int requestCode = type.equalsIgnoreCase(TYPE_ONE_TIME) ? ID_ONETIME : ID_REPEATING;
+        int requestCode = type.equalsIgnoreCase(TYPE_DAILY) ? ID_DAILY : ID_RELEASE;
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0);
         pendingIntent.cancel();
@@ -168,18 +139,17 @@ public class AlarmReceiver extends BroadcastReceiver {
     }
 
     public boolean checkStatusDailyAlarm(Context context){
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
 
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_REPEATING, intent, 0);
-
-        if (alarmManager != null) {
-            status_daily = true;
-        }else{
-            status_daily = false;
-        }
-
+        boolean status_daily = (PendingIntent.getBroadcast(context, ID_DAILY, intent, PendingIntent.FLAG_NO_CREATE) != null);
         return status_daily;
+    }
+
+    public boolean checkStatusReleaseAlarm(Context context){
+        Intent intent = new Intent(context, AlarmReceiver.class);
+
+        boolean status_release = (PendingIntent.getBroadcast(context, ID_RELEASE, intent, PendingIntent.FLAG_NO_CREATE) != null);
+        return status_release;
     }
 
 }
