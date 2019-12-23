@@ -1,4 +1,4 @@
-package com.path_studio.submission_05.Activities;
+package com.path_studio.submission4.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,11 +18,11 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
-import com.path_studio.submission_05.Database.FavouriteHelper;
-import com.path_studio.submission_05.Entity.Favourite;
-import com.path_studio.submission_05.Models.MovieItems;
-import com.path_studio.submission_05.R;
-import com.path_studio.submission_05.ViewModels.MovieViewModel;
+import com.path_studio.submission4.Database.FavouriteHelper;
+import com.path_studio.submission4.Entity.Favourite;
+import com.path_studio.submission4.Models.MovieItems;
+import com.path_studio.submission4.R;
+import com.path_studio.submission4.ViewModels.MovieViewModel;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
@@ -33,13 +32,12 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.StringJoiner;
 
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.CONTENT_URI_01;
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.DATA_ID;
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.POSTER;
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.RATTING;
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.TITLE;
-import static com.path_studio.submission_05.Database.DatabaseContract.FavouriteColumns.TYPE;
-import static com.path_studio.submission_05.Database.DatabaseContract.TABLE_NAME_01;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.DATA_ID;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.POSTER;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.RATTING;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TITLE;
+import static com.path_studio.submission4.Database.DatabaseContract.FavouriteColumns.TYPE;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_01;
 
 public class DetailMovieActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -76,7 +74,6 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
     public static final int RESULT_DELETE = 301;
 
     private int position;
-    private Uri uriWithId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +216,11 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         favourite.setType("movie");
         favourite.setPoster(items.getPoster());
         favourite.setRatting(items.getRatting());
+        favourite.setType("Movie");
+
+        Intent intent = new Intent();
+        intent.putExtra(EXTRA_FAVOURITE, favourite);
+        intent.putExtra(EXTRA_POSITION, position);
 
         ContentValues values = new ContentValues();
         values.put(TITLE, items.getName());
@@ -226,23 +228,37 @@ public class DetailMovieActivity extends AppCompatActivity implements View.OnCli
         values.put(TYPE, "movie");
         values.put(RATTING, items.getRatting());
         values.put(POSTER, items.getPoster());
-        getContentResolver().insert(CONTENT_URI_01, values);
+        long result = favouriteHelper.insert(values, TABLE_NAME_01);
 
+        if (result > 0) {
+            favourite.setId((int) result);
+            setResult(RESULT_ADD, intent);
 
-        //berhasil, maka ganti warna hatinya
-        showSnackbarMessage(getResources().getString(R.string.add_favourite), view);
-        fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
+            //berhasil, maka ganti warna hatinya
+            showSnackbarMessage(getResources().getString(R.string.add_favourite), view);
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_red_24dp);
+
+        } else {
+            Toast.makeText(DetailMovieActivity.this, getResources().getString(R.string.failed_add_data), Toast.LENGTH_SHORT).show();
+        }
 
     }
 
     private void deleteFavourite(MovieItems items, View view){
 
-        uriWithId = Uri.parse(CONTENT_URI_01 + "/" + items.getId());
+        long result = favouriteHelper.deleteById(String.valueOf(items.getId()), TABLE_NAME_01);
 
-        getContentResolver().delete(uriWithId, null, null);
+        if (result > 0) {
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA_POSITION, position);
+            setResult(RESULT_DELETE, intent);
 
-        showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
-        fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+            showSnackbarMessage(getResources().getString(R.string.unfavourite), view);
+            fabAddMovie.setImageResource(R.drawable.ic_favorite_gray_24dp);
+
+        } else {
+            Toast.makeText(DetailMovieActivity.this, getResources().getString(R.string.failed_remove_data), Toast.LENGTH_SHORT).show();
+        }
 
     }
 

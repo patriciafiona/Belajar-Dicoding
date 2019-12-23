@@ -1,32 +1,33 @@
-package com.path_studio.submission_05.Fragments;
+package com.path_studio.submission4.Fragments;
 
 
-import android.content.Context;
-import android.database.ContentObserver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 
-import com.path_studio.submission_05.Adapters.FavouriteAdapter;
-import com.path_studio.submission_05.Database.DatabaseContract;
-import com.path_studio.submission_05.Database.FavouriteHelper;
-import com.path_studio.submission_05.Entity.Favourite;
-import com.path_studio.submission_05.Helper.MappingHelper;
-import com.path_studio.submission_05.R;
-
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+
+import com.path_studio.submission4.Adapters.FavouriteAdapter;
+import com.path_studio.submission4.Database.FavouriteHelper;
+import com.path_studio.submission4.Entity.Favourite;
+import com.path_studio.submission4.Helper.MappingHelper;
+import com.path_studio.submission4.R;
+
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 
 public class FavTVShowFragment extends Fragment implements LoadTVCallback{
 
@@ -58,14 +59,8 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
         adapter = new FavouriteAdapter(getActivity());
         rvFavTVShow.setAdapter(adapter);
 
-        HandlerThread handlerThread = new HandlerThread("DataObserver");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-
-        DataObserver myObserver = new DataObserver(handler, getContext());
-        getContext().getContentResolver().registerContentObserver(DatabaseContract.FavouriteColumns.CONTENT_URI_02, true, myObserver);
-
-        new FavTVShowFragment.LoadTVAsync(getActivity(), this).execute();
+        favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
+        new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
 
         return view;
     }
@@ -77,7 +72,7 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
         //refresh page
         adapter = new FavouriteAdapter(getActivity());
         rvFavTVShow.setAdapter(adapter);
-        new FavTVShowFragment.LoadTVAsync(getActivity(), this).execute();
+        new FavTVShowFragment.LoadTVAsync(favouriteHelper, this).execute();
     }
 
     @Override
@@ -102,11 +97,11 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
     }
 
     private static class LoadTVAsync extends AsyncTask<Void, Void, ArrayList<Favourite>> {
-        private final WeakReference<Context> weakContext;
+        private final WeakReference<FavouriteHelper> weakfavouriteHelper;
         private final WeakReference<LoadTVCallback> weakCallback;
 
-        private LoadTVAsync(Context context, LoadTVCallback callback) {
-            weakContext = new WeakReference<>(context);
+        private LoadTVAsync(FavouriteHelper favouriteHelper, LoadTVCallback callback) {
+            weakfavouriteHelper = new WeakReference<>(favouriteHelper);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -118,8 +113,7 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
 
         @Override
         protected ArrayList<Favourite> doInBackground(Void... voids) {
-            Context context = weakContext.get();
-            Cursor dataCursor = context.getContentResolver().query(DatabaseContract.FavouriteColumns.CONTENT_URI_02, null, null, null, null);
+            Cursor dataCursor = weakfavouriteHelper.get().queryAllTV();
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 
@@ -130,16 +124,14 @@ public class FavTVShowFragment extends Fragment implements LoadTVCallback{
         }
     }
 
-    public static class DataObserver extends ContentObserver {
-        final Context context;
-        public DataObserver(Handler handler, Context context) {
-            super(handler);
-            this.context = context;
-        }
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-        }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

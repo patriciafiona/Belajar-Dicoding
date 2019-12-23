@@ -6,11 +6,11 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.path_studio.Submission_05.Fragments.FavMovieFragment"
+        android:name="com.path_studio.submission4.Fragments.FavMovieFragment"
         tools:layout="@layout/fragment_fav_movie" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.path_studio.Submission_05.Fragments.FavTVShowFragment"
+        android:name="com.path_studio.submission4.Fragments.FavTVShowFragment"
         tools:layout="@layout/fragment_fav_tvshow" />
 </navigation>

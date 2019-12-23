@@ -12,18 +12,36 @@ public class MappingHelper {
     public static ArrayList<Favourite> mapCursorToArrayList(Cursor notesCursor) {
         ArrayList<Favourite> favouritesList = new ArrayList<>();
 
-        while (notesCursor.moveToNext()) {
-            int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns._ID));
-            int data_id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DATA_ID));
+        if(notesCursor != null){
 
-            String type = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TYPE));
-            String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TITLE));
-            String poster = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.POSTER));
-            double ratting = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.RATTING));
+            while (notesCursor.moveToNext()) {
+                int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns._ID));
+                int data_id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DATA_ID));
 
-            favouritesList.add(new Favourite(id, data_id, type, title, poster, ratting));
+                String type = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TYPE));
+                String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TITLE));
+                String poster = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.POSTER));
+                double ratting = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.RATTING));
+
+                favouritesList.add(new Favourite(id, data_id, type, title, poster, ratting));
+            }
+
         }
+
         return favouritesList;
+    }
+
+    public static Favourite mapCursorToObject(Cursor notesCursor) {
+        notesCursor.moveToFirst();
+        int id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns._ID));
+        int data_id = notesCursor.getInt(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.DATA_ID));
+
+        String type = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TYPE));
+        String title = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.TITLE));
+        String poster = notesCursor.getString(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.POSTER));
+        double ratting = notesCursor.getDouble(notesCursor.getColumnIndexOrThrow(DatabaseContract.FavouriteColumns.RATTING));
+
+        return new Favourite(id, data_id, type, title, poster, ratting);
     }
 
 }

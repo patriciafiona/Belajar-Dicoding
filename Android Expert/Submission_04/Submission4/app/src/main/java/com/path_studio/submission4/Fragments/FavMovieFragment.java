@@ -1,8 +1,6 @@
-package com.path_studio.submission_05.Fragments;
+package com.path_studio.submission4.Fragments;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -13,8 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +19,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.path_studio.submission_05.Adapters.FavouriteAdapter;
-import com.path_studio.submission_05.Database.DatabaseContract;
-import com.path_studio.submission_05.Database.FavouriteHelper;
-import com.path_studio.submission_05.Entity.Favourite;
-import com.path_studio.submission_05.Helper.MappingHelper;
-import com.path_studio.submission_05.R;
+import com.path_studio.submission4.Adapters.FavouriteAdapter;
+import com.path_studio.submission4.Database.FavouriteHelper;
+import com.path_studio.submission4.Entity.Favourite;
+import com.path_studio.submission4.Helper.MappingHelper;
+import com.path_studio.submission4.R;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -58,20 +53,12 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
         rvFavMovie = view.findViewById(R.id.rv_fav_movie);
         rvFavMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvFavMovie.setHasFixedSize(true);
-
         adapter = new FavouriteAdapter(getActivity());
         rvFavMovie.setAdapter(adapter);
 
         favouriteHelper = FavouriteHelper.getInstance(getActivity().getApplicationContext());
 
-        HandlerThread handlerThread = new HandlerThread("DataObserver");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-
-        DataObserver myObserver = new DataObserver(handler, getContext());
-        getContext().getContentResolver().registerContentObserver(DatabaseContract.FavouriteColumns.CONTENT_URI_01, true, myObserver);
-
-        new LoadMovieAsync(getActivity(), this).execute();
+        new LoadMovieAsync(favouriteHelper, this).execute();
 
         // Inflate the layout for this fragment
         return view;
@@ -84,7 +71,7 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
         //refresh page
         adapter = new FavouriteAdapter(getActivity());
         rvFavMovie.setAdapter(adapter);
-        new LoadMovieAsync(getActivity(), this).execute();
+        new LoadMovieAsync(favouriteHelper, this).execute();
     }
 
     @Override
@@ -109,11 +96,11 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
     }
 
     private static class LoadMovieAsync extends AsyncTask<Void, Void, ArrayList<Favourite>> {
-        private final WeakReference<Context> weakContext;
+        private final WeakReference<FavouriteHelper> weakfavouriteHelper;
         private final WeakReference<LoadMoviesCallback> weakCallback;
-
-        private LoadMovieAsync(Context context, LoadMoviesCallback callback) {
-            weakContext = new WeakReference<>(context);
+        
+        private LoadMovieAsync(FavouriteHelper favouriteHelper, LoadMoviesCallback callback) {
+            weakfavouriteHelper = new WeakReference<>(favouriteHelper);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -125,8 +112,7 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
 
         @Override
         protected ArrayList<Favourite> doInBackground(Void... voids) {
-            Context context = weakContext.get();
-            Cursor dataCursor = context.getContentResolver().query(DatabaseContract.FavouriteColumns.CONTENT_URI_01, null, null, null, null);
+            Cursor dataCursor = weakfavouriteHelper.get().queryAllMovie();
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 
@@ -137,16 +123,14 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
         }
     }
 
-    public static class DataObserver extends ContentObserver {
-        final Context context;
-        public DataObserver(Handler handler, Context context) {
-            super(handler);
-            this.context = context;
-        }
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-        }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
 }

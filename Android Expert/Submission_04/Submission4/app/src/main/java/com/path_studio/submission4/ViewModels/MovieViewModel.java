@@ -1,4 +1,4 @@
-package com.path_studio.submission_05.ViewModels;
+package com.path_studio.submission4.ViewModels;
 
 import android.app.Application;
 import android.content.Context;
@@ -10,8 +10,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.path_studio.submission_05.BuildConfig;
-import com.path_studio.submission_05.Models.MovieItems;
+import com.path_studio.submission4.BuildConfig;
+import com.path_studio.submission4.Models.MovieItems;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -110,6 +110,7 @@ public class MovieViewModel extends AndroidViewModel {
                         //now get your  json array like this
                         try {
                             movieItems.setId(response.getInt("id"));
+
                             movieItems.setName(response.getString("title"));
                             movieItems.setRatting(response.getDouble("vote_average"));
                             movieItems.setPoster(linkPoster + response.getString("poster_path"));
@@ -136,7 +137,7 @@ public class MovieViewModel extends AndroidViewModel {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.e("Error.Response.DETAIL_MOVIE", error.toString());
+                        Log.e("Error.Response", error.toString());
                     }
                 });
 

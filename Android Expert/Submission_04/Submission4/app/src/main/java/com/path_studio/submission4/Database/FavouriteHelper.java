@@ -1,4 +1,4 @@
-package com.path_studio.submission_05.Database;
+package com.path_studio.submission4.Database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,11 +7,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
-import static com.path_studio.submission_05.Database.DatabaseContract.TABLE_NAME_01;
-import static com.path_studio.submission_05.Database.DatabaseContract.TABLE_NAME_02;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_01;
+import static com.path_studio.submission4.Database.DatabaseContract.TABLE_NAME_02;
 
 public class FavouriteHelper {
 
@@ -95,30 +93,6 @@ public class FavouriteHelper {
         }
     }
 
-    public Cursor queryMovieById(String id) {
-        return database.query(
-                DATABASE_TABLE_MOVIE,
-                null,
-                _ID + " = ?",
-                new String[]{id},
-                null,
-                null,
-                null,
-                null);
-    }
-
-    public Cursor queryTVById(String id) {
-        return database.query(
-                DATABASE_TABLE_TV,
-                null,
-                _ID + " = ?",
-                new String[]{id},
-                null,
-                null,
-                null,
-                null);
-    }
-
     public long insert(ContentValues values, String DATABASE_TABLE) {
         return database.insert(DATABASE_TABLE, null, values);
     }
@@ -139,20 +113,6 @@ public class FavouriteHelper {
         c.close();
 
         return status_data;
-    }
-
-    public ArrayList selectData(String DATABASE_TABLE){
-        ArrayList array_list = new ArrayList<>();
-        array_list.clear();
-
-        Cursor c = database.rawQuery("select * from " + DATABASE_TABLE + "", null);
-        c.moveToFirst();
-
-        while(!c.isAfterLast()) {
-            array_list.add(c.getString(c.getColumnIndex("poster")));
-            c.moveToNext();
-        }
-        return array_list;
     }
 
 }
