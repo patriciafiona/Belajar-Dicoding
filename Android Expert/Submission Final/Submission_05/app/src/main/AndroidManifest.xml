@@ -5,10 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.alarm.permission.SET_ALARM" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +17,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.ReminderActivity"></activity>
+        <receiver android:name=".BannerWidget.FavouriteTvBannerWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favourite_tv_banner_widget_info" />
+        </receiver>
+
+        <receiver android:name=".BannerWidget.FavouriteMovieBannerWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/favourite_movie_banner_widget_info" />
+        </receiver>
+
+        <activity android:name=".Activities.ReminderActivity" />
         <activity android:name=".Activities.DetailTvSeasonActivity" />
         <activity android:name=".Activities.OpeningActivity">
             <intent-filter>
@@ -43,7 +62,14 @@
         <receiver
             android:name=".Alarm_Reminder.AlarmReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <service
+            android:name=".BannerWidget.StackWidgetServiceMovie"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <service
+            android:name=".BannerWidget.StackWidgetServiceTv"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

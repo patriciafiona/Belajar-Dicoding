@@ -53,6 +53,7 @@ public class FavMovieFragment extends Fragment implements LoadMoviesCallback{
         rvFavMovie = view.findViewById(R.id.rv_fav_movie);
         rvFavMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvFavMovie.setHasFixedSize(true);
+
         adapter = new FavouriteAdapter(getActivity());
         rvFavMovie.setAdapter(adapter);
 

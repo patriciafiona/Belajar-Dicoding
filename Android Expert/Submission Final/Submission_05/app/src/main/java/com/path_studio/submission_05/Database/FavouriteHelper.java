@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 import static android.provider.MediaStore.Audio.Playlists.Members._ID;
 import static com.path_studio.submission_05.Database.DatabaseContract.TABLE_NAME_01;
 import static com.path_studio.submission_05.Database.DatabaseContract.TABLE_NAME_02;
@@ -113,6 +115,20 @@ public class FavouriteHelper {
         c.close();
 
         return status_data;
+    }
+
+    public ArrayList selectData(String DATABASE_TABLE){
+        ArrayList array_list = new ArrayList<>();
+        array_list.clear();
+
+        Cursor c = database.rawQuery("select * from " + DATABASE_TABLE + "", null);
+        c.moveToFirst();
+
+        while(c.isAfterLast() == false) {
+            array_list.add(c.getString(c.getColumnIndex("poster")));
+            c.moveToNext();
+        }
+        return array_list;
     }
 
 }

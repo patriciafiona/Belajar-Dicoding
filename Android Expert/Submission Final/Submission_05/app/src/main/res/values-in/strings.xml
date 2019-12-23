@@ -86,4 +86,9 @@
     <string name="daily_alarm_text">Catalogue Movie Merindukan Kamu…</string>
     <string name="has_been_release">sudah keluar hari ini!</string>
 
+    <string name="appwidget_text_movie">Film Favourit Saya</string>
+    <string name="appwidget_text_tv">Acara TV Favourit Saya</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="add_widget">Tambah widget</string>
+
 </resources>

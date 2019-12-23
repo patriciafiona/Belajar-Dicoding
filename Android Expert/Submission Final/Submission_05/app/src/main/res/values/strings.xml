@@ -84,4 +84,8 @@
 
     <string name="daily_alarm_text">Catalogue Movie Missing You…</string>
     <string name="has_been_release">has been release today!</string>
+    <string name="appwidget_text_movie">My Favourite Movie</string>
+    <string name="appwidget_text_tv">My Favourite TV Show</string>
+    <string name="empty_text">NO DATA</string>
+    <string name="add_widget">Add widget</string>
 </resources>
