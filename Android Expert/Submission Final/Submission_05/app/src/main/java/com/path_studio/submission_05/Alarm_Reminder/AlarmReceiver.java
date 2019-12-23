@@ -14,16 +14,23 @@ import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.path_studio.submission_05.BuildConfig;
 import com.path_studio.submission_05.R;
+
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import cz.msebera.android.httpclient.Header;
 
 public class AlarmReceiver extends BroadcastReceiver {
 
@@ -38,8 +45,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     private final static String TIME_FORMAT = "HH:mm";
 
+    private static final String API_KEY = BuildConfig.API_KEY;
+
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
+        Log.e("Masuk on Recieve","Masuk");
         String type = intent.getStringExtra(EXTRA_TYPE);
         String message = intent.getStringExtra(EXTRA_MESSAGE);
 
@@ -49,7 +59,48 @@ public class AlarmReceiver extends BroadcastReceiver {
         showToast(context, title, message);
 
         //memunculkan notifikasi
-        showAlarmNotification(context, title, message, notifId);
+        if(notifId == ID_RELEASE){
+            Log.e("Masuk proses API", "MAsuk");
+            //call data from API
+
+            //dapatkan tanggal hari ini
+            Date c = Calendar.getInstance().getTime();
+
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String today = df.format(c);
+
+            AsyncHttpClient client = new AsyncHttpClient();
+            String url = "https://api.themoviedb.org/3/discover/movie?api_key="+API_KEY+"&primary_release_date.gte="+today+"&primary_release_date.lte="+today;
+            client.get(url, new AsyncHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    String result = new String(responseBody);
+                    try {
+                        JSONObject responseObject = new JSONObject(result);
+
+                        int totalResult = responseObject.getInt("total_results");
+                        for (int i = 0; i < totalResult; i++) {
+                            String movie_title = responseObject.getJSONArray("results").getJSONObject(i).getString("title");
+                            String message = movie_title + " " + context.getResources().getString(R.string.has_been_release);
+
+                            showAlarmNotification(context, movie_title, message, ID_RELEASE+i);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("Exception API", e.toString());
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    Log.e("onFailure", error.toString());
+                }
+            });
+        }else{
+            showAlarmNotification(context, title, message, notifId);
+        }
+
     }
 
     private void showToast(Context context, String title, String message) {
@@ -124,6 +175,29 @@ public class AlarmReceiver extends BroadcastReceiver {
         Toast.makeText(context, context.getResources().getString(R.string.alarm_set_up), Toast.LENGTH_SHORT).show();
     }
 
+    public void setRepeatingAlarmRelease(Context context, String type, String time){
+        if (isDateInvalid(time, TIME_FORMAT)) return;
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        intent.putExtra(EXTRA_TYPE, type);
+
+        String[] timeArray = time.split(":");
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+        calendar.set(Calendar.SECOND, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, ID_RELEASE, intent, 0);
+        if (alarmManager != null) {
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+        }
+
+        Toast.makeText(context, context.getResources().getString(R.string.alarm_set_up), Toast.LENGTH_SHORT).show();
+
+    }
+
     public void cancelAlarm(Context context, String type) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmReceiver.class);
@@ -151,5 +225,6 @@ public class AlarmReceiver extends BroadcastReceiver {
         boolean status_release = (PendingIntent.getBroadcast(context, ID_RELEASE, intent, PendingIntent.FLAG_NO_CREATE) != null);
         return status_release;
     }
+
 
 }

@@ -2,19 +2,12 @@ package com.path_studio.submission_05.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.PendingIntent;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import com.path_studio.submission_05.Alarm_Reminder.AlarmReceiver;
 import com.path_studio.submission_05.R;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class ReminderActivity extends AppCompatActivity {
 
@@ -56,10 +49,8 @@ public class ReminderActivity extends AppCompatActivity {
         }
 
         if(alarmReceiver.checkStatusReleaseAlarm(this)){
-            //true
             mRelease.setChecked(true);
         }else{
-            //false
             mRelease.setChecked(false);
         }
     }
@@ -88,17 +79,16 @@ public class ReminderActivity extends AppCompatActivity {
                 switch_daily = mDaily.isChecked();
                 switch_release = mRelease.isChecked();
 
-                if(switch_daily){
-                    //kalau false, alarm di set
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-
-                    Log.e("tanggal saat ini",dateFormat.toString());
+                if(switch_release){
                     String repeatTime = "08:00";
+                    alarmReceiver.setRepeatingAlarmRelease(ReminderActivity.this, AlarmReceiver.TYPE_RELEASE,
+                            repeatTime);
                 }else{
                     //batalkan alarm (jika sudah di set)
+                    alarmReceiver.cancelAlarm(ReminderActivity.this, AlarmReceiver.TYPE_RELEASE);
                 }
             }
         });
     }
+
 }
