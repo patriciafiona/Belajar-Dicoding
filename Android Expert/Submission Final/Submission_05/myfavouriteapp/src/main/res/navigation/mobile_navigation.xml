@@ -1,0 +1,16 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.path_studio.myfavouriteapp.Fragments.FavouriteMovieFragment"
+        tools:layout="@layout/fragment_favourite_movie" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.path_studio.myfavouriteapp.Fragments.FavouriteTVFragment"
+        tools:layout="@layout/fragment_favourite_tv" />
+</navigation>

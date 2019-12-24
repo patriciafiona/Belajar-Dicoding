@@ -29,16 +29,16 @@
             android:authorities="com.path_studio.submission_05.tv"
             android:enabled="true"
             android:exported="true"
-            android:readPermission="com.path_studio.submission_05.tv.READ_DATABASE"
-            android:writePermission="com.path_studio.submission_05.tv.WRITE_DATABASE"/>
+            android:readPermission="com.path_studio.submission_05.READ_DATABASE"
+            android:writePermission="com.path_studio.submission_05.WRITE_DATABASE"/>
 
         <provider
             android:name=".provider.FavouriteMovieProvider"
             android:authorities="com.path_studio.submission_05.movie"
             android:enabled="true"
             android:exported="true"
-            android:readPermission="com.path_studio.submission_05.movie.READ_DATABASE"
-            android:writePermission="com.path_studio.submission_05.movie.WRITE_DATABASE" />
+            android:readPermission="com.path_studio.submission_05.READ_DATABASE"
+            android:writePermission="com.path_studio.submission_05.WRITE_DATABASE" />
 
         <receiver android:name=".BannerWidget.FavouriteTvBannerWidget">
             <intent-filter>
