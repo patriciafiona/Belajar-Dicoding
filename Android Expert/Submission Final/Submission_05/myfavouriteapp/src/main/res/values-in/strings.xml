@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Favourite - Movie Catalogue</string>
+    <string name="app_name">My Favourite</string>
 
     <!--Tab Title-->
     <string name="tab_text_1">Beranda</string>

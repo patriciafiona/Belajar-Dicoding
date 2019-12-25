@@ -23,9 +23,9 @@ public class FavouriteMovieProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        // content://com.path_studio.submission_05.MOVIE/fav_movie
+        // content://com.path_studio.submission_05.movie/fav_movie
         sUriMatcher.addURI(AUTHORITY_MOVIE, TABLE_NAME_01, FAVOURITE);
-        // content://com.path_studio.submission_05.MOVIE/fav_movie/id
+        // content://com.path_studio.submission_05.movie/fav_movie/id
         sUriMatcher.addURI(AUTHORITY_MOVIE,
                 TABLE_NAME_01 + "/#",
                 FAVOURITE_ID);

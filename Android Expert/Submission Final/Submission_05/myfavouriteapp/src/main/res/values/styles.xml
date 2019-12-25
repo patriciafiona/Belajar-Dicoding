@@ -6,9 +6,6 @@
         <item name="colorPrimary">@color/colorSkyBlue</item>
         <item name="colorPrimaryDark">@color/colorSkyBlue</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <item name="android:textViewStyle">@style/PoppinsTextViewStyle</item>
-        <item name="android:buttonStyle">@style/PoppinsButtonStyle</item>
     </style>
 
     <style name="PoppinsTextViewStyle" parent="android:Widget.TextView">

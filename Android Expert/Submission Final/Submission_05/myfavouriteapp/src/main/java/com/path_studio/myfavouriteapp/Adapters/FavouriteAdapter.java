@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.path_studio.myfavouriteapp.CustomOnItemClickListener;
 import com.path_studio.myfavouriteapp.Entity.Favourite;
+import com.path_studio.myfavouriteapp.GotoDetail;
 import com.path_studio.myfavouriteapp.R;
 
 import java.util.ArrayList;
@@ -114,19 +115,18 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
                 public void onItemClicked(View view, int position) {
 
                     int data_id = listNotes.get(position).getData_id();
+                    GotoDetail gotoDetail = new GotoDetail();
 
-                    /*
                     switch (listNotes.get(position).getType()){
                         case "movie":
                             //ke halaman detail movie
-                            MovieFragment.getInstance().go_to_detail(data_id);
+                            gotoDetail.go_to_movie(activity, data_id);
                             break;
                         case "tv_show":
                             //START DETAIL TV SHOW ACTIVITY
-                            TvShowFragment.getInstance().go_to_detail(data_id);
+                            gotoDetail.go_to_tv(activity, data_id);
                             break;
                     }
-                     */
 
                 }
             }));

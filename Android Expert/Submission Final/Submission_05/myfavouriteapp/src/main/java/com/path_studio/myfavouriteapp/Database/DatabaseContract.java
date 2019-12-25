@@ -21,13 +21,13 @@ public class DatabaseContract {
         public static String POSTER = "poster";
         public static String TYPE = "type";
 
-        // untuk membuat URI content://com.path_studio.myfavouriteapp.movieCatalogue/fav_movie
+        // untuk membuat URI content://com.path_studio.myfavouriteapp.movie/fav_movie
         public static final Uri CONTENT_URI_01 = new Uri.Builder().scheme(SCHEME)
                 .authority(AUTHORITY_MOVIE)
                 .appendPath(TABLE_NAME_01)
                 .build();
 
-        // untuk membuat URI content://com.path_studio.myfavouriteapp.movieCatalogue/fav_tv
+        // untuk membuat URI content://com.path_studio.myfavouriteapp.tv/fav_tv
         public static final Uri CONTENT_URI_02 = new Uri.Builder().scheme(SCHEME)
                 .authority(AUTHORITY_TV)
                 .appendPath(TABLE_NAME_02)
