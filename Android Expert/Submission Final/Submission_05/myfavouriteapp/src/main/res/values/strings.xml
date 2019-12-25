@@ -1,12 +1,8 @@
 <resources>
     <string name="app_name">My Favourite</string>
 
-    <!--Tab Title-->
-    <string name="tab_text_1">Home</string>
     <string name="tab_text_2">Movies</string>
     <string name="tab_text_3">Tv Shows</string>
-    <string name="tab_text_4">Favourite</string>
-    <string name="tab_text_5">Contact</string>
 
     <!--Menu Title-->
     <string name="menu_1">Language</string>
@@ -74,21 +70,4 @@
     <string name="failed_add_data">Failed add data</string>
     <string name="failed_remove_data">Failed remove data</string>
 
-    <string name="daily_reminder">Daily Reminder</string>
-    <string name="reminder_for_return_to_app">Remind for Return to App</string>
-    <string name="release_reminder">Release Reminder</string>
-    <string name="reminder_showing_the_movie_that_release_today">Reminder showing the Movie that release Today</string>
-
-    <string name="alarm_cancle">Alarm Cancel</string>
-    <string name="alarm_set_up">Repeating alarm set up</string>
-
-    <string name="daily_alarm_text">Catalogue Movie Missing You…</string>
-    <string name="has_been_release">has been release today!</string>
-    <string name="appwidget_text_movie">My Favourite Movie</string>
-    <string name="appwidget_text_tv">My Favourite TV Show</string>
-    <string name="empty_text">NO DATA</string>
-    <string name="add_widget">Add widget</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
